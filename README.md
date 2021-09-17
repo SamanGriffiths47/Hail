@@ -31,7 +31,7 @@ Register and sign in to the gameing blog where you will have access to thousands
 
 ### ***Hierarchy Diagram***
 
-![Hierarchy](mdImgs/Hail_CHD.png)
+![Hierarchy](mdImgs/Hail_CHD%20(1).png)
 
 ## Screenshots of Website
 
