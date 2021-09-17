@@ -1,6 +1,6 @@
 # Hail: A Video Game Blog
 
-## Date: 09/17/2020
+## Date: 09/17/2021
 
 ### By: Zitai Haung | Sam'man Griffiths
 
