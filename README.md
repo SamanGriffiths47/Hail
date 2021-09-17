@@ -1,0 +1,2 @@
+# Hail
+Video Game Blog
