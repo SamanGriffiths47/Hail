@@ -12,7 +12,7 @@
 
 ### ***Discription***
 
-#### Find and talk about the games you love all in one place. Explore new games and read reviews from other plays. If you see something you would love to play, go ahead and add it to your wishlist so may purchase it later.
+#### Find and talk about the games you love all in one place. Explore new games and read reviews from other players. If you see something you would love to play, go ahead and add it to your wishlist so you may purchase it later.
 
 
 ### ***Technologies used***
