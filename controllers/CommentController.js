@@ -7,7 +7,7 @@ const CreateComment = async (req, res) => {
       ownerId,
       ...req.body
     }
-    const comment = await Comment.create()
+    let comment = await Comment.create(commentBody)
     res.send(comment)
   } catch (error) {}
 }
