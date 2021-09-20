@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.GamePost, {
         as: 'posts',
-        foreignKey: user_Id
+        foreignKey: 'user_Id'
       })
       User.hasMany(models.Comment, {
         as: 'comments',
-        foreignKey: user_Id
+        foreignKey: 'user_Id'
       })
     }
   }
