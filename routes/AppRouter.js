@@ -4,7 +4,7 @@ const CommentRouter = require('./CommentRouter')
 const GamePostRouter = require('./GamePostRouter')
 
 Router.use('/users', UserRouter)
-Router.use('/gameposts/', GamePostRouter)
+// Router.use('/gameposts', GamePostRouter)
 Router.use('/comments,', CommentRouter)
 
 module.exports = Router
