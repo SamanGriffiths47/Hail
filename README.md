@@ -12,7 +12,7 @@
 
 ### ***Discription***
 
-#### Find and talk about the games you love all in one place. Explore new games and read reviews from other plays. If you see something you would love to play, go ahead and add it to your wishlist so may purchase it later.
+#### Find and talk about the games you love all in one place. Explore new games and read reviews from other players. If you see something you would love to play, go ahead and add it to your wishlist so you may purchase it later.
 
 
 ### ***Technologies used***
@@ -21,7 +21,7 @@
 
 ### ***Getting Started***
 
-Register and sign in to the gameing blog where you will have access to thousands of games and join in the discussion. Please follow community guidlines and respect your fellow gamers in the comment sections.
+Register and sign in to the gameing blog where you will have access to thousands of games and join in on the discussion. Please follow community guidlines and respect your fellow gamers in the comment sections.
 
 ***
 
@@ -31,7 +31,7 @@ Register and sign in to the gameing blog where you will have access to thousands
 
 ### ***Hierarchy Diagram***
 
-![Hierarchy](mdImgs/Hail_CHD.png)
+![Hierarchy](mdImgs/Hail_CHD%20(1).png)
 
 ## Screenshots of Website
 
