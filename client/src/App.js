@@ -1,6 +1,27 @@
-import './CSS/App.css'
+import { connect } from 'react-redux'
+import saveGames from './redux/actions/rawgActions'
+import { useEffect } from 'react'
+import './css/App.css'
 
-function App() {
+const mapStateToProps = ({ rawgState }) => {
+  return {
+    rawgState
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchGames: () => dispatch(saveGames())
+  }
+}
+
+function App(props) {
+  function getGames() {
+    props.fetchGames()
+  }
+
+  useEffect(() => {
+    getGames()
+  }, [])
   return (
     <div className="App">
       <header className="App-header"></header>
@@ -8,4 +29,4 @@ function App() {
   )
 }
 
-export default App
+export default connect(mapStateToProps, mapDispatchToProps)(App)

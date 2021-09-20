@@ -1,4 +1,5 @@
 import grabGames from '../../services/rawgServices'
+import { GET_GAMES } from '../types'
 
 export default function saveGames() {
   return async (dispatch) => {

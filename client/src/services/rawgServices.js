@@ -1,10 +1,9 @@
-import { RAWG_URL } from './api'
+import { RAWG_KEY, RAWG_URL } from './api'
+import axios from 'axios'
 
-export default function grabGames() {
+export default async function grabGames() {
   try {
-    const res = await axios.get(
-      `https://api.rawg.io/api/genres?key=${process.env.REACT_APP_KEY}`
-    )
+    const res = await axios.get(`${RAWG_URL}/games?key=${RAWG_KEY}`)
     return res.data.results
   } catch (error) {
     throw error
