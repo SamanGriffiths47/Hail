@@ -1,0 +1,1 @@
+const { GamePost } = require('../models')
