@@ -21,7 +21,7 @@
 
 ### ***Getting Started***
 
-Register and sign in to the gameing blog where you will have access to thousands of games and join in the discussion. Please follow community guidlines and respect your fellow gamers in the comment sections.
+Register and sign in to the gameing blog where you will have access to thousands of games and join in on the discussion. Please follow community guidlines and respect your fellow gamers in the comment sections.
 
 ***
 
