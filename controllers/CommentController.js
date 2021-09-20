@@ -21,7 +21,7 @@ const FindComments = async (req, res) => {
   }
 }
 
-const FindCommentbyId = async (req, res) => {
+const FindCommentById = async (req, res) => {
   try {
     const comment = await Comment.findByPk(req.params.comment_id)
     res.send(comment)
@@ -52,7 +52,7 @@ const DeleteComment = async (req, res) => {
 module.exports = {
   CreateComment,
   FindComments,
-  FindCommentbyId,
+  FindCommentById,
   UpdateComments,
   DeleteComment
 }
