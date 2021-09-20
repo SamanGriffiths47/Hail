@@ -8,4 +8,3 @@ Router.put('/:comment_id', controller.UpdateComments)
 Router.delete('/del/:comment_id', controller.DeleteComment)
 
 module.exports = Router
-//1

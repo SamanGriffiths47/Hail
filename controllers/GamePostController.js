@@ -1,3 +1,14 @@
 const { GamePost } = require('../models')
 
-const FindGames = async
+const GetGames = async (req, res) => {
+  try {
+    const games = await GamePost.findAll()
+    res.send(games)
+  } catch (error) {
+    throw error
+  }
+}
+
+module.exports = {
+  GetGames
+}
