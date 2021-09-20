@@ -30,7 +30,26 @@ const CreateUser = async (req, res) => {
       created: new Date(),
       updated: new Date()
     }
+    const result = await User.create(body)
+    res.send(result)
   } catch (error) {
     throw error
   }
+}
+
+const deleteUser = async (req, res) => {
+  try {
+    let userId = parseInt(req, params.user_id)
+    await User.destroy({ where: { id: userId } })
+    res.send({ message: `Deleting user ${userId}` })
+  } catch (error) {
+    throw error
+  }
+}
+
+module.exports = {
+  GetUsers,
+  GetUsers,
+  CreateUser,
+  deleteUser
 }
