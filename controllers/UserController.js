@@ -23,7 +23,7 @@ const GetUserProfile = async (req, res) => {
 const CreateUser = async (req, res) => {
   try {
     let name = req.body.content.userName
-    let email = req.body.content.email
+    let emails = req.body.content.email
     let body = {
       userName: name,
       email: emails,
