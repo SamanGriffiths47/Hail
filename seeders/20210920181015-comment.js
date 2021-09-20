@@ -1,24 +1,24 @@
-'use strict';
+'use strict'
+const faker = require('faker')
+const { User, GamePost } = require('../models')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    const user = await User.findAll({ raw: true })
+    const post = await GamePost.findAll({ raw: true })
+
+    const comments = [...Array(20)].map((_) => ({
+      content: faker.random.word(),
+      user_Id: user[Math.floor(Math.random() * user.length)].id,
+      post_Id: user[Math.floor(Math.random() * post.length)].id,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }))
+
+    await queryInterface.bulkInsert('comments', comments)
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('comments')
   }
-};
+}
