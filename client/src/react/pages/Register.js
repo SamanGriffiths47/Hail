@@ -22,14 +22,16 @@ export default function Register(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    RegisterUser({
+    const user = {
       admin: adminToggle(),
       city_state: formValues.city_state,
       country: formValues.country,
       userName: formValues.userName,
       email: formValues.email,
       password: formValues.password
-    })
+    }
+    console.log(user)
+    RegisterUser(user)
     setFormValues({ ...iState })
     props.history.push('/signin')
   }
@@ -107,14 +109,14 @@ export default function Register(props) {
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               onChange={handleChange}
-              name="Confirm Password"
+              name="confirmPassword"
               type="password"
-              placeholder="confirmPassword"
+              placeholder="Confirm Password"
               value={formValues.confirmPassword}
               required
             />
           </div>
-          <sectiion className="authFooter">
+          <section className="authFooter">
             <div>
               Already have and account? <Link to="/signin">Signin</Link>
             </div>
@@ -132,7 +134,7 @@ export default function Register(props) {
             >
               Register
             </button>
-          </sectiion>
+          </section>
         </form>
       </div>
     </div>
