@@ -19,9 +19,6 @@ function Nav(props) {
           <Link to="/" id="userPage">
             User Page
           </Link>
-          <Link to="/newsfeed" id="newsfeed">
-            Newsfeed
-          </Link>
         </div>
       )
     } else {
@@ -29,6 +26,9 @@ function Nav(props) {
         <div>
           <Link to="/" id="navHome">
             Home
+          </Link>
+          <Link to="/newsfeed" id="newsfeed">
+            Newsfeed
           </Link>
         </div>
       )
