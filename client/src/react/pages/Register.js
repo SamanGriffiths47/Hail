@@ -30,7 +30,6 @@ export default function Register(props) {
       email: formValues.email,
       password: formValues.password
     }
-    console.log(user)
     RegisterUser(user)
     setFormValues({ ...iState })
     props.history.push('/signin')

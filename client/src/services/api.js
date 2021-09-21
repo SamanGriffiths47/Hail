@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 //Database Auth
-export const DB_URL = 'http://localhost:3001'
+export const DB_URL = 'http://localhost:3001/api'
 const Client = Axios.create({ baseURL: DB_URL })
 
 // Intercepts every request axios makes
@@ -19,6 +19,7 @@ Client.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 export default Client
+
 //RAWG Auth
 export const RAWG_URL = `https://api.rawg.io/api`
 export const RAWG_KEY = process.env.REACT_APP_KEY
