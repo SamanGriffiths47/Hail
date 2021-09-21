@@ -107,14 +107,14 @@ export default function Register(props) {
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               onChange={handleChange}
-              name="Confirm Password"
+              name="confirmPassword"
               type="password"
-              placeholder="confirmPassword"
+              placeholder="Confirm Password"
               value={formValues.confirmPassword}
               required
             />
           </div>
-          <sectiion className="authFooter">
+          <section className="authFooter">
             <div>
               Already have and account? <Link to="/signin">Signin</Link>
             </div>
@@ -132,7 +132,7 @@ export default function Register(props) {
             >
               Register
             </button>
-          </sectiion>
+          </section>
         </form>
       </div>
     </div>
