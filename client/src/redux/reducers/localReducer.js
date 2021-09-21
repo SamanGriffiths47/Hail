@@ -2,7 +2,8 @@ import { SET_USER_STATE, TOGGLE_AUTH } from '../types'
 
 const iState = {
   authenticated: false,
-  user: null
+  user: null,
+  gameposts: []
 }
 
 export default function localReducer(state = iState, action) {

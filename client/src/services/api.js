@@ -2,7 +2,7 @@ import Axios from 'axios'
 
 //Database Auth
 export const DB_URL = 'http://localhost:3001/api'
-const Client = Axios.create({ baseURL: DB_URL })
+export const Client = Axios.create({ baseURL: DB_URL })
 
 // Intercepts every request axios makes
 Client.interceptors.request.use(
