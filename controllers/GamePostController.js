@@ -1,4 +1,4 @@
-const { GamePost } = require('../models/gamepost')
+const { GamePost, User } = require('../models')
 
 const GetGames = async (req, res) => {
   try {
@@ -22,17 +22,17 @@ const GameDetails = async (req, res) => {
 
 const CreateGame = async (req, res) => {
   try {
-    let images = req.body.content.image
-    let descriptions = req.body.content.description
-    let titles = req.body.content.title
-    let userId = parserInt(req.body.contnent.user_Id)
-    let body = {
-      image: images,
-      description: descriptions,
-      title: titles,
+    let userId = parseInt(req.body.user_Id)
+    const { image, description, title } = req.body
+
+    let gamePostBody = {
+      image,
+      description,
+      title,
       user_Id: userId
     }
-    const result = await GamePost.create(body)
+
+    const result = await GamePost.create(gamePostBody)
     res.send(result)
   } catch (error) {
     throw error

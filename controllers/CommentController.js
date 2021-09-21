@@ -36,7 +36,7 @@ const FindCommentById = async (req, res) => {
 
 const UpdateComments = async (req, res) => {
   try {
-    let postId = parseInt(req.params.post_id)
+    let postId = parseInt(req.params.post_d)
     let updateComment = await Comment.update(req.body, {
       where: { id: postId },
       returning: true
