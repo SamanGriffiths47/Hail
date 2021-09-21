@@ -60,5 +60,3 @@ module.exports = {
   CreateUser,
   deleteUser
 }
-
-//1
