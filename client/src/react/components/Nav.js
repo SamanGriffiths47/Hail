@@ -13,17 +13,23 @@ function Nav(props) {
     if (props.localState.authorized) {
       return (
         <div>
-          <Link id="navHome">Home</Link>
-          <Link id="userPage">User Page</Link>
-          <Link id="newsfeed">Newsfeed</Link>
+          <Link to="/" id="navHome">
+            Home
+          </Link>
+          <Link to="/" id="userPage">
+            User Page
+          </Link>
+          <Link to="/newsfeed" id="newsfeed">
+            Newsfeed
+          </Link>
         </div>
       )
     } else {
       return (
         <div>
-          <Link id="navHome">Home</Link>
-          <Link id="navRegister">Register</Link>
-          <Link id="navSignin">Signin</Link>
+          <Link to="/" id="navHome">
+            Home
+          </Link>
         </div>
       )
     }
