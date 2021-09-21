@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const mapStateToProps = ({ localState }) => {
@@ -12,7 +13,7 @@ function Nav(props) {
     if (props.localState.authorized) {
       return (
         <div>
-          <Link id="home">Home</Link>
+          <Link id="navHome">Home</Link>
           <Link id="userPage">User Page</Link>
           <Link id="newsfeed">Newsfeed</Link>
         </div>
@@ -20,8 +21,9 @@ function Nav(props) {
     } else {
       return (
         <div>
-          <Link id="home">Home</Link>
-          <Link id="authForm">Register/Signin</Link>
+          <Link id="navHome">Home</Link>
+          <Link id="navRegister">Register</Link>
+          <Link id="navSignin">Signin</Link>
         </div>
       )
     }
