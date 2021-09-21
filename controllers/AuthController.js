@@ -28,13 +28,13 @@ const Login = async (req, res) => {
 
 const Register = async (req, res) => {
   try {
-    const { email, name, password, city_state, country } = req.body
+    const { email, userName, password, city_state, country } = req.body
     let passwordDigest = await middleware.hashPassword(password)
     const user = await User.create({
       admin: false,
       email,
-      passwordDigest,
-      name,
+      password_digest: passwordDigest,
+      userName,
       city_state,
       country
     })
