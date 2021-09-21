@@ -9,6 +9,7 @@ import Signin from './react/pages/Signin'
 import Newsfeed from './react/pages/Newsfeed'
 import Register from './react/pages/Register'
 import Home from './react/pages/Home'
+import { setUser, authToggle } from './redux/actions/localActions'
 
 const mapStateToProps = ({ rawgState, localState }) => {
   return {
@@ -18,17 +19,26 @@ const mapStateToProps = ({ rawgState, localState }) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchGames: () => dispatch(saveGames())
+    fetchGames: () => dispatch(saveGames()),
+    userSet: () => dispatch(setUser()),
+    toggleAuth: (boolean) => dispatch(authToggle(boolean))
   }
 }
 
 function App(props) {
-  function getGames() {
-    props.fetchGames()
+  const checkToken = async () => {
+    props.userSet()
+    props.toggleAuth(true)
   }
 
   useEffect(() => {
-    getGames()
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkToken()
+    }
+  }, [])
+  useEffect(() => {
+    props.fetchGames()
   }, [])
   return (
     <div className="App">
@@ -38,9 +48,10 @@ function App(props) {
           <Route exact path="/" component={Home} />
           <Route path="/signin" component={Signin} />
           <Route path="/register" component={Register} />
-          {props.localState.user && props.localState.authenticated && (
-            <ProtectedRoute path="/newsfeed" component={Newsfeed} />
-          )}
+          {/* {props.localState.user && props.localState.authenticated && ( */}
+          {/* <Protected */}
+          <Route path="/newsfeed" component={Newsfeed} />
+          {/* )} */}
         </Switch>
       </main>
     </div>
