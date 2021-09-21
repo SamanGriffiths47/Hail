@@ -2,14 +2,18 @@ const { Comment } = require('../models')
 
 const CreateComment = async (req, res) => {
   try {
-    let ownerId = parseInt(req.params.user_Id)
+    let ownerId = parseInt(req.body.user_Id)
+    let postId = parseInt(req.body.post_Id)
     let commentBody = {
-      ownerId,
+      user_Id: ownerId,
+      post_Id: postId,
       ...req.body
     }
     let comment = await Comment.create(commentBody)
     res.send(comment)
-  } catch (error) {}
+  } catch (error) {
+    throw error
+  }
 }
 
 const FindComments = async (req, res) => {
