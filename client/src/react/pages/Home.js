@@ -18,7 +18,9 @@ function Home(props) {
   }
   return (
     <div className="homeContainer">
-      <button>Le</button>
+      <button>
+        <Link to={handleChange}>Let's Go!</Link>
+      </button>
     </div>
   )
 }
