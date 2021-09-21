@@ -1,22 +1,27 @@
 import { connect } from 'react-redux'
+import { CheckSession } from '../../services/auth'
 import toggleFunc from '../../services/localServices'
-import { TOGGLE_AUTH } from '../types'
+import { SET_USER_STATE, TOGGLE_AUTH } from '../types'
 
-const mapStateToProps = ({ localState }) => {
-  return {
-    localState
-  }
-}
-
-function toggleAuth(props) {
+function authToggle(boolean) {
   return async (dispatch) => {
     try {
-      const auth = await toggleFunc(props)
-      dispatch({ type: TOGGLE_AUTH, payload: auth })
+      dispatch({ type: TOGGLE_AUTH, payload: boolean })
     } catch (error) {
       throw error
     }
   }
 }
 
-export default connect(mapStateToProps)(toggleAuth)
+function setUser() {
+  return async (dispatch) => {
+    try {
+      const session = await CheckSession()
+      dispatch({ type: SET_USER_STATE, payload: session })
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
+export default authToggle(setUser)

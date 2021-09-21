@@ -1,13 +1,16 @@
-import { TOGGLE_AUTH } from '../types'
+import { SET_USER_STATE, TOGGLE_AUTH } from '../types'
 
 const iState = {
-  authorized: false
+  authenticated: false,
+  user: null
 }
 
 export default function localReducer(state = iState, action) {
   switch (action.type) {
     case TOGGLE_AUTH:
-      return { ...state, authorized: action.payload }
+      return { ...state, authenticated: action.payload }
+    case SET_USER_STATE:
+      return { ...state, user: action.payload }
     default:
       return { ...state }
   }
