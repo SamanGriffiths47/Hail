@@ -22,14 +22,16 @@ export default function Register(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    RegisterUser({
+    const user = {
       admin: adminToggle(),
       city_state: formValues.city_state,
       country: formValues.country,
       userName: formValues.userName,
       email: formValues.email,
       password: formValues.password
-    })
+    }
+    console.log(user)
+    RegisterUser(user)
     setFormValues({ ...iState })
     props.history.push('/signin')
   }
