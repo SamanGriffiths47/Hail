@@ -6,3 +6,4 @@ export const GET_ALL_USERS = 'GET_ALL_USERS'
 //Auth
 export const TOGGLE_AUTH = 'TOGGLE_AUTH'
 export const SET_USER_STATE = 'SET_USER_STATE'
+export const GET_POSTS = 'GET_POSTS'
