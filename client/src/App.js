@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import saveGames from './redux/actions/rawgActions'
 import { useEffect } from 'react'
-import './css/App.css'
+import './CSS/App.css'
 import Nav from './react/components/Nav'
 
 const mapStateToProps = ({ rawgState }) => {
