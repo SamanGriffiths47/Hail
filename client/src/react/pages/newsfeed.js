@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import getPosts from '../../redux/actions/localActions'
 import PostCard from '../components/Postcard'
 
+<<<<<<< HEAD
 const mapStateToProps = ({ localState }) => {
   return {
     localState
@@ -29,3 +30,9 @@ function Newsfeed(props) {
   )
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Newsfeed)
+=======
+function Newsfeed(props) {
+  return <div></div>
+}
+export default Newsfeed
+>>>>>>> af1a5d523b355c082e8a861b9cd19c58e267b93f

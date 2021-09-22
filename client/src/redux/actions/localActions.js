@@ -1,9 +1,13 @@
 import { connect } from 'react-redux'
 import { CheckSession } from '../../services/auth'
+<<<<<<< HEAD
 import grabGamePosts from '../../services/localServices'
+=======
+import { grabGamePosts } from '../../services/localServices'
+>>>>>>> af1a5d523b355c082e8a861b9cd19c58e267b93f
 import { GET_POSTS, SET_USER_STATE, TOGGLE_AUTH } from '../types'
 
-function authToggle(boolean) {
+export function authToggle(boolean) {
   return async (dispatch) => {
     try {
       dispatch({ type: TOGGLE_AUTH, payload: boolean })
@@ -13,7 +17,7 @@ function authToggle(boolean) {
   }
 }
 
-function setUser() {
+export function setUser() {
   return async (dispatch) => {
     try {
       const session = await CheckSession()
@@ -24,7 +28,7 @@ function setUser() {
   }
 }
 
-function getPosts() {
+export function getPosts() {
   return async (dispatch) => {
     try {
       const posts = await grabGamePosts()
@@ -34,5 +38,8 @@ function getPosts() {
     }
   }
 }
+<<<<<<< HEAD
 export default getPosts
 //export default authToggle(setUser)
+=======
+>>>>>>> af1a5d523b355c082e8a861b9cd19c58e267b93f
