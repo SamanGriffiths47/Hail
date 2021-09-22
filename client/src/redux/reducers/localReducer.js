@@ -1,4 +1,4 @@
-import { SET_USER_STATE, TOGGLE_AUTH } from '../types'
+import { SET_USER_STATE, TOGGLE_AUTH, GET_POSTS } from '../types'
 
 const iState = {
   authenticated: false,
@@ -12,6 +12,8 @@ export default function localReducer(state = iState, action) {
       return { ...state, authenticated: action.payload }
     case SET_USER_STATE:
       return { ...state, user: action.payload }
+    case GET_POSTS:
+      return { ...state, gameposts: action.payload }
     default:
       return { ...state }
   }

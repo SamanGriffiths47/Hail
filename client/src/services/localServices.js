@@ -1,13 +1,14 @@
 import axios from 'axios'
-import axios from 'axios'
 
-import Client from './'
-export default async function grabGamePosts() {
+import Client from './api.js'
+async function grabGamePosts() {
   try {
     const res = await Client.get('/gameposts')
-    console.log(res)
-    return res
+    console.log(res.data)
+    return res.data
   } catch (error) {
     throw error
   }
 }
+
+export default grabGamePosts
