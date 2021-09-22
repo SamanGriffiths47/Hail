@@ -1,18 +1,20 @@
 import React from 'react'
 
-const Search = (props) => {
-  return (
-    <form onSubmit={props.onSubmit}>
-      <input
-        type="text"
-        name="search"
-        value={props.value}
-        placeholder="Search Games"
-        onChange={props.onChange}
-      />
-      <button type="submit">Submit</button>
-    </form>
-  )
+const Search = () => {
+  const [searchInput, setSearchInput] = useState('')
+  const [gameResults, setGameResults] = useState([])
+
+  const handleChange = (e) => {
+    searchInput(e.target.value)
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    let input = searchInput.split('').join('-'.toLocaleLowerCase)
+  }
+
+  setGameResults([])
+  fetch('')
 }
 
 export default Search
