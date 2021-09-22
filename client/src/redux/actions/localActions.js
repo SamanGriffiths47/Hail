@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
 import { CheckSession } from '../../services/auth'
-import { grabGamePosts } from '../../services/localServices'
-import { GET_POSTS, SET_USER_STATE, TOGGLE_AUTH } from '../types'
+import {
+  grabGamePosts,
+  grabCommentByPostId
+} from '../../services/localServices'
+import { GET_POSTS, SET_USER_STATE, TOGGLE_AUTH, GET_COMMENTS } from '../types'
 
 export function authToggle(boolean) {
   console.log('hi')
@@ -36,4 +39,16 @@ export function getPosts() {
   }
 }
 export default getPosts
+
+export function getComments(postid) {
+  return async (dispatch) => {
+    try {
+      const comment = await grabCommentByPostId(postid)
+      console.log(comment)
+      dispatch({ type: GET_COMMENTS, payload: comment })
+    } catch (error) {
+      throw error
+    }
+  }
+}
 //export default authToggle(setUser)
