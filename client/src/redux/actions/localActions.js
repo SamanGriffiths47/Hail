@@ -1,10 +1,6 @@
 import { connect } from 'react-redux'
 import { CheckSession } from '../../services/auth'
-<<<<<<< HEAD
-import grabGamePosts from '../../services/localServices'
-=======
 import { grabGamePosts } from '../../services/localServices'
->>>>>>> af1a5d523b355c082e8a861b9cd19c58e267b93f
 import { GET_POSTS, SET_USER_STATE, TOGGLE_AUTH } from '../types'
 
 export function authToggle(boolean) {
@@ -38,8 +34,5 @@ export function getPosts() {
     }
   }
 }
-<<<<<<< HEAD
 export default getPosts
 //export default authToggle(setUser)
-=======
->>>>>>> af1a5d523b355c082e8a861b9cd19c58e267b93f

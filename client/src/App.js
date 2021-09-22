@@ -48,6 +48,8 @@ function App(props) {
           <Route exact path="/" component={Home} />
           <Route path="/signin" component={Signin} />
           <Route path="/register" component={Register} />
+          {/* <Route path="/newsfeed" component={Newsfeed} /> */}
+
           {props.localState.user && props.localState.authenticated && (
             <ProtectedRoute path="/newsfeed" component={Newsfeed} />
           )}
