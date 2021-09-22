@@ -65,8 +65,14 @@ const UpdatePassword = async (req, res) => {
   }
 }
 
+const CheckSession = async (req, res) => {
+  const { payload } = res.locals
+  console.log(res.locals)
+  res.send(res.locals)
+}
 module.exports = {
   Login,
   Register,
-  UpdatePassword
+  UpdatePassword,
+  CheckSession
 }

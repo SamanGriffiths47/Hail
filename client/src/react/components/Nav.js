@@ -11,7 +11,8 @@ const mapStateToProps = ({ localState }) => {
 
 function Nav(props) {
   function authorized() {
-    if (props.localState.authorized) {
+    console.log(props.localState.authenticated)
+    if (props.localState.authenticated) {
       return (
         <div className="home-user">
           <Search />
@@ -21,6 +22,9 @@ function Nav(props) {
           <Link to="/" id="userPage">
             User Page
           </Link>
+          <Link to="/newsfeed" id="newsfeed">
+            Newsfeed
+          </Link>
         </div>
       )
     } else {
@@ -29,9 +33,6 @@ function Nav(props) {
           <Search />
           <Link to="/" id="navHome">
             Home
-          </Link>
-          <Link to="/newsfeed" id="newsfeed">
-            Newsfeed
           </Link>
         </div>
       )

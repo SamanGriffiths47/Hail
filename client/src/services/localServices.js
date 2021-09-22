@@ -4,9 +4,11 @@ import Client from './api'
 export async function grabGamePosts() {
   try {
     const res = await Client.get('/gameposts')
-    console.log(res)
-    return res
+    console.log(res.data)
+    return res.data
   } catch (error) {
     throw error
   }
 }
+
+export default grabGamePosts

@@ -34,3 +34,5 @@ export function getPosts() {
     }
   }
 }
+export default getPosts
+//export default authToggle(setUser)
