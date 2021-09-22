@@ -43,6 +43,7 @@ function App(props) {
   return (
     <div className="App">
       <Nav />
+
       <main>
         <Switch>
           <Route exact path="/" component={Home} />

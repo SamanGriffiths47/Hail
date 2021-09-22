@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Search from '../components/Search'
 
 const mapStateToProps = ({ localState }) => {
   return {
@@ -13,7 +14,8 @@ function Nav(props) {
     console.log(props.localState.authenticated)
     if (props.localState.authenticated) {
       return (
-        <div>
+        <div className="home-user">
+          <Search />
           <Link to="/" id="navHome">
             Home
           </Link>
@@ -27,7 +29,8 @@ function Nav(props) {
       )
     } else {
       return (
-        <div>
+        <div className="home-news">
+          <Search />
           <Link to="/" id="navHome">
             Home
           </Link>
