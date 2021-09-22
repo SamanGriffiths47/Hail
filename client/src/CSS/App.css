@@ -1,11 +1,19 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  background-color: black;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
+.App {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -25,7 +33,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #185566;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +43,30 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.home-user {
+  float: right;
+  justify-content: space-between;
+  margin: 0em 1em;
+}
+
+.postlist {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5rem;
+}
+
+.postcard {
+  cursor: pointer;
+  margin: 5em 1em -10em 3em;
+  height: 30em;
+  width: 40em;
+}
+
+.imgs {
+  border: rgb(0, 179, 9) solid 5px;
+  border-radius: 0% 100% 0% 100% / 76% 32% 68% 24%;
+  height: 25em;
+  width: 30em;
 }
