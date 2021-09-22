@@ -9,19 +9,15 @@ const mapStateToProps = ({ localState }) => {
 }
 
 function Home(props) {
-  if (props.authenticated && props.user) {
-    function handleChange() {
+  function handleClick() {
+    if (props.localState.authenticated && props.localState.user) {
       props.history.push('/newsfeed')
     }
-  }
-  function handleChange() {
     props.history.push('/register')
   }
   return (
     <div className="homeContainer">
-      <button>
-        <Link to={handleChange}>Let's Go!</Link>
-      </button>
+      <button onClick={handleClick}>Let's Go!</button>
     </div>
   )
 }

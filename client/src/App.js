@@ -27,16 +27,13 @@ const mapDispatchToProps = (dispatch) => {
 
 function App(props) {
   const checkToken = async () => {
-    props.userSet()
-    props.toggleAuth(true)
-  }
-
-  useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
-      checkToken()
+      props.userSet()
+      props.toggleAuth(true)
     }
-  }, [])
+  }
+
   useEffect(() => {
     props.fetchGames()
   }, [])
@@ -52,7 +49,12 @@ function App(props) {
           {/* <Route path="/newsfeed" component={Newsfeed} /> */}
 
           {props.localState.user && props.localState.authenticated && (
-            <ProtectedRoute path="/newsfeed" component={Newsfeed} />
+            <ProtectedRoute
+              path="/newsfeed"
+              user={props.localState.user}
+              authenticated={props.localState.authenticated}
+              component={Newsfeed}
+            />
           )}
         </Switch>
       </main>
