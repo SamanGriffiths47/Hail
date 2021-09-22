@@ -10,6 +10,7 @@ import Newsfeed from './react/pages/Newsfeed'
 import Register from './react/pages/Register'
 import Home from './react/pages/Home'
 import { setUser, authToggle } from './redux/actions/localActions'
+import PostDetail from './react/pages/PostDetail'
 
 const mapStateToProps = ({ rawgState, localState }) => {
   return {
@@ -46,6 +47,10 @@ function App(props) {
           <Route exact path="/" component={Home} />
           <Route path="/signin" component={Signin} />
           <Route path="/register" component={Register} />
+          <Route
+            path="/gamepost/:post_Id"
+            component={(routerProps) => <PostDetail {...routerProps} />}
+          />
           {/* <Route path="/newsfeed" component={Newsfeed} /> */}
 
           {props.localState.user && props.localState.authenticated && (
