@@ -1,27 +1,51 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SignInUser } from '../../services/auth'
+import { setUser, authToggle } from '../../redux/actions/localActions'
 
 const iState = {
-  userName: '',
+  username: '',
   email: '',
   password: ''
 }
 
-export default function Signin(props) {
+const mapStateToProps = ({ rawgState, localState }) => {
+  return {
+    rawgState,
+    localState
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userSet: () => dispatch(setUser()),
+    toggleAuth: (boolean) => dispatch(authToggle(boolean))
+  }
+}
+
+function Signin(props) {
   const [formValues, setFormValues] = useState({
     ...iState
   })
+
+  const checkToken = async (e) => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      props.userSet()
+      props.toggleAuth(true)
+      props.history.push('/newsfeed')
+    }
+    setFormValues({ ...iState })
+  }
 
   function handleChange(e) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    SignInUser({ ...formValues })
-    setFormValues({ ...iState })
-    props.history.push('/newsfeed')
+    await SignInUser({ ...formValues })
+    checkToken(e)
   }
 
   return (
@@ -29,13 +53,13 @@ export default function Signin(props) {
       <div className="formContain">
         <form onSubmit={handleSubmit}>
           <div className="inputWrapper">
-            <label htmlFor="userName">Username</label>
+            <label htmlFor="username">Username</label>
             <input
               onChange={handleChange}
-              name="userName"
+              name="username"
               type="text"
               placeholder="What Should We Call You?"
-              value={formValues.userName}
+              value={formValues.username}
               required
             />
           </div>
@@ -68,10 +92,11 @@ export default function Signin(props) {
             <button
               disabled={
                 !formValues.email ||
-                !formValues.userName ||
+                !formValues.username ||
                 !formValues.password
               }
               type="submit"
+              // onMouseOver={handleSubmit}
             >
               Signin
             </button>
@@ -81,3 +106,5 @@ export default function Signin(props) {
     </div>
   )
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin)

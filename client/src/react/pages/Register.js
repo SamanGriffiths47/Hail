@@ -5,7 +5,7 @@ import { RegisterUser } from '../../services/auth'
 const iState = {
   city_state: '',
   country: '',
-  userName: '',
+  username: '',
   email: '',
   password: '',
   confirmPassword: ''
@@ -26,7 +26,7 @@ export default function Register(props) {
       admin: adminToggle(),
       city_state: formValues.city_state,
       country: formValues.country,
-      userName: formValues.userName,
+      username: formValues.username,
       email: formValues.email,
       password: formValues.password
     }
@@ -37,9 +37,9 @@ export default function Register(props) {
 
   function adminToggle() {
     if (
-      formValues.userName === "Sam'an" ||
-      formValues.userName === 'Zitai' ||
-      formValues.userName === 'Robert'
+      formValues.username === "Sam'an" ||
+      formValues.username === 'Zitai' ||
+      formValues.username === 'Robert'
     ) {
       return true
     }
@@ -72,13 +72,13 @@ export default function Register(props) {
             />
           </div>
           <div className="inputWrapper">
-            <label htmlFor="userName">Username</label>
+            <label htmlFor="username">Username</label>
             <input
               onChange={handleChange}
-              name="userName"
+              name="username"
               type="text"
               placeholder="What Should We Call You?"
-              value={formValues.userName}
+              value={formValues.username}
               required
             />
           </div>
@@ -122,7 +122,7 @@ export default function Register(props) {
             <button
               disabled={
                 !formValues.email ||
-                !formValues.userName ||
+                !formValues.username ||
                 !formValues.country ||
                 !formValues.city_state ||
                 !formValues.password ||

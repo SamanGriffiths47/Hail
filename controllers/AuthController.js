@@ -28,13 +28,13 @@ const Login = async (req, res) => {
 
 const Register = async (req, res) => {
   try {
-    const { email, userName, password, city_state, country } = req.body
+    const { email, username, password, city_state, country } = req.body
     let passwordDigest = await middleware.hashPassword(password)
     const user = await User.create({
       admin: false,
       email,
       password_digest: passwordDigest,
-      userName,
+      username,
       city_state,
       country
     })
@@ -67,8 +67,7 @@ const UpdatePassword = async (req, res) => {
 
 const CheckSession = async (req, res) => {
   const { payload } = res.locals
-  console.log(res.locals)
-  res.send(res.locals)
+  res.send(payload)
 }
 module.exports = {
   Login,
