@@ -3,7 +3,7 @@ import saveGames from './redux/actions/rawgActions'
 import { useEffect } from 'react'
 import './css/App.css'
 import Nav from './react/components/Nav'
-import { Redirect, Route, Switch } from 'react-router'
+import { Route, Switch } from 'react-router'
 import ProtectedRoute from './react/components/ProtectedRoute'
 import Signin from './react/pages/Signin'
 import Newsfeed from './react/pages/Newsfeed'
@@ -33,7 +33,6 @@ function App(props) {
 
   const checkToken = async () => {
     const session = await CheckSession()
-    console.log(session)
     await props.toggleAuth(true)
   }
 
