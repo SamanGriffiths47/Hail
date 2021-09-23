@@ -1,9 +1,10 @@
-import { SET_USER_STATE, TOGGLE_AUTH, GET_POSTS } from '../types'
+import { SET_USER_STATE, TOGGLE_AUTH, GET_POSTS, GET_COMMENTS } from '../types'
 
 const iState = {
   authenticated: false,
   user: null,
-  gameposts: []
+  gameposts: [],
+  comments: []
 }
 
 export default function localReducer(state = iState, action) {
@@ -14,6 +15,8 @@ export default function localReducer(state = iState, action) {
       return { ...state, user: action.payload }
     case GET_POSTS:
       return { ...state, gameposts: action.payload }
+    case GET_COMMENTS:
+      return { ...state, comments: action.payload }
     default:
       return { ...state }
   }
