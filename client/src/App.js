@@ -3,7 +3,7 @@ import saveGames from './redux/actions/rawgActions'
 import { useEffect } from 'react'
 import './css/App.css'
 import Nav from './react/components/Nav'
-import { Redirect, Route, Switch } from 'react-router'
+import { Route, Switch } from 'react-router'
 import ProtectedRoute from './react/components/ProtectedRoute'
 import Signin from './react/pages/Signin'
 import Newsfeed from './react/pages/Newsfeed'
@@ -33,7 +33,6 @@ function App(props) {
 
   const checkToken = async () => {
     const session = await CheckSession()
-    console.log(session)
     await props.toggleAuth(true)
   }
 
@@ -60,16 +59,6 @@ function App(props) {
             path="/gamepost/:post_Id"
             render={(props) => <PostDetail {...props} />}
           />
-<<<<<<< HEAD
-          {token && (
-            <ProtectedRoute
-              path="/newsfeed"
-              user={user}
-              authenticated={authenticated}
-              component={Newsfeed}
-            />
-          )}
-=======
           {/* <Route exact path="/" component={Home} />
           <Route path="/signin" component={Signin} />
           <Route path="/register" component={Register} />
@@ -82,7 +71,6 @@ function App(props) {
                 component={Newsfeed}
               />
             ) && <ProtectedRoute />}
->>>>>>> d96d958bffb829af4008d23d415b6cc40bd28fba
         </Switch>
       </main>
     </div>

@@ -15,10 +15,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 function Newsfeed(props) {
-  console.log(props)
   useEffect(() => {
     props.fetchPosts()
-    console.log(1)
   }, [])
   return (
     <div>
