@@ -1,9 +1,16 @@
 import { CheckSession } from '../../services/auth'
 import {
   grabGamePosts,
-  grabCommentByPostId
+  grabCommentByPostId,
+  postComment
 } from '../../services/localServices'
-import { GET_POSTS, SET_USER_STATE, TOGGLE_AUTH, GET_COMMENTS } from '../types'
+import {
+  GET_POSTS,
+  SET_USER_STATE,
+  TOGGLE_AUTH,
+  GET_COMMENTS,
+  POST_COMMENTS
+} from '../types'
 
 export function authToggle(boolean) {
   return async (dispatch) => {
@@ -45,6 +52,16 @@ export function getComments(postid) {
       const comment = await grabCommentByPostId(postid)
       console.log(comment)
       dispatch({ type: GET_COMMENTS, payload: comment })
+    } catch (error) {
+      throw error
+    }
+  }
+}
+export function postComments(body) {
+  return async (dispatch) => {
+    try {
+      const res = await postComment(body)
+      dispatch({ type: POST_COMMENTS, payload: body })
     } catch (error) {
       throw error
     }
