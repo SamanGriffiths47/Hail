@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getComments, postComments } from '../../redux/actions/localActions'
 import CommentCard from './CommentCard'
+import { delComment } from '../../services/localServices'
 const mapStateToProps = ({ localState }) => {
   return {
     ...localState
@@ -21,6 +22,7 @@ function Comment(props) {
   })
   const [Content,SetContent]=useState('')
   const [Comments,SetComments]=useState(null)
+  const [Loading,SetLoading]=useState(true)
   //const [PostId,SetPostId]=useState(null)
 
  
@@ -38,8 +40,8 @@ function Comment(props) {
     let allcomments = props.comments
     SetComments(allcomments)
      
-     console.log(props.comments)
-    
+     console.log(Comments)
+    SetLoading(false)
   }, [postId])
  
 
@@ -61,17 +63,18 @@ function Comment(props) {
   }
 
   return (
-    Comments  ? (<div>
+    <div>
       <h1>Comment section</h1>
       <div className="comment_forum">
         <form onSubmit={handleSubmit}>
           <div>Comment</div>
-          <input placeholder="Comments"  value={Content} onChange={handleChange} />
+          <input placeholder="Comments"   onChange={handleChange} />
           <button>Submit</button>
         </form>
       </div>
       <div className="card_holder">
-      {Comments?
+      {Loading===false?
+      
             Comments.map((comment)=>(
               <CommentCard
               key={comment.id}  
@@ -81,7 +84,7 @@ function Comment(props) {
         
         }
       </div>
-    </div>
-  ):null)
+    </div>)
+  
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Comment)
