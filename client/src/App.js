@@ -60,16 +60,6 @@ function App(props) {
             path="/gamepost/:post_Id"
             render={(props) => <PostDetail {...props} />}
           />
-<<<<<<< HEAD
-          {token && (
-            <ProtectedRoute
-              path="/newsfeed"
-              user={user}
-              authenticated={authenticated}
-              component={Newsfeed}
-            />
-          )}
-=======
           {/* <Route exact path="/" component={Home} />
           <Route path="/signin" component={Signin} />
           <Route path="/register" component={Register} />
@@ -82,7 +72,6 @@ function App(props) {
                 component={Newsfeed}
               />
             ) && <ProtectedRoute />}
->>>>>>> d96d958bffb829af4008d23d415b6cc40bd28fba
         </Switch>
       </main>
     </div>
