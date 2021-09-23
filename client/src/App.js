@@ -25,6 +25,7 @@ const mapDispatchToProps = (dispatch) => {
     toggleAuth: (boolean) => dispatch(authToggle(boolean))
   }
 }
+
 function App(props) {
   const authenticated = props.localState.authenticated
   const user = props.localState.user
@@ -48,29 +49,18 @@ function App(props) {
 
       <main>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={(props) => checkToken() && <Home {...props} />}
-          />
-          <Route
-            path="/signin"
-            render={(props) => checkToken() && <Signin {...props} />}
-          />
-          <Route
-            path="/register"
-            render={(props) => checkToken() && <Register {...props} />}
-          />
+          <Route exact path="/" render={(props) => <Home {...props} />} />
+          <Route path="/signin" render={(props) => <Signin {...props} />} />
+          <Route path="/register" render={(props) => <Register {...props} />} />
           <Route
             path="/gamepost/:post_Id"
-            render={(props) => checkToken() && <PostDetail {...props} />}
+            render={(props) => <PostDetail {...props} />}
           />
           {token && (
               <ProtectedRoute
                 path="/newsfeed"
                 user={user}
                 authenticated={authenticated}
-                checkToken={checkToken}
                 component={Newsfeed}
               />
             ) && <ProtectedRoute />}
