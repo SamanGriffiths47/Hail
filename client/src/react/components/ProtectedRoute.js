@@ -1,21 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Redirect, Route } from 'react-router'
 
 export default function ProtectedRoute({
   user,
   authenticated,
   component: Component,
+  checkToken,
   ...rest
 }) {
-  console.log('user', user)
+  useEffect(() => {
+    checkToken()
+  }, [])
   return (
     <Route
       {...rest}
       render={(props) =>
         user && authenticated ? (
-          <Component {...props} /> // Render our chosen component if a user exists and they are authenticated
+          <Component {...props} />
         ) : (
-          <Redirect to="/register" /> // Otherwise, use the Redirect component to return the user to the sign in screen
+          <Redirect to="/register" />
         )
       }
     />

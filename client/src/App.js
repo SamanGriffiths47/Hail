@@ -3,7 +3,7 @@ import saveGames from './redux/actions/rawgActions'
 import { useEffect } from 'react'
 import './css/App.css'
 import Nav from './react/components/Nav'
-import { Route, Switch } from 'react-router'
+import { Redirect, Route, Switch } from 'react-router'
 import ProtectedRoute from './react/components/ProtectedRoute'
 import Signin from './react/pages/Signin'
 import Newsfeed from './react/pages/Newsfeed'
@@ -25,14 +25,18 @@ const mapDispatchToProps = (dispatch) => {
     toggleAuth: (boolean) => dispatch(authToggle(boolean))
   }
 }
-
 function App(props) {
+  const authenticated = props.localState.authenticated
+  const user = props.localState.user
+  const token = localStorage.getItem('token')
+
   const checkToken = async () => {
-    const token = localStorage.getItem('token')
     if (token) {
-      props.userSet()
-      props.toggleAuth(true)
+      await props.userSet()
+      await props.toggleAuth(true)
+      return true
     }
+    return true
   }
 
   useEffect(() => {
@@ -44,23 +48,32 @@ function App(props) {
 
       <main>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/register" component={Register} />
+          <Route
+            exact
+            path="/"
+            render={(props) => checkToken() && <Home {...props} />}
+          />
+          <Route
+            path="/signin"
+            render={(props) => checkToken() && <Signin {...props} />}
+          />
+          <Route
+            path="/register"
+            render={(props) => checkToken() && <Register {...props} />}
+          />
           <Route
             path="/gamepost/:post_Id"
-            component={(routerProps) => <PostDetail {...routerProps} />}
+            render={(props) => checkToken() && <PostDetail {...props} />}
           />
-          {/* <Route path="/newsfeed" component={Newsfeed} /> */}
-
-          {props.localState.user && props.localState.authenticated && (
-            <ProtectedRoute
-              path="/newsfeed"
-              user={props.localState.user}
-              authenticated={props.localState.authenticated}
-              component={Newsfeed}
-            />
-          )}
+          {token && (
+              <ProtectedRoute
+                path="/newsfeed"
+                user={user}
+                authenticated={authenticated}
+                checkToken={checkToken}
+                component={Newsfeed}
+              />
+            ) && <ProtectedRoute />}
         </Switch>
       </main>
     </div>

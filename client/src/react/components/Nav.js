@@ -11,7 +11,6 @@ const mapStateToProps = ({ localState }) => {
 
 function Nav(props) {
   function authorized() {
-    console.log(props.localState.authenticated)
     if (props.localState.authenticated) {
       return (
         <div className="home-user">
