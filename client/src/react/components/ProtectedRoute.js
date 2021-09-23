@@ -24,7 +24,6 @@ function ProtectedRoute(props) {
   let authenticated = props.localState.authenticated
 >>>>>>> d96d958bffb829af4008d23d415b6cc40bd28fba
   return (
-    //<Newsfeed />
     <Route
       render={() =>
         user && authenticated ? <Newsfeed /> : <Redirect to="/login" />
