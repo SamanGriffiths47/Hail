@@ -1,6 +1,6 @@
-* {
+body {
   box-sizing: border-box;
-  background-image: url(https://images.unsplash.com/photo-1572537577590-ac6a88150100?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlkZW8lMjBnYW1lc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+  background-image: url(https://cdn.wallpapersafari.com/25/63/VxMO4Q.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
@@ -48,6 +48,10 @@
   }
 }
 
+h3 {
+  color: rgb(214, 124, 123);
+}
+
 .home-user {
   float: right;
   justify-content: space-between;
@@ -56,9 +60,9 @@
 
 .postlist {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 5rem;
-  background-color: black;
+  background-image: url(https://images.unsplash.com/photo-1567360425618-1594206637d2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzAzfHxiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
 }
 
 .postcard {
@@ -69,7 +73,7 @@
 }
 
 .imgs {
-  border: rgb(0, 179, 9) solid 5px;
+  border: rgb(127, 8, 6) solid 5px;
   border-radius: 0% 100% 0% 100% / 76% 32% 68% 24%;
   height: 25em;
   width: 30em;
@@ -94,13 +98,44 @@ button,
 .formContain {
   display: grid;
   justify-content: center;
+
   border: azure solid 2px;
   border-width: 1px;
-  width: 300px;
+  width: 450px;
   position: fixed;
   top: 50%;
   left: 50%;
   margin-top: -100px;
   margin-left: -100px;
   background-color: black;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  border: white 1px solid;
+}
+
+a:hover {
+  color: blue;
+  border: blue 1px solid;
+}
+
+/* form {
+  font-size: 25px;
+  justify-content: ;
+} */
+label {
+  display: inline-block;
+  margin-left: -200px;
+  width: 250px;
+  text-align: right;
+}
+input {
+  display: inline-block;
+}
+
+button {
+  display: inline;
+  margin-left: 75px;
 }
