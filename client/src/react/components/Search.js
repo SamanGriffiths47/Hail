@@ -1,20 +1,26 @@
-// import React from 'react'
+import React, { useState } from 'react'
 
-// const Search = () => {
-//   const [searchInput, setSearchInput] = useState('')
-//   const [gameResults, setGameResults] = useState([])
+const Search = () => {
+  const [formValue, setFormValue] = useState('')
 
-//   const handleChange = (e) => {
-//     searchInput(e.target.value)
-//   }
+  const handleChange = (e) => {
+    setFormValue(e.target.value)
+  }
 
-//   const onSubmit = (e) => {
-//     e.preventDefault()
-//     let input = searchInput.split('').join('-'.toLocaleLowerCase)
-//   }
+  const onSubmit = (e) => {
+    e.preventDefault()
+  }
 
-//   setGameResults([])
-//   fetch('')
-// }
+  return (
+    <section className="searchContainer">
+      <div></div>
+      <div></div>
+      <form>
+        <input type="search" value={formValue} />
+        <button type="submit">search</button>
+      </form>
+    </section>
+  )
+}
 
-// export default Search
+export default Search

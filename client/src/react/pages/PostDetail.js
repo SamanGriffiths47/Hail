@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import getPosts from '../../redux/actions/localActions'
 import Comment from '../components/Comment'
 
 const mapStateToProps = ({ localState }) => {
@@ -7,17 +8,18 @@ const mapStateToProps = ({ localState }) => {
     localState
   }
 }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     fetchPosts: () => dispatch(() => {})
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: () => dispatch(getPosts())
+  }
+}
 
 function PostDetail(props) {
   const [Post, setPost] = useState(null)
   let { gameposts } = props.localState
   let { post_Id } = props.match.params
   useEffect(() => {
+    props.fetchPosts()
     async function findpost() {
       try {
         let selectedPost = gameposts.find(
@@ -45,4 +47,4 @@ function PostDetail(props) {
     </div>
   ) : null
 }
-export default connect(mapStateToProps)(PostDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)

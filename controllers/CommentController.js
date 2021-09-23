@@ -27,7 +27,9 @@ const FindComments = async (req, res) => {
 
 const FindCommentById = async (req, res) => {
   try {
-    const comment = await Comment.findByPk(req.params.post_id)
+    const comment = await Comment.findAll({
+      where: { post_Id: req.params.post_id }
+    })
     res.send(comment)
   } catch (error) {
     throw error

@@ -11,7 +11,6 @@ const mapStateToProps = ({ rawgState, localState }) => {
 }
 
 function ProtectedRoute(props) {
-  console.log(props)
   let user = props.localState.user
   let authenticated = props.localState.authenticated
   return (
