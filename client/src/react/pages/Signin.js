@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SignInUser } from '../../services/auth'
@@ -24,6 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 function Signin(props) {
+  const [tokenChecked, toggleCheck] = useState(true)
   const [formValues, setFormValues] = useState({
     ...iState
   })
@@ -45,8 +46,12 @@ function Signin(props) {
   async function handleSubmit(e) {
     e.preventDefault()
     await SignInUser({ ...formValues })
-    checkToken(e)
+    tokenChecked ? toggleCheck(false) : toggleCheck(true)
   }
+
+  useEffect(() => {
+    checkToken()
+  }, [tokenChecked])
 
   return (
     <div className="formControl">

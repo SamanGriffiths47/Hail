@@ -42,6 +42,7 @@ function App(props) {
 
   useEffect(() => {
     props.fetchGames()
+    checkToken()
   }, [])
   return (
     <div className="App">
@@ -57,13 +58,13 @@ function App(props) {
             render={(props) => <PostDetail {...props} />}
           />
           {token && (
-              <ProtectedRoute
-                path="/newsfeed"
-                user={user}
-                authenticated={authenticated}
-                component={Newsfeed}
-              />
-            ) && <ProtectedRoute />}
+            <ProtectedRoute
+              path="/newsfeed"
+              user={user}
+              authenticated={authenticated}
+              component={Newsfeed}
+            />
+          )}
         </Switch>
       </main>
     </div>
