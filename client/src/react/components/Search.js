@@ -9,14 +9,16 @@ const Search = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
+
+    setFormValue('')
   }
 
   return (
     <section className="searchContainer">
       <div></div>
       <div></div>
-      <form>
-        <input type="search" value={formValue} />
+      <form onSubmit={onSubmit}>
+        <input type="search" onChange={handleChange} value={formValue} />
         <button type="submit">search</button>
       </form>
     </section>

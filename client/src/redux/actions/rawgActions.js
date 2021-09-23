@@ -1,10 +1,12 @@
+import { connect } from 'react-redux'
+import grabGamePosts, { createPost } from '../../services/localServices'
 import grabGames, {
   grabDescription,
   grabTrailers
 } from '../../services/rawgServices'
 import { GET_GAMES } from '../types'
 
-export default function saveGames() {
+export default function saveGames(user) {
   return async (dispatch) => {
     try {
       const games = []
@@ -16,12 +18,22 @@ export default function saveGames() {
 
       const grab = await grabGames()
 
+      async function postCreate(game) {
+        console.log(await createPost(game))
+      }
+      console.log(user)
       grab.map((game) => {
         additions(game, game.id)
-        games.push(game)
-        return games
+        const gamepost = {
+          image: game.background_image,
+          description: game.description,
+          title: game.name,
+          user_Id: user.id
+        }
+        return postCreate(gamepost)
       })
-      console.log('games', games)
+
+      grabGamePosts()
 
       dispatch({ type: GET_GAMES, payload: games })
     } catch (error) {

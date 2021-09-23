@@ -15,32 +15,28 @@ const mapDispatchToProps = (dispatch) => ({
 function Comment(props) {
   const [Loading, setLoading] = useState(false)
   const [Commentbody, SetCommentbody] = useState({
-    "content": '',
-      "user_Id": null,
-      "post_Id": null
+    content: '',
+    user_Id: null,
+    post_Id: null
   })
 
-  console.log(props.Post.id)
   let postId = props.Post.id
   let userId = props.user.id
 
   useEffect(() => {
-    
     props.fetchComments(postId)
     setLoading(true)
   }, [Loading])
   let content = props
-  console.log(content)
 
   const handleSubmit = (e) => {
     e.preventdefault()
     SetCommentbody({
-      "content": '',
-      "user_Id": parseInt(userId),
-      "post_Id": parseInt(postId)
+      content: '',
+      user_Id: parseInt(userId),
+      post_Id: parseInt(postId)
     })
 
-    console.log(Commentbody)
     props.postyourComment(Commentbody)
   }
 

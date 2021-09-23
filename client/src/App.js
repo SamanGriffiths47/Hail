@@ -30,21 +30,20 @@ const mapDispatchToProps = (dispatch) => {
 function App(props) {
   const authenticated = props.localState.authenticated
   const user = props.localState.user
+  console.log(props.localState.user)
 
   const checkToken = async () => {
     const session = await CheckSession()
     await props.toggleAuth(true)
   }
 
-  useEffect(() => {
+  useEffect((props) => {
     const token = localStorage.getItem('token')
     if (token) {
       checkToken()
     }
     props.fetchGames()
     props.userSet()
-    props.fetchGames()
-    checkToken()
   }, [])
   return (
     <div className="App">
