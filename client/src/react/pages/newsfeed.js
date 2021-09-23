@@ -18,10 +18,10 @@ function Newsfeed(props) {
   console.log(props)
   useEffect(() => {
     props.fetchPosts()
+    console.log(1)
   }, [])
   return (
     <div>
-      hello
       <div className="postlist">
         {props.localState.gameposts.map((gamepost) => (
           <PostCard key={gamepost.id} gamepost={gamepost} />

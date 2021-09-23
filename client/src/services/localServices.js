@@ -11,4 +11,14 @@ export async function grabGamePosts() {
   }
 }
 
+export async function grabCommentByPostId(postid) {
+  try {
+    const res = await Client.get(`/comments/view/${postid}`)
+    console.log(res)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export default grabGamePosts
