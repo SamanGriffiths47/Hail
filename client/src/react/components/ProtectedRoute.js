@@ -1,40 +1,26 @@
 import React, { useEffect } from 'react'
 import { Redirect, Route } from 'react-router'
+import { connect } from 'react-redux'
+import Newsfeed from '../pages/Newsfeed'
 
-// const mapStateToProps = ({ rawgState, localState }) => {
-//   return {
-//     rawgState,
-//     localState
-//   }
-// }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     fetchGames: () => dispatch(saveGames()),
-//     userSet: () => dispatch(setUser()),
-//     toggleAuth: (boolean) => dispatch(authToggle(boolean))
-//   }
-// }
+const mapStateToProps = ({ rawgState, localState }) => {
+  return {
+    rawgState,
+    localState
+  }
+}
 
-export default function ProtectedRoute({
-  user,
-  authenticated,
-  component: Component,
-  ...rest
-}) {
-  // useEffect(() => {
-  //   checkToken()
-  // }, [])
-
+function ProtectedRoute(props) {
+  console.log(props)
+  let user = props.localState.user
+  let authenticated = props.localState.authenticated
   return (
+    //<Newsfeed />
     <Route
-      {...rest}
-      render={(props) =>
-        user && authenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/register" />
-        )
+      render={() =>
+        user && authenticated ? <Newsfeed /> : <Redirect to="/login" />
       }
     />
   )
 }
+export default connect(mapStateToProps)(ProtectedRoute)

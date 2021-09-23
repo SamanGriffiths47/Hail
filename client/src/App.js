@@ -11,6 +11,7 @@ import Register from './react/pages/Register'
 import Home from './react/pages/Home'
 import { setUser, authToggle } from './redux/actions/localActions'
 import PostDetail from './react/pages/PostDetail'
+import { CheckSession } from './services/auth'
 
 const mapStateToProps = ({ rawgState, localState }) => {
   return {
@@ -29,18 +30,20 @@ const mapDispatchToProps = (dispatch) => {
 function App(props) {
   const authenticated = props.localState.authenticated
   const user = props.localState.user
-  const token = localStorage.getItem('token')
 
   const checkToken = async () => {
-    if (token) {
-      await props.userSet()
-      await props.toggleAuth(true)
-      return true
-    }
-    return true
+    const session = await CheckSession()
+    console.log(session)
+    await props.toggleAuth(true)
   }
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkToken()
+    }
+    props.fetchGames()
+    props.userSet()
     props.fetchGames()
   }, [])
   return (
@@ -56,7 +59,11 @@ function App(props) {
             path="/gamepost/:post_Id"
             render={(props) => <PostDetail {...props} />}
           />
-          {token && (
+          {/* <Route exact path="/" component={Home} />
+          <Route path="/signin" component={Signin} />
+          <Route path="/register" component={Register} />
+          <Route path="/gamepost/:post_Id" component={() => <PostDetail />} /> */}
+          {user && (
               <ProtectedRoute
                 path="/newsfeed"
                 user={user}
