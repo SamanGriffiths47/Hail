@@ -22,3 +22,15 @@ export async function grabCommentByPostId(postid) {
 }
 
 export default grabGamePosts
+
+export async function postComment(body) {
+  try {
+    const res = await Client.post(`/comments/create`, body, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    console.log(res)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

@@ -7,11 +7,11 @@ const mapStateToProps = ({ localState }) => {
     localState
   }
 }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     fetchPosts: () => dispatch(() => {})
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: () => dispatch(() => {})
+  }
+}
 
 function PostDetail(props) {
   const [Post, setPost] = useState(null)
@@ -45,4 +45,4 @@ function PostDetail(props) {
     </div>
   ) : null
 }
-export default connect(mapStateToProps)(PostDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)
