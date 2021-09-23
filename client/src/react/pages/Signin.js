@@ -63,7 +63,7 @@ function Signin(props) {
               onChange={handleChange}
               name="username"
               type="text"
-              placeholder="What Should We Call You?"
+              placeholder="Username"
               value={formValues.username}
               required
             />
