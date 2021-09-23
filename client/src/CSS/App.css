@@ -156,3 +156,11 @@ button {
 div {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+
+.inputWrapper,
+label,
+input {
+  margin-bottom: 15px;
+  margin-right: 15px;
+  height: 25px;
+}
