@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getComments, postComments } from '../../redux/actions/localActions'
-
+import CommentCard from './CommentCard'
 const mapStateToProps = ({ localState }) => {
   return {
     ...localState
@@ -13,48 +13,75 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 function Comment(props) {
-  const [Loading, setLoading] = useState(false)
+ 
   const [Commentbody, SetCommentbody] = useState({
     "content": '',
       "user_Id": null,
       "post_Id": null
   })
+  const [Content,SetContent]=useState('')
+  const [Comments,SetComments]=useState(null)
+  //const [PostId,SetPostId]=useState(null)
 
-  console.log(props.Post.id)
+ 
+  async function getComs(postid){
+    await props.fetchComments(postid)
+    // let allcomments = props.comments
+    // SetComments(allcomments)
+  }
+  
   let postId = props.Post.id
-  let userId = props.user.id
-
   useEffect(() => {
     
-    props.fetchComments(postId)
-    setLoading(true)
-  }, [Loading])
-  let content = props
-  console.log(content)
+    let postId = props.Post.id
+    getComs(postId)
+    let allcomments = props.comments
+    SetComments(allcomments)
+     
+     console.log(props.comments)
+    
+  }, [postId])
+ 
 
-  const handleSubmit = (e) => {
-    e.preventdefault()
-    SetCommentbody({
-      "content": '',
-      "user_Id": parseInt(userId),
-      "post_Id": parseInt(postId)
-    })
-
-    console.log(Commentbody)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    let tempbody=Commentbody
+  
+    tempbody.content = Content
+    tempbody.user_Id = parseInt(props.user.id)
+    tempbody.post_Id = parseInt(props.Post.id)
+    SetCommentbody(tempbody)
+ 
     props.postyourComment(Commentbody)
   }
 
+  const handleChange= (e)=>{
+    SetContent(e.target.value)
+   
+  }
+
   return (
-    <div>
+    Comments  ? (<div>
       <h1>Comment section</h1>
       <div className="comment_forum">
         <form onSubmit={handleSubmit}>
-          <input placeholder="content" />
+          <div>Comment</div>
+          <input placeholder="Comments"  value={Content} onChange={handleChange} />
           <button>Submit</button>
         </form>
       </div>
-      <div className="card_holder"></div>
+      <div className="card_holder">
+      {Comments?
+            Comments.map((comment)=>(
+              <CommentCard
+              key={comment.id}  
+                comment={comment}
+                />
+            )):null
+        
+        }
+      </div>
     </div>
-  )
+  ):null)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Comment)

@@ -30,7 +30,6 @@ const mapDispatchToProps = (dispatch) => {
 function App(props) {
   const authenticated = props.localState.authenticated
   const user = props.localState.user
-
   const checkToken = async () => {
     const session = await CheckSession()
     await props.toggleAuth(true)
@@ -64,13 +63,13 @@ function App(props) {
           <Route path="/register" component={Register} />
           <Route path="/gamepost/:post_Id" component={() => <PostDetail />} /> */}
           {user && (
-              <ProtectedRoute
-                path="/newsfeed"
-                user={user}
-                authenticated={authenticated}
-                component={Newsfeed}
-              />
-            ) && <ProtectedRoute />}
+            <ProtectedRoute
+              path="/newsfeed"
+              user={user}
+              authenticated={authenticated}
+              component={Newsfeed}
+            />
+          )}
         </Switch>
       </main>
     </div>
