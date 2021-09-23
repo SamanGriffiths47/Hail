@@ -1,8 +1,11 @@
 * {
   box-sizing: border-box;
-  background-color: black;
+  background-image: url(https://images.unsplash.com/photo-1572537577590-ac6a88150100?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlkZW8lMjBnYW1lc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 0;
   padding: 0;
+  color: aliceblue;
 }
 
 .App {
@@ -55,6 +58,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5rem;
+  background-color: black;
 }
 
 .postcard {
@@ -69,4 +73,34 @@
   border-radius: 0% 100% 0% 100% / 76% 32% 68% 24%;
   height: 25em;
   width: 30em;
+}
+
+/* #navHome {
+  color: aqua;
+} */
+
+#homeContainer,
+button,
+#navHome {
+  color: aqua;
+  display: flex;
+  justify-content: center;
+}
+
+.home-news {
+  background-color: ivory;
+}
+
+.formContain {
+  display: grid;
+  justify-content: center;
+  border: azure solid 2px;
+  border-width: 1px;
+  width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+  background-color: black;
 }
