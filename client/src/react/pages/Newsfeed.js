@@ -43,26 +43,30 @@ function Newsfeed({
     }
   }
 
-  // useEffect(() => {
-  //   if (user) {
-  //     storePosts(user.id)
-  //   }
-  // }, [authenticated])
+  useEffect(() => {
+    if (user) {
+      storePosts(user.id)
+    }
+  }, [authenticated])
 
-  // useEffect(() => {
-  //   // swap(newPosts)
-  //   async function createPosts (games){
-  //     if (games.length > 0) {
-  //       games.map((game) => {
-  //         return creation(game, switchFunc(postsCreated))
-  //       })
-  //     }
-  //   }
-  // }, [games])
+  useEffect(() => {
+    function createPosts(games) {
+      if (games.length > 0) {
+        games.map((game) => {
+          return creation(game, switchFunc(postsCreated))
+        })
+      }
+    }
+    async function postCreate() {
+      await createPosts(games)
+    }
+    postCreate()
+    // swap(newPosts)
+  }, [games])
 
   useEffect(() => {
     fetchPosts()
-  }, [authenticated])
+  }, [postsCreated])
   // useEffect(() => {}, [gameposts])
   return (
     <div className="postlist flexRow">

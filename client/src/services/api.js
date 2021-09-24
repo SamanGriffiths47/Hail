@@ -1,8 +1,11 @@
 import Axios from 'axios'
 
 //Database Auth
-export const DB_URL = 'http://localhost:3001/api'
-export const Client = Axios.create({ baseURL: DB_URL })
+export const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? `${window.location.origin}/api`
+    : 'http://localhost:3001/api'
+export const Client = Axios.create({ baseURL: BASE_URL })
 
 // Intercepts every request axios makes
 Client.interceptors.request.use(
