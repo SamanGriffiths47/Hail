@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 const mapStateToProps = ({ localState }) => {
   return {
@@ -15,13 +16,15 @@ function PostCard(props) {
   return (
     <div className="postcard" onClick={() => showPost(gamepost)}>
       <h3>{gamepost.title}</h3>
-      <img
-        style={{ display: 'block' }}
-        src={gamepost.image}
-        alt={'gameposter'}
-        className="imgs"
-      />
+      <div className="imgContain flexRow">
+        <img
+          style={{ display: 'block' }}
+          src={gamepost.image}
+          alt={'gameposter'}
+          className="imgs"
+        />
+      </div>
     </div>
   )
 }
-export default withRouter(PostCard)
+export default connect(mapStateToProps)(withRouter(PostCard))

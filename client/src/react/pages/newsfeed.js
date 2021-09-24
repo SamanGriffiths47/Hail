@@ -2,10 +2,11 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getPosts } from '../../redux/actions/localActions'
 import PostCard from '../components/Postcard'
+import storeGames from '../../redux/actions/rawgActions'
 
 const mapStateToProps = ({ localState }) => {
   return {
-    localState
+    ...localState
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -14,13 +15,14 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-function Newsfeed(props) {
+function Newsfeed({ gameposts, fetchPosts, user }) {
   useEffect(() => {
-    props.fetchPosts()
+    // storePosts(user.id)
+    // fetchPosts()
   }, [])
   return (
-    <div className="postlist">
-      {props.localState.gameposts.map((gamepost) => (
+    <div className="postlist flexRow">
+      {gameposts.map((gamepost) => (
         <PostCard key={gamepost.id} gamepost={gamepost} />
       ))}
     </div>

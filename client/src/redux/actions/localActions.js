@@ -58,7 +58,7 @@ export function postComments(body) {
   return async (dispatch) => {
     try {
       const res = await postComment(body)
-      dispatch({ type: POST_COMMENTS, payload: body })
+      dispatch({ type: POST_COMMENTS, payload: res })
     } catch (error) {
       throw error
     }

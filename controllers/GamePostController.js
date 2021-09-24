@@ -3,7 +3,7 @@ const { GamePost, User } = require('../models')
 const GetGames = async (req, res) => {
   try {
     const games = await GamePost.findAll()
-    res.send(games)
+    return res.send(games)
   } catch (error) {
     throw error
   }
@@ -12,8 +12,10 @@ const GetGames = async (req, res) => {
 const GamesByName = async (req, res) => {
   try {
     const { name } = req.params
+    console.log(name)
     const games = await GamePost.findAll({ where: { title: `${name}` } })
-    res.send(games)
+    console.log(games)
+    // return res.send(games)
   } catch (error) {
     throw error
   }
@@ -24,7 +26,7 @@ const GameDetails = async (req, res) => {
     const games = await GamePost.findByPk(req.params.post_id, {
       include: [{ model: User, as: 'users' }]
     })
-    res.send(games)
+    return res.send(games)
   } catch (error) {
     throw error
   }
@@ -43,7 +45,7 @@ const CreateGame = async (req, res) => {
     }
 
     const result = await GamePost.create(gamePostBody)
-    res.send(result)
+    return res.send(result)
   } catch (error) {
     throw error
   }

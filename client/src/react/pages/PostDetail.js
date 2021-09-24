@@ -19,7 +19,7 @@ function PostDetail(props) {
   let { gameposts } = props.localState
   let { post_Id } = props.match.params
   useEffect(() => {
-    props.fetchPosts()
+    // props.fetchPosts()
     async function findpost() {
       try {
         let selectedPost = gameposts.find(
@@ -31,7 +31,7 @@ function PostDetail(props) {
         console.log(err)
       }
     }
-    findpost()
+    // findpost()
   }, [post_Id])
 
   return Post ? (

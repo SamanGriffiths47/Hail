@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './css/App.css'
 import Nav from './react/components/Nav'
 import { Route, Switch } from 'react-router'
@@ -8,10 +8,9 @@ import Signin from './react/pages/Signin'
 import Newsfeed from './react/pages/Newsfeed'
 import Register from './react/pages/Register'
 import Home from './react/pages/Home'
-import { authToggle, setUser } from './redux/actions/localActions'
+import { authToggle, getPosts, setUser } from './redux/actions/localActions'
 import PostDetail from './react/pages/PostDetail'
-import { CheckSession } from './services/auth'
-import { storeGames } from './redux/actions/rawgActions'
+import storeGames from './redux/actions/rawgActions'
 
 const mapStateToProps = ({ rawgState, localState }) => {
   return {
@@ -21,29 +20,38 @@ const mapStateToProps = ({ rawgState, localState }) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchGames: (userId) => dispatch(storeGames(userId)),
     userSet: () => dispatch(setUser()),
-    toggleAuth: (boolean) => dispatch(authToggle(boolean))
+    toggleAuth: (boolean) => dispatch(authToggle(boolean)),
+    storePosts: (user) => dispatch(storeGames(user)),
+    fetchPosts: () => dispatch(getPosts())
   }
 }
 
 function App(props) {
+  const [checked, togglechecked] = useState(true)
+  function checkedToggle() {
+    checked ? togglechecked(false) : togglechecked(true)
+  }
   const token = localStorage.getItem('token')
   const authenticated = props.localState.authenticated
   const user = props.localState.user
   const checkToken = async () => {
     await props.toggleAuth(true)
     await props.userSet()
+    checkedToggle()
   }
 
   useEffect(() => {
     if (token) {
       checkToken()
     }
-    if (user) {
-      props.fetchGames(user.id)
-    }
   }, [])
+  useEffect(() => {
+    if (user) {
+      // props.storePosts(user.id)
+      props.fetchPosts()
+    }
+  }, [checked])
   return (
     <div className="App">
       <Nav />

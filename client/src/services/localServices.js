@@ -1,9 +1,8 @@
-import axios from 'axios'
 import Client from './api'
 
 export async function grabGamePosts() {
   try {
-    const res = await Client.get('/gameposts')
+    const res = await Client.get('/gameposts/all')
     return res.data
   } catch (error) {
     throw error
@@ -13,6 +12,7 @@ export async function grabGamePosts() {
 export async function gamePostsByName(name) {
   try {
     const res = await Client.get(`/gameposts/${name}`)
+    console.log('FE', 'hi')
     return res.data
   } catch (error) {
     throw error
