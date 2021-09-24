@@ -1,30 +1,74 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getPosts } from '../../redux/actions/localActions'
+import {
+  boolSwitch,
+  getPosts,
+  postCreate
+} from '../../redux/actions/localActions'
 import PostCard from '../components/Postcard'
+import storeGames from '../../redux/actions/rawgActions'
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = ({ localState, rawgState }) => {
   return {
-    localState
+    ...localState,
+    ...rawgState
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPosts: () => dispatch(getPosts())
+    fetchPosts: () => dispatch(getPosts()),
+    creation: (game, boolean) => dispatch(postCreate(game, boolean)),
+    swap: (boolean) => dispatch(boolSwitch(boolean)),
+    storePosts: (user) => dispatch(storeGames(user))
   }
 }
 
-function Newsfeed(props) {
+function Newsfeed({
+  gameposts,
+  fetchPosts,
+  newPosts,
+  user,
+  authenticated,
+  games,
+  storePosts,
+  swap,
+  creation,
+  postsCreated
+}) {
+  async function switchFunc(boolean) {
+    if (boolean) {
+      return false
+    } else {
+      return true
+    }
+  }
+  async function store(id) {
+    await storePosts(id)
+  }
   useEffect(() => {
-    props.fetchPosts()
-  }, [])
+    if (user) {
+      store(user.id)
+      swap(newPosts)
+    }
+  }, [authenticated])
+  useEffect(() => {
+    console.log(games)
+
+    if (games.length > 0) {
+      games.map((game) => {
+        return creation(game, switchFunc(postsCreated))
+      })
+    }
+  }, [newPosts])
+  useEffect(() => {
+    fetchPosts()
+  }, [postsCreated])
+  // useEffect(() => {}, [gameposts])
   return (
-    <div>
-      <div className="postlist">
-        {props.localState.gameposts.map((gamepost) => (
-          <PostCard key={gamepost.id} gamepost={gamepost} />
-        ))}
-      </div>
+    <div className="postlist flexRow">
+      {gameposts.map((gamepost) => (
+        <PostCard key={gamepost.id} gamepost={gamepost} />
+      ))}
     </div>
   )
 }

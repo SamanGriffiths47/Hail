@@ -14,11 +14,16 @@ const Search = () => {
   }
 
   return (
-    <section className="searchContainer">
+    <section className="searchContainer flexRow">
       <div></div>
       <div></div>
-      <form onSubmit={onSubmit}>
-        <input type="search" onChange={handleChange} value={formValue} />
+      <form onSubmit={onSubmit} className="searchForm flexRow">
+        <input
+          type="search"
+          onChange={handleChange}
+          value={formValue}
+          className="flexRow"
+        />
         <button type="submit">search</button>
       </form>
     </section>

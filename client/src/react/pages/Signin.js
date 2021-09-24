@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SignInUser } from '../../services/auth'
-import { setUser, authToggle } from '../../redux/actions/localActions'
+import {
+  setUser,
+  authToggle,
+  boolSwitch
+} from '../../redux/actions/localActions'
 
 const iState = {
   username: '',
@@ -19,7 +23,8 @@ const mapStateToProps = ({ rawgState, localState }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     userSet: () => dispatch(setUser()),
-    toggleAuth: (boolean) => dispatch(authToggle(boolean))
+    toggleAuth: (boolean) => dispatch(authToggle(boolean)),
+    swap: (boolean) => dispatch(boolSwitch(boolean))
   }
 }
 
@@ -29,12 +34,15 @@ function Signin(props) {
     ...iState
   })
 
-  const checkToken = async (e) => {
+  // console.log('newposts', props.localState.newPosts)
+
+  const checkToken = async () => {
     const token = localStorage.getItem('token')
     if (token) {
       props.userSet()
       props.toggleAuth(true)
       props.history.push('/newsfeed')
+      props.swap(props.localState.newPosts)
     }
     setFormValues({ ...iState })
   }
