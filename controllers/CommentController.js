@@ -38,7 +38,7 @@ const FindCommentById = async (req, res) => {
 
 const UpdateComments = async (req, res) => {
   try {
-    let postId = parseInt(req.params.post_d)
+    let postId = parseInt(req.params.post_id)
     let updateComment = await Comment.update(req.body, {
       where: { id: postId },
       returning: true
@@ -49,10 +49,11 @@ const UpdateComments = async (req, res) => {
 
 const DeleteComment = async (req, res) => {
   try {
-    let postId = parseInt(req.params.id)
-    await Comment.destroy({ where: { id: id } })
-    console.log('deleted')
-    res.send({ message: `Deleted comment with an id of ${id}` })
+    let commentId = parseInt(req.params.id)
+    console.log(req.body)
+    await Comment.destroy({ where: { id: commentId } })
+
+    res.send({ message: `Deleted comment with an id of ${commentId}` })
   } catch (error) {}
 }
 
