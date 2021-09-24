@@ -32,3 +32,15 @@ export async function postComment(body) {
     throw error
   }
 }
+
+export async function delComment(id) {
+  try {
+    console.log('send')
+    const res = await Client.delete(`/comments/del/${id}`)
+    console.log(res)
+
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
