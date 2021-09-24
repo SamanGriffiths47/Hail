@@ -1,26 +1,27 @@
 body {
   box-sizing: border-box;
-  background-image: url(https://cdn.wallpapersafari.com/25/63/VxMO4Q.jpg);
-  background-repeat: no-repeat;
+  background-image: url(https://images.unsplash.com/photo-1567360425618-1594206637d2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YmFja2dyb3VuZCUyMHJlZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
   background-size: cover;
+  background-attachment: fixed;
+  background-color: rgb(110, 5, 3);
   margin: 0;
   padding: 0;
   color: aliceblue;
   height: 100vh;
 }
 
+.flexRow {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .App {
-  background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
 }
 
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,40 +35,30 @@ body {
   color: #185566;
 }
 
+nav {
+  height: 10vh;
+  background: linear-gradient(rgba(113, 0, 0, 0.418), rgba(113, 0, 0, 0.075));
+}
+
 h1 {
   font-family: 'Yeseva One', cursive;
 }
 
 h3 {
+  text-align: center;
   color: rgb(209, 196, 196);
   font-family: 'Yeseva One', cursive;
-}
-
-.home-user {
-  float: right;
-  justify-content: space-between;
-  margin: 0em 1em;
+  font-size: 2vw;
+  align-self: center;
 }
 
 .postlist {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  background-image: url(https://images.unsplash.com/photo-1567360425618-1594206637d2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YmFja2dyb3VuZCUyMHJlZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
-  width: 99vw;
-  height: 383vh;
-  image-rendering: crisp-edges;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -o-crisp-edges;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  width: 100vw;
+  height: 90vh;
+
   image-rendering: -webkit-optimize-contrast;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-
-@media (max-width: 1500px) {
-  .postlist {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 115vw;
-  }
 }
 
 @media (max-width: 1000px) {
@@ -76,33 +67,22 @@ h3 {
   }
 }
 
-/* viewheight viewwidth */
 .postcard {
+  display: grid;
+  grid-template: 30% 70%/ 1fr;
   cursor: pointer;
-  margin: 5em 1em -10em 3em;
-  height: 50vh;
+
   width: 30vw;
-}
-
-@media (max-width: 1500px) {
-  .postcard {
-    height: 50vh;
-    width: 50vw;
-    margin-top: -15px;
-  }
-}
-
-@media (max-width: 1000px) {
-  .postcard {
-    display: block;
-    width: 100vw;
-  }
+  height: 40vw;
+  margin: 1.5vw;
+  flex-direction: column;
 }
 
 .imgs {
   border: rgb(127, 8, 6) solid 5px;
-  height: 20em;
+  height: 100%;
   width: 70%;
+
   transition: 0.5s ease;
 }
 
@@ -121,22 +101,15 @@ h3 {
   }
 }
 
-button,
 #navHome {
   color: rgb(0, 0, 0);
   display: flex;
   justify-content: center;
 }
 
-.home-news {
-  background-color: ivory;
-}
-
-/* viewwidth */
 .formContain {
   display: grid;
   justify-content: center;
-
   border: rgb(255, 255, 255) solid 2px;
   border-width: 1px;
   width: 450px;
@@ -159,7 +132,6 @@ a:hover {
   border: blue 1px solid;
 }
 
-/* view width */
 label {
   display: inline-block;
   margin-left: -200px;
@@ -170,12 +142,6 @@ input {
   display: inline-block;
 }
 
-button {
-  display: inline;
-  margin-left: 75px;
-}
-
-/* vw font size DO FIRST */
 #navHome,
 #userPage,
 #newsfeed {
@@ -222,19 +188,34 @@ input {
   }
 }
 
-.comment_card {
-  display: block;
-  border: white solid 1px;
-  margin-bottom: 1.5em;
+.homeLogo {
+  height: 20vw;
+  border: 1vw solid black;
+  border-radius: 999px;
+  padding: 0.5vw;
+  margin: 4vh;
 }
-
-.delBtn {
+#homebutton {
+  background-image: url(../a-img/hail_app_logo.png);
+  background-color: rgba(113, 0, 0, 0.938);
+  width: 15vw;
+  height: 5vw;
+  border: 0.5vw outset rgb(34, 34, 34);
+  border-radius: 10px;
 }
-
-main {
-  background-color: rgb(0, 0, 0);
+#homebutton:hover {
+  background-color: rgba(97, 0, 0, 0.938);
+  border: 0.5vw inset rgb(34, 34, 34);
 }
 
 .homeContainer {
+  width: 100vw;
+  height: 90vh;
+  background-image: url(https://cdn.wallpapersafari.com/25/63/VxMO4Q.jpg);
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  overflow-y: scroll;
+  background-repeat: no-repeat;
   background-color: rgba(255, 255, 255, 0.4);
+  flex-direction: column;
 }

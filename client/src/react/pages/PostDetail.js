@@ -19,19 +19,19 @@ function PostDetail(props) {
   let { gameposts } = props.localState
   let { post_Id } = props.match.params
   useEffect(() => {
-    props.fetchPosts()
-    async function findpost() {
-      try {
-        let selectedPost = gameposts.find(
-          (post) => post.id === parseInt(post_Id)
-        )
-        setPost(selectedPost)
-        console.log(selectedPost)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    findpost()
+    // props.fetchPosts()
+    // async function findpost() {
+    //   try {
+    //     let selectedPost = gameposts.find(
+    //       (post) => post.id === parseInt(post_Id)
+    //     )
+    //     setPost(selectedPost)
+    //     console.log(selectedPost)
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // }
+    // findpost()
   }, [post_Id])
 
   return Post ? (

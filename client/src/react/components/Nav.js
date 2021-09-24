@@ -13,7 +13,7 @@ function Nav(props) {
   function authorized() {
     if (props.localState.authenticated) {
       return (
-        <div className="home-user">
+        <nav className="home-protected flexRow">
           <Search />
           <Link to="/" id="navHome">
             Home
@@ -24,16 +24,16 @@ function Nav(props) {
           <Link to="/newsfeed" id="newsfeed">
             Newsfeed
           </Link>
-        </div>
+        </nav>
       )
     } else {
       return (
-        <div className="home-news">
+        <nav className="home-open flexRow">
           {/* <Search /> */}
           <Link to="/" id="navHome">
             Home
           </Link>
-        </div>
+        </nav>
       )
     }
   }

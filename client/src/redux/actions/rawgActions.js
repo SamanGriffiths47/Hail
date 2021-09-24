@@ -1,59 +1,52 @@
-import { connect } from 'react-redux'
-import {
-  grabGamePosts,
-  createPost,
-  gamePostsByName
-} from '../../services/localServices'
-import { grabGames, grabDescription } from '../../services/rawgServices'
+import { gamePostsByName } from '../../services/localServices'
+import { grabDescription, grabGames } from '../../services/rawgServices'
 import { GET_GAMES } from '../types'
 
-export function storeGames(userId) {
-  return async (dispatch) => {
-    try {
-      const games = []
+export default function storeGames(userId) {
+  if (userId !== null && userId !== undefined) {
+    return async (dispatch) => {
+      try {
+        const games = []
 
-      async function additions(game, id) {
-        const deets = await grabDescription(id)
-        game.description = deets.description_raw
-        return game
-      }
+        function additions(game, id) {
+          const deets = grabDescription(id)
+          game.description = deets.description_raw
+          game.user_Id = userId
+          return game
+        }
 
-      console.log('hi')
-
-      const grab = await grabGames()
-      console.log('h')
-      async function byName(game) {
-        const get = await gamePostsByName(game.name)
-        if (get.length === 0) {
-          additions(game, game.id)
-          const gamepost = {
-            image: game.background_image,
-            description: game.deqscription,
-            title: game.name,
-            user_Id: userId
+        const grab = await grabGames()
+        function byName(game) {
+          try {
+            const get = gamePostsByName(game.name)
+            get.then(function (result) {
+              console.log(result.length)
+              if (result.length >= 1) {
+                return games
+              } else {
+                games.push(game)
+                return games
+              }
+            })
+          } catch (error) {
+            throw error
           }
-          postCreate(gamepost)
-          games.push(game)
-          console.log(games)
-          return games
         }
+
+        grab.map((game) => {
+          try {
+            additions(game, game.id)
+
+            return byName(game)
+          } catch (error) {
+            throw error
+          }
+        })
+
+        dispatch({ type: GET_GAMES, payload: games })
+      } catch (error) {
+        throw error
       }
-
-      async function postCreate(game) {
-        try {
-          await createPost(game)
-        } catch (error) {
-          throw error
-        }
-      }
-
-      grab.map((game) => {
-        byName(game)
-      })
-
-      dispatch({ type: GET_GAMES, payload: games })
-    } catch (error) {
-      throw error
     }
   }
 }

@@ -1,9 +1,8 @@
-import axios from 'axios'
 import Client from './api'
 
 export async function grabGamePosts() {
   try {
-    const res = await Client.get('/gameposts')
+    const res = await Client.get('/gameposts/all')
     return res.data
   } catch (error) {
     throw error
@@ -42,12 +41,19 @@ export async function postComment(body) {
 export async function createPost(body) {
   try {
     const res = await Client.post('/gameposts/create', body)
-    console.log(res)
     return res.data
   } catch (error) {
     throw error
   }
 }
+export async function toggle(boolean) {
+  if (boolean) {
+    return false
+  } else {
+    return true
+  }
+}
+
 export async function delComment(id) {
   try {
     console.log('commentbody')

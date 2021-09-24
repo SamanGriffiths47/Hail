@@ -20,7 +20,7 @@ function CommentCard(props) {
 
   useEffect(() => {
     let id = props.comment.id
-    SetcommentId(id)
+    // SetcommentId(id)
   })
   let comment = props.comment
 
