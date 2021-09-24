@@ -222,6 +222,15 @@ input {
   }
 }
 
+.comment_card {
+  display: block;
+  border: white solid 1px;
+  margin-bottom: 1.5em;
+}
+
+.delBtn {
+}
+
 main {
   background-color: rgb(0, 0, 0);
 }

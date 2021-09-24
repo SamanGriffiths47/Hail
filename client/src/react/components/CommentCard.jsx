@@ -30,7 +30,7 @@ function CommentCard(props) {
       <div>Post by{comment.user_Id}</div>
       <div>at {comment.post_Id}</div>
       <div>at {comment.createdAt}</div>
-      <div>{props.comment.user_Id === props.user.id ?<button
+      <div>{props.comment.user_Id === props.user.id ?<button className='delBtn'
         value={comment.id}
         onClick={() => {
           deletecomment()
