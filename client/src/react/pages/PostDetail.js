@@ -19,6 +19,20 @@ function PostDetail(props) {
   let { gameposts } = props.localState
   let { post_Id } = props.match.params
   useEffect(() => {
+<<<<<<< HEAD
+    props.fetchPosts()
+    async function findpost() {
+      try {
+        let selectedPost = gameposts.find(
+          (post) => post.id === parseInt(post_Id)
+        )
+        setPost(selectedPost)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    findpost()
+=======
     // props.fetchPosts()
     // async function findpost() {
     //   try {
@@ -32,6 +46,7 @@ function PostDetail(props) {
     //   }
     // }
     // findpost()
+>>>>>>> 1173297497629ea881f19c311cbfaa59a549e522
   }, [post_Id])
 
   return Post ? (
