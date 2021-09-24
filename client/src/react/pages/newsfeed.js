@@ -42,6 +42,7 @@ function Newsfeed({
       return true
     }
   }
+
   useEffect(() => {
     if (user) {
       async function store(id) {

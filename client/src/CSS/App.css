@@ -18,17 +18,10 @@ body {
 }
 
 .App {
-  /* background-color: rgb(0, 0, 0); */
   color: rgb(255, 255, 255);
 }
 
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
 .App-header {
-  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -43,7 +36,6 @@ body {
 }
 
 nav {
-  /* background-color: yellowgreen; */
   height: 10vh;
   background: linear-gradient(rgba(113, 0, 0, 0.418), rgba(113, 0, 0, 0.075));
 }
@@ -61,28 +53,13 @@ h3 {
 }
 
 .postlist {
-  /* display: grid;
-  grid-template-columns: repeat(3, 1fr); */
-  /* flex-direction: row !important; */
   flex-wrap: wrap;
   overflow-y: scroll;
   width: 100vw;
   height: 90vh;
-  /* padding-top: 4vh; */
-  /* image-rendering: crisp-edges !important;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -o-crisp-edges; */
-  image-rendering: -webkit-optimize-contrast;
-  /* -ms-interpolation-mode: nearest-neighbor; */
-}
 
-/* @media (max-width: 1500px) {
-  .postlist {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 115vw;
-  }
-} */
+  image-rendering: -webkit-optimize-contrast;
+}
 
 @media (max-width: 1000px) {
   .postlist {
@@ -90,32 +67,16 @@ h3 {
   }
 }
 
-/* viewheight viewwidth */
 .postcard {
   display: grid;
   grid-template: 30% 70%/ 1fr;
   cursor: pointer;
-  /* margin: 5em 1em -10em 3em; */
+
   width: 30vw;
   height: 40vw;
   margin: 1.5vw;
   flex-direction: column;
 }
-
-/* @media (max-width: 1500px) {
-  .postcard {
-    height: 50vh;
-    width: 50vw;
-    margin-top: -15px;
-  }
-} */
-
-/* @media (max-width: 1000px) {
-  .postcard {
-    display: block;
-    width: 100vw;
-  }
-} */
 
 .imgs {
   border: rgb(127, 8, 6) solid 5px;
@@ -140,14 +101,12 @@ h3 {
   }
 }
 
-/* button, */
 #navHome {
   color: rgb(0, 0, 0);
   display: flex;
   justify-content: center;
 }
 
-/* viewwidth */
 .formContain {
   display: grid;
   justify-content: center;
@@ -173,7 +132,6 @@ a:hover {
   border: blue 1px solid;
 }
 
-/* view width */
 label {
   display: inline-block;
   margin-left: -200px;
@@ -184,12 +142,6 @@ input {
   display: inline-block;
 }
 
-/* button {
-  display: inline;
-  margin-left: 75px;
-} */
-
-/* vw font size DO FIRST */
 #navHome,
 #userPage,
 #newsfeed {
@@ -256,9 +208,6 @@ input {
   border: 0.5vw inset rgb(34, 34, 34);
 }
 
-/* main {
-  background-color: rgb(0, 0, 0);
-} */
 .homeContainer {
   width: 100vw;
   height: 90vh;
