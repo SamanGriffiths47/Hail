@@ -26,7 +26,6 @@ function PostDetail(props) {
           (post) => post.id === parseInt(post_Id)
         )
         setPost(selectedPost)
-        console.log(selectedPost)
       } catch (err) {
         console.log(err)
       }
