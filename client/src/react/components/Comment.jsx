@@ -35,13 +35,13 @@ function Comment(props) {
   let postId = props.Post.id
   useEffect(() => {
     
-    let postId = props.Post.id
-    getComs(postId)
-    let allcomments = props.comments
-    SetComments(allcomments)
+    // let postId = props.Post.id
+    // getComs(postId)
+    // let allcomments = props.comments
+    // SetComments(allcomments)
      
-     console.log(Comments)
-    SetLoading(false)
+    //  console.log(Comments)
+    // SetLoading(false)
   }, [postId])
  
 

@@ -68,6 +68,7 @@ const UpdatePassword = async (req, res) => {
 const CheckSession = async (req, res) => {
   try {
     const { payload } = res.locals
+    console.log(payload)
     return res.send(payload)
   } catch (error) {
     throw error

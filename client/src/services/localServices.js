@@ -12,7 +12,6 @@ export async function grabGamePosts() {
 export async function gamePostsByName(name) {
   try {
     const res = await Client.get(`/gameposts/${name}`)
-    console.log('FE', 'hi')
     return res.data
   } catch (error) {
     throw error
@@ -42,12 +41,19 @@ export async function postComment(body) {
 export async function createPost(body) {
   try {
     const res = await Client.post('/gameposts/create', body)
-    console.log(res)
     return res.data
   } catch (error) {
     throw error
   }
 }
+export async function toggle(boolean) {
+  if (boolean) {
+    return false
+  } else {
+    return true
+  }
+}
+
 export async function delComment(id) {
   try {
     console.log('commentbody')
