@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import saveGames from './redux/actions/rawgActions'
 import { useEffect } from 'react'
 import './css/App.css'
 import Nav from './react/components/Nav'
@@ -9,9 +8,10 @@ import Signin from './react/pages/Signin'
 import Newsfeed from './react/pages/Newsfeed'
 import Register from './react/pages/Register'
 import Home from './react/pages/Home'
-import { setUser, authToggle } from './redux/actions/localActions'
+import { authToggle, setUser } from './redux/actions/localActions'
 import PostDetail from './react/pages/PostDetail'
 import { CheckSession } from './services/auth'
+import { storeGames } from './redux/actions/rawgActions'
 
 const mapStateToProps = ({ rawgState, localState }) => {
   return {
@@ -21,29 +21,28 @@ const mapStateToProps = ({ rawgState, localState }) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchGames: () => dispatch(saveGames()),
+    fetchGames: (userId) => dispatch(storeGames(userId)),
     userSet: () => dispatch(setUser()),
     toggleAuth: (boolean) => dispatch(authToggle(boolean))
   }
 }
 
 function App(props) {
+  const token = localStorage.getItem('token')
   const authenticated = props.localState.authenticated
   const user = props.localState.user
-  console.log(props.localState.user)
-
   const checkToken = async () => {
-    const session = await CheckSession()
     await props.toggleAuth(true)
+    props.userSet()
   }
 
-  useEffect((props) => {
-    const token = localStorage.getItem('token')
+  useEffect(() => {
     if (token) {
       checkToken()
     }
-    props.fetchGames()
-    props.userSet()
+    if (user) {
+      props.fetchGames(user.id)
+    }
   }, [])
   return (
     <div className="App">
@@ -63,13 +62,13 @@ function App(props) {
           <Route path="/register" component={Register} />
           <Route path="/gamepost/:post_Id" component={() => <PostDetail />} /> */}
           {user && (
-              <ProtectedRoute
-                path="/newsfeed"
-                user={user}
-                authenticated={authenticated}
-                component={Newsfeed}
-              />
-            ) && <ProtectedRoute />}
+            <ProtectedRoute
+              path="/newsfeed"
+              user={user}
+              authenticated={authenticated}
+              component={Newsfeed}
+            />
+          )}
         </Switch>
       </main>
     </div>

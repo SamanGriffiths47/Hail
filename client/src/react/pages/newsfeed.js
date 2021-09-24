@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import getPosts from '../../redux/actions/localActions'
+import { getPosts } from '../../redux/actions/localActions'
 import PostCard from '../components/Postcard'
 
 const mapStateToProps = ({ localState }) => {

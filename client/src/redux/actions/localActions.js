@@ -44,13 +44,10 @@ export function getPosts() {
   }
 }
 
-export default getPosts
-
 export function getComments(postid) {
   return async (dispatch) => {
     try {
       const comment = await grabCommentByPostId(postid)
-      console.log(comment)
       dispatch({ type: GET_COMMENTS, payload: comment })
     } catch (error) {
       throw error
@@ -67,4 +64,3 @@ export function postComments(body) {
     }
   }
 }
-//export default authToggle(setUser)

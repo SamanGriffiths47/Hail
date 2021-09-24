@@ -9,6 +9,16 @@ const GetGames = async (req, res) => {
   }
 }
 
+const GamesByName = async (req, res) => {
+  try {
+    const { name } = req.params
+    const games = await GamePost.findAll({ where: { title: `${name}` } })
+    res.send(games)
+  } catch (error) {
+    throw error
+  }
+}
+
 const GameDetails = async (req, res) => {
   try {
     const games = await GamePost.findByPk(req.params.post_id, {
@@ -42,5 +52,6 @@ const CreateGame = async (req, res) => {
 module.exports = {
   GetGames,
   GameDetails,
-  CreateGame
+  CreateGame,
+  GamesByName
 }

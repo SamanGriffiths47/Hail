@@ -10,6 +10,15 @@ export async function grabGamePosts() {
   }
 }
 
+export async function gamePostsByName(name) {
+  try {
+    const res = await Client.get(`/gameposts/${name}`)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export async function grabCommentByPostId(postid) {
   try {
     const res = await Client.get(`/comments/view/${postid}`)
@@ -34,9 +43,16 @@ export async function createPost(body) {
   try {
     const res = await Client.post('/gameposts/create', body)
     console.log(res)
+    return res.data
   } catch (error) {
     throw error
   }
 }
-
-export default grabGamePosts
+export async function delComment(id) {
+  try {
+    const res = await Client.delete(`/comments/del/${id}`)
+    return res
+  } catch (error) {
+    throw error
+  }
+}
