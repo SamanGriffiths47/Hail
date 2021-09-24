@@ -10,7 +10,7 @@ body {
 }
 
 .App {
-  background-color: rgb(0, 0, 0);
+  /* background-color: rgb(0, 0, 0); */
   color: rgb(255, 255, 255);
 }
 
@@ -20,7 +20,7 @@ body {
 } */
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -53,6 +53,7 @@ h3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   background-image: url(https://images.unsplash.com/photo-1567360425618-1594206637d2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YmFja2dyb3VuZCUyMHJlZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+  background-size: contain;
   width: 99vw;
   height: 383vh;
   image-rendering: crisp-edges;
@@ -223,9 +224,8 @@ input {
 }
 
 main {
-  background-color: rgb(0, 0, 0);
+  /* background-color: rgb(0, 0, 0); */
 }
-
 .homeContainer {
   background-color: rgba(255, 255, 255, 0.4);
 }

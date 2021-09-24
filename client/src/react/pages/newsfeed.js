@@ -19,12 +19,10 @@ function Newsfeed(props) {
     props.fetchPosts()
   }, [])
   return (
-    <div>
-      <div className="postlist">
-        {props.localState.gameposts.map((gamepost) => (
-          <PostCard key={gamepost.id} gamepost={gamepost} />
-        ))}
-      </div>
+    <div className="postlist">
+      {props.localState.gameposts.map((gamepost) => (
+        <PostCard key={gamepost.id} gamepost={gamepost} />
+      ))}
     </div>
   )
 }

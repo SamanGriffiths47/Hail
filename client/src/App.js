@@ -33,7 +33,7 @@ function App(props) {
   const user = props.localState.user
   const checkToken = async () => {
     await props.toggleAuth(true)
-    props.userSet()
+    await props.userSet()
   }
 
   useEffect(() => {
