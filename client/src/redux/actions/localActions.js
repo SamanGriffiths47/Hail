@@ -12,7 +12,8 @@ import {
   TOGGLE_AUTH,
   GET_COMMENTS,
   POST_COMMENTS,
-  CREATE_POST
+  CREATE_POST,
+  SWAP
 } from '../types'
 
 export function authToggle(boolean) {
@@ -82,7 +83,7 @@ export function boolSwitch(boolean) {
   try {
     return async (dispatch) => {
       const swap = await toggle(boolean)
-      dispatch({ type: CREATE_POST, payload: swap })
+      dispatch({ type: SWAP, payload: swap })
     }
   } catch (error) {
     throw error

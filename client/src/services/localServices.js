@@ -47,6 +47,7 @@ export async function createPost(body) {
   }
 }
 export async function toggle(boolean) {
+  console.log(boolean)
   if (boolean) {
     return false
   } else {

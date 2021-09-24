@@ -20,7 +20,6 @@ export default function storeGames(userId) {
           try {
             const get = gamePostsByName(game.name)
             get.then(function (result) {
-              console.log(result.length)
               if (result.length >= 1) {
                 return games
               } else {

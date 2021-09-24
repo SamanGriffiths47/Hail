@@ -42,17 +42,17 @@ function Newsfeed({
       return true
     }
   }
-  async function store(id) {
-    await storePosts(id)
-  }
   useEffect(() => {
     if (user) {
+      async function store(id) {
+        await storePosts(id)
+        await swap(newPosts)
+      }
       store(user.id)
-      swap(newPosts)
     }
   }, [authenticated])
   useEffect(() => {
-    console.log(games)
+    console.log('1', games)
 
     if (games.length > 0) {
       games.map((game) => {
