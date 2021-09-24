@@ -45,6 +45,7 @@ function Newsfeed({
   async function store(id) {
     await storePosts(id)
   }
+
   useEffect(() => {
     if (user) {
       store(user.id)
