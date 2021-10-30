@@ -56,24 +56,6 @@ function App(props) {
       checkToken()
     }
   }, [])
-  // useEffect(() => {
-  //   console.log('checked', newPosts)
-  //   console.log('user', user)
-  //   if (user) {
-  //     props.storePosts(user.id)
-  //   }
-  // }, [checked])
-  // useEffect(() => {
-  //   if (games.length > 0) {
-  //     games.map((game) => {
-  //       return props.creation(game)
-  //     })
-  //     props.swap(newPosts)
-  //   }
-  // }, [games])
-  // useEffect(() => {
-  //   props.fetchPosts()
-  // }, [newPosts])
 
   return (
     <div className="App">
@@ -88,10 +70,6 @@ function App(props) {
             path="/gamepost/:post_Id"
             render={(props) => <PostDetail {...props} />}
           />
-          {/* <Route exact path="/" component={Home} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/register" component={Register} />
-          <Route path="/gamepost/:post_Id" component={() => <PostDetail />} /> */}
           {user && (
             <ProtectedRoute
               path="/newsfeed"

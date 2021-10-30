@@ -45,7 +45,7 @@ function Newsfeed({
 
   useEffect(() => {
     if (user) {
-      storePosts(user.id)
+      storePosts()
     }
   }, [authenticated])
 
@@ -67,7 +67,6 @@ function Newsfeed({
   useEffect(() => {
     fetchPosts()
   }, [postsCreated])
-  // useEffect(() => {}, [gameposts])
   return (
     <div className="postlist flexRow">
       {gameposts.map((gamepost) => (
