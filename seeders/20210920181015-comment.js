@@ -4,16 +4,29 @@ const { User, GamePost } = require('../models')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const user = await User.findAll({ raw: true })
-    const post = await GamePost.findAll({ raw: true })
+    const users = await User.findAll({ raw: true })
+    const posts = await GamePost.findAll({ raw: true })
+    const comments = []
 
-    const comments = [...Array(20)].map((_) => ({
-      content: faker.random.word(),
-      user_Id: user[Math.floor(Math.random() * user.length)].id,
-      post_Id: user[Math.floor(Math.random() * post.length)].id,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }))
+    posts.map((post) => {
+      for (let i = 0; i < Math.floor(Math.random() * 9); i++) {
+        comments.push({
+          content: faker.company.bs(),
+          user_Id: users[Math.floor(Math.random() * users.length)].id,
+          post_Id: post.id,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        })
+      }
+    })
+
+    // const comments = [...Array(20)].map((_) => ({
+    //   content: faker.random.word(),
+    //   user_Id: user[Math.floor(Math.random() * users.length)].id,
+    //   post_Id: user[Math.floor(Math.random() * posts.length)].id,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date()
+    // }))
 
     await queryInterface.bulkInsert('comments', comments)
   },

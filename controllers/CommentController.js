@@ -53,7 +53,7 @@ const DeleteComment = async (req, res) => {
     console.log(req.body)
     await Comment.destroy({ where: { id: commentId } })
 
-    res.send({ message: `Deleted comment with an id of ${commentId}` })
+    res.send({ message: `Comment ${commentId} Deleted` })
   } catch (error) {}
 }
 

@@ -8,13 +8,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      GamePost.belongsTo(models.User, {
-        as: 'postBy',
-        foreignKey: 'user_Id'
-      })
       GamePost.hasMany(models.Comment, {
         as: 'post_comments',
         foreignKey: 'post_Id'
+      })
+      GamePost.belongsToMany(models.User, {
+        foreignKey: 'post_Id',
+        as: 'commenters',
+        through: models.Comment
       })
     }
   }
@@ -25,16 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       title: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-
-      user_Id: {
-        type: DataTypes.INTEGER,
-        onDelete: 'CASCADE',
-        allowNull: false,
-        references: {
-          model: 'users',
-          key: 'id'
-        }
       }
     },
     {

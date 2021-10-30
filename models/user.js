@@ -3,13 +3,14 @@ const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      User.hasMany(models.GamePost, {
-        as: 'posts',
-        foreignKey: 'user_Id'
-      })
       User.hasMany(models.Comment, {
         as: 'comments',
         foreignKey: 'user_Id'
+      })
+      User.belongsToMany(models.GamePost, {
+        foreignKey: 'user_Id',
+        as: 'commented_posts',
+        through: models.Comment
       })
     }
   }

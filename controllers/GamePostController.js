@@ -2,7 +2,9 @@ const { GamePost, User } = require('../models')
 
 const GetGames = async (req, res) => {
   try {
-    const games = await GamePost.findAll()
+    const games = await GamePost.findAll({
+      include: [{ model: User, as: 'commenters' }]
+    })
     return res.send(games)
   } catch (error) {
     throw error
@@ -28,7 +30,7 @@ const GamesByName = async (req, res) => {
 const GameDetails = async (req, res) => {
   try {
     const games = await GamePost.findByPk(req.params.post_id, {
-      include: [{ model: User, as: 'users' }]
+      include: [{ model: User, as: 'commenters' }]
     })
     return res.send(games)
   } catch (error) {

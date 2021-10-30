@@ -1,8 +1,10 @@
-const { User, Comment } = require('../models')
+const { User, Comment, GamePost } = require('../models')
 
 const GetUsers = async (req, res) => {
   try {
-    const users = await User.findAll()
+    const users = await User.findAll({
+      include: [{ model: GamePost, as: 'commented_posts' }]
+    })
     res.send(users)
   } catch (error) {
     throw error
@@ -12,7 +14,7 @@ const GetUsers = async (req, res) => {
 const GetUserProfile = async (req, res) => {
   try {
     const userProfile = await User.findByPk(req.params.user_id, {
-      include: [{ model: Comment, as: 'comments' }]
+      include: [{ model: GamePost, as: 'commented_posts' }]
     })
     res.send(userProfile)
   } catch (error) {
@@ -48,7 +50,7 @@ const deleteUser = async (req, res) => {
   try {
     let userId = parseInt(req.params.user_Id)
     await User.destroy({ where: { id: userId } })
-    res.send({ message: `Deleting user ${userId}` })
+    res.send({ message: `User ${userId} Deleted` })
   } catch (error) {
     throw error
   }
