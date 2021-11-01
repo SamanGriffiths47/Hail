@@ -17,8 +17,6 @@ const mapStateToProps = ({ localState, rawgState }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPosts: () => dispatch(getPosts()),
-    creation: (game, boolean) => dispatch(postCreate(game, boolean)),
-    swap: (boolean) => dispatch(boolSwitch(boolean)),
     storePosts: (user) => dispatch(storeGames(user))
   }
 }
@@ -31,7 +29,6 @@ function Newsfeed({
   authenticated,
   games,
   storePosts,
-  swap,
   creation,
   postsCreated
 }) {
@@ -42,12 +39,6 @@ function Newsfeed({
       return true
     }
   }
-
-  useEffect(() => {
-    if (user) {
-      storePosts()
-    }
-  }, [authenticated])
 
   useEffect(() => {
     function createPosts(games) {
@@ -61,7 +52,6 @@ function Newsfeed({
       await createPosts(games)
     }
     postCreate()
-    // swap(newPosts)
   }, [games])
 
   useEffect(() => {

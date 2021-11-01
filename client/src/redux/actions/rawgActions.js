@@ -7,38 +7,34 @@ export default function storeGames() {
     try {
       const games = []
 
-      function additions(game, id) {
-        const deets = grabDescription(id)
-        game.description = deets.description_raw
-        game.user_Id = userId
-        return game
-      }
+      // async function additions(game, id) {
+      //   const deets = await grabDescription(id)
+      //   game.description = deets.description_raw
+      //   return game
+      // }
 
       const grab = await grabGames()
-      function byName(game) {
+
+      async function byName(game) {
         try {
-          const get = gamePostsByName(game.name)
-          get.then(function (result) {
+          const get = await gamePostsByName(game.name)
+          function sort(result) {
             if (result.length >= 1) {
               return games
             } else {
               games.push(game)
               return games
             }
-          })
+          }
+          sort(get)
         } catch (error) {
           throw error
         }
       }
 
       grab.map((game) => {
-        try {
-          additions(game, game.id)
-
-          return byName(game)
-        } catch (error) {
-          throw error
-        }
+        // additions(game, game.id)
+        return byName(game)
       })
 
       dispatch({ type: GET_GAMES, payload: games })

@@ -8,13 +8,7 @@ import Signin from './react/pages/Signin'
 import Newsfeed from './react/pages/Newsfeed'
 import Register from './react/pages/Register'
 import Home from './react/pages/Home'
-import {
-  authToggle,
-  boolSwitch,
-  getPosts,
-  postCreate,
-  setUser
-} from './redux/actions/localActions'
+import { authToggle, getPosts, setUser } from './redux/actions/localActions'
 import PostDetail from './react/pages/PostDetail'
 import storeGames from './redux/actions/rawgActions'
 
@@ -29,9 +23,7 @@ const mapDispatchToProps = (dispatch) => {
     userSet: () => dispatch(setUser()),
     toggleAuth: (boolean) => dispatch(authToggle(boolean)),
     fetchPosts: () => dispatch(getPosts()),
-    storePosts: (user) => dispatch(storeGames(user)),
-    creation: (game) => dispatch(postCreate(game)),
-    swap: (boolean) => dispatch(boolSwitch(boolean))
+    storePosts: (user) => dispatch(storeGames(user))
   }
 }
 
@@ -46,17 +38,13 @@ function App(props) {
   const authenticated = props.localState.authenticated
   const user = props.localState.user
   const checkToken = async () => {
-    await props.toggleAuth(true)
-    await props.userSet()
-    togglechecked()
-  }
-
-  useEffect(() => {
     if (token) {
-      checkToken()
+      await props.toggleAuth(true)
+      await props.userSet()
+      togglechecked()
+    } else {
     }
-  }, [])
-
+  }
   return (
     <div className="App">
       <Nav />
@@ -83,5 +71,4 @@ function App(props) {
     </div>
   )
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(App)

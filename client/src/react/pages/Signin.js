@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SignInUser } from '../../services/auth'
@@ -23,28 +23,21 @@ const mapStateToProps = ({ rawgState, localState }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     userSet: () => dispatch(setUser()),
-    toggleAuth: (boolean) => dispatch(authToggle(boolean)),
-    swap: (boolean) => dispatch(boolSwitch(boolean))
+    toggleAuth: (boolean) => dispatch(authToggle(boolean))
   }
 }
 
 function Signin(props) {
-  const [tokenChecked, toggleCheck] = useState(true)
-  const [formValues, setFormValues] = useState({
-    ...iState
-  })
-
-  // console.log('newposts', props.localState.newPosts)
+  const [formValues, setFormValues] = useState(iState)
 
   const checkToken = async () => {
     const token = localStorage.getItem('token')
+    setFormValues(iState)
     if (token) {
       props.userSet()
       props.toggleAuth(true)
-      props.history.push('/newsfeed')
-      props.swap(props.localState.newPosts)
+      props.history.push('/')
     }
-    setFormValues({ ...iState })
   }
 
   function handleChange(e) {
@@ -53,13 +46,9 @@ function Signin(props) {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    await SignInUser({ ...formValues })
-    tokenChecked ? toggleCheck(false) : toggleCheck(true)
-  }
-
-  useEffect(() => {
+    await SignInUser(formValues)
     checkToken()
-  }, [tokenChecked])
+  }
 
   return (
     <div className="formControl">

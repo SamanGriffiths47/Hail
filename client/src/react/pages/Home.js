@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import logo from '../../a-img/hail_app_logo.png'
+import { boolSwitch, getPosts } from '../../redux/actions/localActions'
+import storeGames from '../../redux/actions/rawgActions'
+import { createPost } from '../../services/localServices'
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = ({ localState, rawgState }) => {
   return {
-    localState
+    localState,
+    rawgState
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: () => dispatch(getPosts()),
+    storeGames: (user) => dispatch(storeGames(user))
   }
 }
 
@@ -16,6 +26,25 @@ function Home(props) {
     }
     props.history.push('/register')
   }
+  function gameGetter() {
+    if (props.localState.authenticated) {
+      if (props.rawgState.games.length === 0) {
+        props.storeGames()
+      }
+      // if (props.rawgState.games.length > 0) {
+      //   props.rawgState.games.map(async (game) => {
+      //     await createPost(game)
+      //   })
+      //   props.fetchPosts()
+      // }
+    }
+  }
+  // useEffect(() => {
+  // if (props.localState.gameposts.length === 0) {
+  // }
+  // }, [])
+  gameGetter()
+
   return (
     <div className="homeContainer flexRow">
       <img className="homeLogo" src={logo} alt="Hail Brand Logo" />
@@ -26,4 +55,4 @@ function Home(props) {
   )
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

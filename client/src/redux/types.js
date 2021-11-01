@@ -3,7 +3,6 @@ export const GET_GAMES = 'GET_GAMES'
 
 //Local types
 export const GET_ALL_USERS = 'GET_ALL_USERS'
-export const SWAP = 'SWAP'
 export const GET_POSTS = 'GET_POSTS'
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const POST_COMMENTS = 'POST_COMMENTS'

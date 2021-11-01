@@ -3,7 +3,6 @@ import {
   grabGamePosts,
   grabCommentByPostId,
   postComment,
-  createPost,
   toggle
 } from '../../services/localServices'
 import {
@@ -12,8 +11,7 @@ import {
   TOGGLE_AUTH,
   GET_COMMENTS,
   POST_COMMENTS,
-  CREATE_POST,
-  SWAP
+  CREATE_POST
 } from '../types'
 
 export function authToggle(boolean) {
@@ -66,26 +64,5 @@ export function postComments(body) {
     } catch (error) {
       throw error
     }
-  }
-}
-
-export function postCreate(game, boolean) {
-  try {
-    return async (dispatch) => {
-      const res = await createPost(game)
-      dispatch({ type: CREATE_POST, payload: boolean })
-    }
-  } catch (error) {
-    throw error
-  }
-}
-export function boolSwitch(boolean) {
-  try {
-    return async (dispatch) => {
-      const swap = await toggle(boolean)
-      dispatch({ type: SWAP, payload: swap })
-    }
-  } catch (error) {
-    throw error
   }
 }

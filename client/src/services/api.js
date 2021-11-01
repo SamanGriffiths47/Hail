@@ -24,5 +24,5 @@ Client.interceptors.request.use(
 export default Client
 
 //RAWG Auth
-export const RAWG_URL = `https://api.rawg.io/api`
+export const RAWG_URL = `https://rawg.io/api`
 export const RAWG_KEY = process.env.REACT_APP_KEY
