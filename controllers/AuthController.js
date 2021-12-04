@@ -20,9 +20,9 @@ const Login = async (req, res) => {
       let token = middleware.createToken(payload)
       return res.send({ user: payload, token })
     }
-    res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
+    return res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
   } catch (error) {
-    throw error
+    return error
   }
 }
 
@@ -38,7 +38,7 @@ const Register = async (req, res) => {
       city_state,
       country
     })
-    res.send(user)
+    return res.send(user)
   } catch (error) {
     throw error
   }
@@ -59,7 +59,7 @@ const UpdatePassword = async (req, res) => {
       await user.update({ passwordDigest })
       return res.send({ status: 'Success', msg: 'Password Updated' })
     }
-    res.status(401).send({ status: 'Error', msg: 'Invalid Credentials' })
+    return res.status(401).send({ status: 'Error', msg: 'Invalid Credentials' })
   } catch (error) {
     throw error
   }
@@ -68,7 +68,6 @@ const UpdatePassword = async (req, res) => {
 const CheckSession = async (req, res) => {
   try {
     const { payload } = res.locals
-    console.log(payload)
     return res.send(payload)
   } catch (error) {
     throw error

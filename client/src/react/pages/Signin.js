@@ -1,54 +1,54 @@
-import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SignInUser } from '../../services/auth'
-import {
-  setUser,
-  authToggle,
-  boolSwitch
-} from '../../redux/actions/localActions'
+import { changeForm } from '../../redux/actions/localActions'
 
-const iState = {
-  username: '',
-  email: '',
-  password: ''
-}
-
-const mapStateToProps = ({ rawgState, localState }) => {
+const mapStateToProps = ({ localState }) => {
   return {
-    rawgState,
     localState
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    userSet: () => dispatch(setUser()),
-    toggleAuth: (boolean) => dispatch(authToggle(boolean))
+    changeForm: (values) => dispatch(changeForm(values))
   }
 }
 
 function Signin(props) {
-  const [formValues, setFormValues] = useState(iState)
+  const userForm = props.localState.form
 
-  const checkToken = async () => {
-    const token = localStorage.getItem('token')
-    setFormValues(iState)
-    if (token) {
-      props.userSet()
-      props.toggleAuth(true)
+  function handleChange(e) {
+    props.changeForm({ ...userForm, [e.target.name]: e.target.value })
+  }
+
+  async function formSubmit() {
+    const { city_state, country, confirmPassword, ...formValues } = userForm
+    await SignInUser(formValues)
+    if (localStorage.getItem('token')) {
+      props.changeForm(clearForm())
       props.history.push('/')
     }
   }
 
-  function handleChange(e) {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value })
-  }
-
   async function handleSubmit(e) {
     e.preventDefault()
-    await SignInUser(formValues)
-    checkToken()
+    formSubmit()
   }
+
+  function clearForm() {
+    const form = userForm
+    Object.keys(form).forEach((val) => (form[val] = ''))
+    return form
+  }
+
+  async function autoSignIn() {
+    if (userForm.confirmPassword) {
+      console.log('hi')
+      formSubmit()
+    }
+  }
+
+  autoSignIn()
 
   return (
     <div className="formControl">
@@ -61,7 +61,7 @@ function Signin(props) {
               name="username"
               type="text"
               placeholder="Username"
-              value={formValues.username}
+              value={userForm.username}
               required
             />
           </div>
@@ -72,7 +72,7 @@ function Signin(props) {
               name="email"
               type="text"
               placeholder="example@example.com"
-              value={formValues.email}
+              value={userForm.email}
               required
             />
           </div>
@@ -83,7 +83,7 @@ function Signin(props) {
               name="password"
               type="password"
               placeholder="Password"
-              value={formValues.password}
+              value={userForm.password}
               required
             />
           </div>
@@ -93,9 +93,7 @@ function Signin(props) {
             </div>
             <button
               disabled={
-                !formValues.email ||
-                !formValues.username ||
-                !formValues.password
+                !userForm.email || !userForm.username || !userForm.password
               }
               type="submit"
               // onMouseOver={handleSubmit}

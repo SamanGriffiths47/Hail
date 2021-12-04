@@ -3,15 +3,22 @@ import {
   TOGGLE_AUTH,
   GET_POSTS,
   GET_COMMENTS,
-  POST_COMMENTS,
-  CREATE_POST
+  CHANGE_FORM
 } from '../types'
 
 const iState = {
   authenticated: false,
   user: null,
-  gameposts: [],
-  comments: []
+  gamePosts: [],
+  comments: [],
+  form: {
+    city_state: '',
+    country: '',
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  }
 }
 
 export default function localReducer(state = iState, action) {
@@ -21,11 +28,11 @@ export default function localReducer(state = iState, action) {
     case SET_USER_STATE:
       return { ...state, user: action.payload }
     case GET_POSTS:
-      return { ...state, gameposts: action.payload }
+      return { ...state, gamePosts: action.payload }
     case GET_COMMENTS:
       return { ...state, comments: action.payload }
-    case POST_COMMENTS:
-      return { ...state }
+    case CHANGE_FORM:
+      return { ...state, form: action.payload }
     default:
       return { ...state }
   }

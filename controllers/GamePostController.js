@@ -11,17 +11,25 @@ const GetGames = async (req, res) => {
   }
 }
 
+const DeleteAllGames = async (req, res) => {
+  try {
+    const games = await GamePost.findAll({
+      include: [{ model: User, as: 'commenters' }]
+    })
+    games.forEach((game) => {
+      GamePost.destroy({ where: { id: game.id } })
+    })
+    return res.send('All Games Deleted')
+  } catch (error) {
+    throw error
+  }
+}
+
 const GamesByName = async (req, res) => {
   try {
     const { name } = req.params
     const games = await GamePost.findAll({ where: { title: `${name}` } })
     return res.send(games)
-    // console.log(games)
-    // if (games.length > 0) {
-    //   return 1
-    // } else {
-    //   return 0
-    // }
   } catch (error) {
     throw error
   }
@@ -40,13 +48,13 @@ const GameDetails = async (req, res) => {
 
 const CreateGame = async (req, res) => {
   try {
-    const { background_image, description, name, user_Id } = req.body
+    const { background_image, description, name, user_Id, ...rest } = req.body
 
     let gamePostBody = {
       image: background_image,
-      description,
+      description: description,
       title: name,
-      user_Id
+      user_Id: user_Id
     }
 
     const result = await GamePost.create(gamePostBody)
@@ -60,5 +68,6 @@ module.exports = {
   GetGames,
   GameDetails,
   CreateGame,
-  GamesByName
+  GamesByName,
+  DeleteAllGames
 }

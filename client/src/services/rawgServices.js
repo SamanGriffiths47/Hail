@@ -4,7 +4,6 @@ import axios from 'axios'
 export async function grabGames() {
   try {
     const res = await axios.get(`${RAWG_URL}/games?key=${RAWG_KEY}`)
-    console.log(res.data)
     return res.data.results
   } catch (error) {
     throw error

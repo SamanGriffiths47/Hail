@@ -16,20 +16,19 @@ const mapDispatchToProps = (dispatch) => {
 
 function PostDetail(props) {
   const [Post, setPost] = useState(null)
-  let { gameposts } = props.localState
-  let { post_Id } = props.match.params
-  useEffect(() => {
-    props.fetchPosts()
-    async function findpost() {
-      try {
-        let selectedPost = gameposts.find(
-          (post) => post.id === parseInt(post_Id)
-        )
-        setPost(selectedPost)
-      } catch (err) {
-        console.log(err)
-      }
+  const { gamePosts } = props.localState
+  const { post_Id } = props.match.params
+
+  async function findpost() {
+    try {
+      let selectedPost = gamePosts.find((post) => post.id === parseInt(post_Id))
+      setPost(selectedPost)
+    } catch (err) {
+      console.log(err)
     }
+  }
+
+  useEffect(() => {
     findpost()
   }, [post_Id])
 

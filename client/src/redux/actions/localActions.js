@@ -1,26 +1,25 @@
 import { CheckSession } from '../../services/auth'
 import {
   grabGamePosts,
-  grabCommentByPostId,
-  postComment,
-  toggle
+  grabCommentByPostId
 } from '../../services/localServices'
 import {
   GET_POSTS,
   SET_USER_STATE,
   TOGGLE_AUTH,
   GET_COMMENTS,
-  POST_COMMENTS,
-  CREATE_POST
+  CHANGE_FORM
 } from '../types'
 
 export function authToggle(boolean) {
-  return async (dispatch) => {
-    try {
-      dispatch({ type: TOGGLE_AUTH, payload: boolean })
-    } catch (error) {
-      throw error
-    }
+  return (dispatch) => {
+    dispatch({ type: TOGGLE_AUTH, payload: boolean })
+  }
+}
+
+export function changeForm(formValues) {
+  return (dispatch) => {
+    dispatch({ type: CHANGE_FORM, payload: formValues })
   }
 }
 
@@ -51,16 +50,6 @@ export function getComments(postid) {
     try {
       const comment = await grabCommentByPostId(postid)
       dispatch({ type: GET_COMMENTS, payload: comment })
-    } catch (error) {
-      throw error
-    }
-  }
-}
-export function postComments(body) {
-  return async (dispatch) => {
-    try {
-      const res = await postComment(body)
-      dispatch({ type: POST_COMMENTS, payload: res })
     } catch (error) {
       throw error
     }

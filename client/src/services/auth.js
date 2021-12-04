@@ -22,7 +22,6 @@ export const RegisterUser = async (data) => {
 
 export const CheckSession = async () => {
   try {
-    // Checks if the current token exists and is valid
     const res = await Client.get('/auth/session')
     return res.data
   } catch (error) {

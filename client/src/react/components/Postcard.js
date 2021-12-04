@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+
 const mapStateToProps = ({ localState }) => {
   return {
     localState
@@ -8,18 +9,19 @@ const mapStateToProps = ({ localState }) => {
 }
 
 function PostCard(props) {
-  const { gamepost } = props
-  let showPost = (gamepost) => {
-    props.history.push(`/gamepost/${gamepost.id}`)
+  const { gamePost } = props
+  console.log('GAMEPOSTS 2', gamePost)
+  let showPost = (gamePost) => {
+    props.history.push(`/gamepost/${gamePost.id}`)
   }
 
   return (
-    <div className="postcard" onClick={() => showPost(gamepost)}>
-      <h3>{gamepost.title}</h3>
+    <div className="postcard" onClick={() => showPost(gamePost)}>
+      <h3>{gamePost.title}</h3>
       <div className="imgContain flexRow">
         <img
           style={{ display: 'block' }}
-          src={gamepost.image}
+          src={gamePost.image}
           alt={'gameposter'}
           className="imgs"
         />

@@ -1,50 +1,43 @@
-import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { changeForm } from '../../redux/actions/localActions'
 import { RegisterUser } from '../../services/auth'
 
-const iState = {
-  city_state: '',
-  country: '',
-  username: '',
-  email: '',
-  password: '',
-  confirmPassword: ''
+const mapStateToProps = ({ localState }) => {
+  return {
+    localState
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeForm: (values) => dispatch(changeForm(values))
+  }
 }
 
-export default function Register(props) {
-  const [formValues, setFormValues] = useState({
-    ...iState
-  })
+function Register(props) {
+  const formValues = props.localState.form
 
   function handleChange(e) {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value })
+    props.changeForm({ ...formValues, [e.target.name]: e.target.value })
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
+
     const user = {
-      admin: adminToggle(),
+      admin: ["Sam'an", 'Zitai', 'Robert'].includes(formValues.username),
       city_state: formValues.city_state,
       country: formValues.country,
       username: formValues.username,
       email: formValues.email,
       password: formValues.password
     }
-    RegisterUser(user)
-    setFormValues({ ...iState })
+
+    await RegisterUser(user)
+
     props.history.push('/signin')
   }
 
-  function adminToggle() {
-    if (
-      formValues.username === "Sam'an" ||
-      formValues.username === 'Zitai' ||
-      formValues.username === 'Robert'
-    ) {
-      return true
-    }
-    return false
-  }
   return (
     <div className="formControl">
       <div className="formContain">
@@ -139,3 +132,5 @@ export default function Register(props) {
     </div>
   )
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

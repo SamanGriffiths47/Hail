@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { Redirect, Route } from 'react-router'
 import { connect } from 'react-redux'
 import Newsfeed from '../pages/Newsfeed'
@@ -16,7 +15,7 @@ function ProtectedRoute(props) {
   return (
     <Route
       render={() =>
-        user && authenticated ? <Newsfeed /> : <Redirect to="/login" />
+        user && authenticated ? <Newsfeed /> : <Redirect to="/register" />
       }
     />
   )

@@ -8,61 +8,27 @@ import {
 import PostCard from '../components/Postcard'
 import storeGames from '../../redux/actions/rawgActions'
 
-const mapStateToProps = ({ localState, rawgState }) => {
+const mapStateToProps = ({ localState }) => {
   return {
-    ...localState,
-    ...rawgState
+    localState
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchPosts: () => dispatch(getPosts()),
-    storePosts: (user) => dispatch(storeGames(user))
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     fetchPosts: () => dispatch(getPosts()),
+//     storePosts: (user) => dispatch(storeGames(user))
+//   }
+// }
 
-function Newsfeed({
-  gameposts,
-  fetchPosts,
-  newPosts,
-  user,
-  authenticated,
-  games,
-  storePosts,
-  creation,
-  postsCreated
-}) {
-  async function switchFunc(boolean) {
-    if (boolean) {
-      return false
-    } else {
-      return true
-    }
-  }
+function Newsfeed(props) {
+  const gamePosts = props.localState.gamePosts
 
-  useEffect(() => {
-    function createPosts(games) {
-      if (games.length > 0) {
-        games.map((game) => {
-          return creation(game, switchFunc(postsCreated))
-        })
-      }
-    }
-    async function postCreate() {
-      await createPosts(games)
-    }
-    postCreate()
-  }, [games])
-
-  useEffect(() => {
-    fetchPosts()
-  }, [postsCreated])
   return (
     <div className="postlist flexRow">
-      {gameposts.map((gamepost) => (
-        <PostCard key={gamepost.id} gamepost={gamepost} />
+      {gamePosts.map((gamePost) => (
+        <PostCard key={gamePost.id} gamePost={gamePost} />
       ))}
     </div>
   )
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Newsfeed)
+export default connect(mapStateToProps)(Newsfeed)
