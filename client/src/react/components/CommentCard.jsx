@@ -1,4 +1,3 @@
-import { parse } from 'dotenv'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { delComment } from '../../services/localServices'
@@ -15,7 +14,6 @@ function CommentCard(props) {
     //let commentid = e.target.value
 
     await delComment(commentId)
-    console.log('deleted')
   }
 
   useEffect(() => {

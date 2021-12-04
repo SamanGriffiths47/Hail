@@ -43,7 +43,6 @@ function Signin(props) {
 
   async function autoSignIn() {
     if (userForm.confirmPassword) {
-      console.log('hi')
       formSubmit()
     }
   }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import { getComments } from '../../redux/actions/localActions'
 import CommentCard from './CommentCard'

@@ -20,12 +20,8 @@ function PostDetail(props) {
   const { post_Id } = props.match.params
 
   async function findpost() {
-    try {
-      let selectedPost = gamePosts.find((post) => post.id === parseInt(post_Id))
-      setPost(selectedPost)
-    } catch (err) {
-      console.log(err)
-    }
+    let selectedPost = gamePosts.find((post) => post.id === parseInt(post_Id))
+    setPost(selectedPost)
   }
 
   useEffect(() => {

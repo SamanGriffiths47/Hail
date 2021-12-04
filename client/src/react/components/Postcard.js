@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
@@ -10,7 +9,6 @@ const mapStateToProps = ({ localState }) => {
 
 function PostCard(props) {
   const { gamePost } = props
-  console.log('GAMEPOSTS 2', gamePost)
   let showPost = (gamePost) => {
     props.history.push(`/gamepost/${gamePost.id}`)
   }

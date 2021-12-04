@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import logo from '../../a-img/hail_logo.png'
-import { boolSwitch, getPosts } from '../../redux/actions/localActions'
+import { getPosts } from '../../redux/actions/localActions'
 import requestGames from '../../redux/actions/rawgActions'
-import { createPost } from '../../services/localServices'
 
 const mapStateToProps = ({ localState, rawgState }) => {
   return {

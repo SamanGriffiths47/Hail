@@ -46,21 +46,10 @@ export async function createPost(body) {
     throw error
   }
 }
-export async function toggle(boolean) {
-  console.log(boolean)
-  if (boolean) {
-    return false
-  } else {
-    return true
-  }
-}
 
 export async function delComment(id) {
   try {
-    console.log('commentbody')
-    console.log(id)
     const res = await Client.delete(`/comments/del/${id}`)
-    console.log(res)
     return res
   } catch (error) {
     throw error
