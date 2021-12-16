@@ -24,6 +24,7 @@ export async function searchGames(query) {
       const deets = await grabDescription(game.id)
       game.description = deets.description_raw
       await createPost(game)
+      console.log('GAME', game.name)
     }
   })
 }

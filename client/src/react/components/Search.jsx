@@ -27,6 +27,7 @@ const Search = (props) => {
     await props.queryDB(props.search)
     await props.queryUpdate(props.search)
     await props.searchUpdate('')
+    console.log('QUERY',props.query)
     props.history.push(`/search/${props.query}`)
   }
 
