@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { getComments } from '../../redux/actions/localActions'
 import { delComment } from '../../services/localServices'
 
 const mapStateToProps = ({ localState }) => {
@@ -8,36 +8,41 @@ const mapStateToProps = ({ localState }) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchComments: (postId, index) => dispatch(getComments(postId, index))
+})
+
 function CommentCard(props) {
-  const [commentId, SetcommentId] = useState(null)
+  const comment = props.comment
+
   async function deletecomment() {
-    //let commentid = e.target.value
-
-    await delComment(commentId)
+    await delComment(comment.id)
+    await props.fetchComments(comment.post_Id, props.postIndex)
   }
-
-  useEffect(() => {
-    let id = props.comment.id
-    // SetcommentId(id)
+  let stamp = ''
+  let date = new Date(comment.createdAt)
+  date = `${date}`.split(' ')
+  date.splice(5,1)
+  date.slice(date.length-3).forEach(word =>{
+    word = word.replace('(','')
+    stamp += word[0]
   })
-  let comment = props.comment
+  date = `${date.slice(4,5)} ${date.slice(0,4).join(' ')} ${stamp}`
 
   return (
     <div className="comment_card">
-      <div>{comment.content}</div>
-      <div>Post by{comment.user_Id}</div>
-      <div>at {comment.post_Id}</div>
-      <div>at {comment.createdAt}</div>
-      <div>{props.comment.user_Id === props.user.id ?<button className='delBtn'
-        value={comment.id}
+      <h5><span>{comment.comment_by.username} Said:</span> {comment.content} <br /> At {date}</h5>
+      {comment.user_Id === props.user.id && <button 
+        className='delBtn'
+        id={comment.id}
         onClick={() => {
           deletecomment()
         }}
       >
-        x
-      </button>:null}</div>
+        Delete Comment
+      </button>}
     </div>
   )
 }
 
-export default connect(mapStateToProps)(CommentCard)
+export default connect(mapStateToProps, mapDispatchToProps)(CommentCard)

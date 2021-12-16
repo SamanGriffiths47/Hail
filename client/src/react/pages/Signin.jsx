@@ -50,7 +50,7 @@ function Signin(props) {
   autoSignIn()
 
   return (
-    <div className="formControl">
+    <div className="formControl flex">
       <div className="formContain">
         <form onSubmit={handleSubmit}>
           <div className="inputWrapper">
@@ -95,7 +95,7 @@ function Signin(props) {
                 !userForm.email || !userForm.username || !userForm.password
               }
               type="submit"
-              // onMouseOver={handleSubmit}
+              className='authBtn'
             >
               Signin
             </button>

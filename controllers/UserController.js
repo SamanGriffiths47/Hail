@@ -1,10 +1,8 @@
-const { User, Comment, GamePost } = require('../models')
+const { User, GamePost } = require('../models')
 
 const GetUsers = async (req, res) => {
   try {
-    const users = await User.findAll({
-      include: [{ model: GamePost, as: 'commented_posts' }]
-    })
+    const users = await User.findAll({})
     res.send(users)
   } catch (error) {
     throw error
@@ -14,7 +12,13 @@ const GetUsers = async (req, res) => {
 const GetUserProfile = async (req, res) => {
   try {
     const userProfile = await User.findByPk(req.params.user_id, {
-      include: [{ model: GamePost, as: 'commented_posts' }]
+      attributes: { exclude: ['password_digest'] },
+      include: [
+        {
+          model: GamePost,
+          as: 'commented'
+        }
+      ]
     })
     res.send(userProfile)
   } catch (error) {

@@ -10,8 +10,8 @@ import Home from './react/pages/Home'
 import { authToggle, getPosts, setUser } from './redux/actions/localActions'
 import PostDetail from './react/pages/PostDetail'
 import requestGames from './redux/actions/rawgActions'
-import { createPost, gamePostsByName } from './services/localServices'
-import { grabDescription } from './services/rawgServices'
+import SearchFeed from './react/pages/SearchFeed'
+import UserPage from './react/pages/UserPage'
 
 const mapStateToProps = ({ rawgState, localState }) => {
   return {
@@ -23,77 +23,50 @@ const mapDispatchToProps = (dispatch) => {
   return {
     userSet: () => dispatch(setUser()),
     toggleAuth: (boolean) => dispatch(authToggle(boolean)),
-    fetchPosts: () => dispatch(getPosts()),
-    storeGames: async () => dispatch(await requestGames())
+    fetchPosts: () => dispatch(getPosts())
   }
 }
 
 function App(props) {
-  const games = props.rawgState.games
-  const authenticated = props.localState.authenticated
-  const user = props.localState.user
+  const games = props.localState.gamePosts
   const history = useHistory()
   const token = localStorage.getItem('token')
 
-  async function gameGetter() {
-    if (games.length === 0) {
-      await props.storeGames()
-    }
-  }
-
-  const checkToken = async () => {
-    if (token) {
-      await props.userSet()
-      await props.toggleAuth(true)
-    } else {
-      if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
-        history.push('/')
+  
+  useEffect(() => {
+    async function checkToken () {
+      if (token) {
+        await props.userSet()
+        await props.toggleAuth(true)
+        await requestGames()
+        await setTimeout(async() => {
+          await props.fetchPosts()
+        }, 1000)
+      } else {
+        if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
+          history.push('/')
+        }
       }
     }
-  }
-
-  async function gamePostEngine() {
-    if (games.length > 0) {
-      games.forEach(async (game) => {
-        const search = await gamePostsByName(game.name)
-        if (search.length === 0) {
-          const deets = await grabDescription(game.id)
-          game.description = deets.description_raw
-          await createPost(game)
-        }
-      })
-      await props.fetchPosts()
-    } else {
-      await props.fetchPosts()
-    }
-  }
-
-  useEffect(() => {
     checkToken()
   }, [token])
 
-  useEffect(() => {
-    gameGetter()
-  }, [authenticated])
-
-  useEffect(() => {
-    gamePostEngine()
-  }, [games])
-
   return (
     <div className="App">
-      <Nav />
+      <Nav history={history} {...props}/>
 
       <main>
         <Switch>
           <Route exact path="/" render={(props) => <Home {...props} />} />
           <Route path="/signin" render={(props) => <Signin {...props} />} />
           <Route path="/register" render={(props) => <Register {...props} />} />
-          <Route
+          <Route path="/search" render={(props) => <SearchFeed {...props} />} />
+          <Route path="/userpage" render={(props) => <UserPage {...props} />} />
+          {games.length && <Route
             path="/gamepost/:post_Id"
             render={(props) => <PostDetail {...props} />}
-          />
-          <Route path="/newsfeed" component={Newsfeed} />
+          />}
+          <Route path="/newsfeed" render={(props) => <Newsfeed {...props} />} />
         </Switch>
       </main>
     </div>

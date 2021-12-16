@@ -1,3 +1,6 @@
+:root {
+  --font: 3vw;
+}
 body {
   box-sizing: border-box;
   background-image: url(https://images.unsplash.com/photo-1567360425618-1594206637d2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YmFja2dyb3VuZCUyMHJlZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
@@ -19,6 +22,7 @@ body {
 
 .App {
   color: rgb(255, 255, 255);
+  font-size: var(--font);
 }
 
 .App-header {
@@ -48,45 +52,65 @@ h3 {
   text-align: center;
   color: rgb(209, 196, 196);
   font-family: 'Yeseva One', cursive;
-  font-size: 2vw;
   align-self: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+main {
+  height: 90vh;
+  width: 100vw;
+  overflow-y: scroll;
+}
+
+.searchMsg {
+  text-align: center;
+  padding: 10vw;
 }
 
 .postlist {
+  padding-top: 2vw;
   flex-wrap: wrap;
   overflow-y: scroll;
+  height: 100%;
   width: 100vw;
-  height: 90vh;
-
   image-rendering: -webkit-optimize-contrast;
 }
-
-@media (max-width: 1000px) {
-  .postlist {
-    display: block;
-  }
+.searchInp {
+  margin: 0;
+  height: 3.5vh;
+  margin-right: 2vh;
+}
+.searchForm > button {
+  height: 3.5vh;
+  width: 8vh;
+}
+.search {
+  display: flex;
+  align-items: center;
 }
 
 .postcard {
-  display: grid;
-  grid-template: 30% 70%/ 1fr;
+  display: grid !important;
+  grid-template: 20% 80%/ 1fr;
   cursor: pointer;
-
   width: 30vw;
-  height: 40vw;
+  height: 50vw;
   margin: 1.5vw;
   flex-direction: column;
 }
-
-.imgs {
-  border: rgb(127, 8, 6) solid 5px;
+.postcard > h3 {
+  margin: 0;
   height: 100%;
-  width: 70%;
-
+}
+.imgContain {
+  border: rgb(127, 8, 6) solid 0.7vw;
   transition: 0.5s ease;
 }
 
-.imgs:hover {
+.imgContain:hover {
   transform: scale(1.1);
   transition: 0.5s ease;
   color: #ffee10;
@@ -94,11 +118,9 @@ h3 {
   text-shadow: 0 0 25px #ffee10;
 }
 
-@media (max-width: 800px) {
-  .imgs {
-    margin-top: 50px;
-    height: 23vh;
-  }
+.imgs {
+  height: 95%;
+  width: 95%;
 }
 
 #navHome {
@@ -110,14 +132,9 @@ h3 {
 .formContain {
   display: grid;
   justify-content: center;
-  border: rgb(255, 255, 255) solid 2px;
-  border-width: 1px;
-  width: 450px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: -100px;
+  border: rgb(255, 255, 255) groove 1vw;
+  padding: 3vw;
+  /* width: 60vw; */
   background-color: black;
 }
 
@@ -127,19 +144,23 @@ a {
   border: white 1px solid;
 }
 
-a:hover {
-  color: blue;
-  border: blue 1px solid;
+label {
+  /* display: inline-block; */
+  /* margin-left: -200px; */
+  /* width: 250px; */
+  text-align: left;
 }
 
-label {
-  display: inline-block;
-  margin-left: -200px;
-  width: 250px;
-  text-align: right;
-}
 input {
   display: inline-block;
+}
+
+.navBar {
+  justify-content: space-evenly !important;
+  overflow: scroll;
+}
+.navBar > * {
+  margin: 0 1vh 0 1vh;
 }
 
 #navHome,
@@ -147,45 +168,122 @@ input {
 #newsfeed {
   display: inline;
   border: none;
-  margin-left: 25px;
   color: rgb(248, 248, 248);
   font-family: 'Yeseva One', cursive;
-  font-size: 25px;
+  font-size: 4vh;
 }
 
 #navHome:hover,
 #userPage:hover,
 #newsfeed:hover {
-  color: rgb(255, 0, 76);
-  /* font-size: 17px; */
+  color: rgb(207, 19, 16);
+}
+#navHome:active,
+#userPage:active,
+#newsfeed:active {
+  color: rgb(127, 8, 6);
+}
+
+#userPage {
+  min-width: 20vh;
 }
 
 div {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+.formControl {
+  width: 100%;
+  height: 100%;
+}
+
 /* vh  */
-.inputWrapper,
 label,
 input {
-  margin-bottom: 15px;
-  margin-right: 15px;
-  height: 25px;
+  height: 3vw;
+}
+
+.inputWrapper {
+  height: 3.5vw;
+  margin-bottom: 1.5vw;
+  display: grid;
+  grid-template: 1fr/ 55% 45%;
+}
+
+.authFooter {
+  text-align: center;
+}
+
+.authBtn {
+  height: 2.5vw;
+  width: 15vw;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .game_detail {
-  display: block;
-  margin: 1% 32%;
-  width: 50%;
-  padding: 100px;
+  flex-direction: column;
+  padding: 0 5vw 5vw 5vw;
 }
 
-@media (max-width: 1500px) {
-  .game_detail {
-    display: block;
-    margin: 0;
-    background-color: black;
-  }
+.commentSec {
+  width: 100%;
+}
+
+.title {
+  margin: 2vw;
+  text-align: center;
+}
+
+.imgCont {
+  width: 70vw;
+  border: white groove 2vw;
+}
+
+.game_img {
+  width: 100%;
+}
+
+.desc {
+  text-align: justify;
+}
+
+.commentSec > * {
+  margin: 0 0 0.4em 0;
+}
+.comment_card {
+  margin: 0 0 2vw 0;
+}
+.comment_card > h5 {
+  margin: 0 0 0 0;
+}
+
+.commentForm {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  font-size: 2.5vw;
+}
+
+span {
+  margin-right: 2vw;
+  color: rgb(207, 19, 16);
+}
+
+.userInfo {
+  width: 100vw;
+  text-align: center;
+}
+
+#logOut {
+  width: 20vw;
+  height: 5vw;
 }
 
 .homeLogo {
@@ -195,8 +293,8 @@ input {
   padding: 0.5vw;
   margin: 4vh;
 }
+
 #homebutton {
-  /* background-image: url(../a-img/hail_app_logo.png); */
   background: linear-gradient(
     to top left,
     rgba(128, 0, 0, 0.938),
@@ -229,8 +327,23 @@ input {
   background-image: url(https://cdn.wallpapersafari.com/25/63/VxMO4Q.jpg);
   background-size: 100% 100%;
   background-attachment: fixed;
-  overflow-y: scroll;
   background-repeat: no-repeat;
   background-color: rgba(255, 255, 255, 0.4);
   flex-direction: column;
+}
+
+button {
+  width: 9vw;
+  font-size: calc(var(--font) * 0.35);
+}
+
+@media (max-width: 1000px) {
+  :root {
+    --font: 3.5vw;
+  }
+}
+@media (max-width: 700px) {
+  :root {
+    --font: 4vw;
+  }
 }

@@ -8,8 +8,26 @@ Router.get(
   middleware.verifyToken,
   controller.GetUsers
 )
-Router.get('/:user_id', controller.GetUserProfile)
-Router.post('/create', controller.CreateUser)
-Router.delete('/:user_Id', controller.deleteUser)
+
+Router.get(
+  '/:user_id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.GetUserProfile
+)
+
+Router.delete(
+  '/:user_Id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.deleteUser
+)
+
+Router.post(
+  '/create',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.CreateUser
+)
 
 module.exports = Router

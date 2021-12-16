@@ -1,9 +1,29 @@
-import { grabGames } from '../../services/rawgServices'
-import { GET_GAMES } from '../types'
+import {
+  grabGames,
+  grabDescription,
+  gameQuery
+} from '../../services/rawgServices'
+import { createPost, gamePostsByName } from '../../services/localServices'
 
-export default function requestGames() {
-  return async function (dispatch) {
-    const grab = await grabGames()
-    dispatch({ type: GET_GAMES, payload: grab })
-  }
+export default async function requestGames() {
+  const grab = await grabGames()
+  grab.forEach(async (game) => {
+    const search = await gamePostsByName(game.name)
+    if (search.length === 0) {
+      const deets = await grabDescription(game.id)
+      game.description = deets.description_raw
+      await createPost(game)
+    }
+  })
+}
+export async function searchGames(query) {
+  const grab = await gameQuery(query)
+  grab.forEach(async (game) => {
+    const search = await gamePostsByName(game.name)
+    if (search.length === 0) {
+      const deets = await grabDescription(game.id)
+      game.description = deets.description_raw
+      await createPost(game)
+    }
+  })
 }

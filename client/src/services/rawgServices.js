@@ -19,10 +19,10 @@ export async function grabDescription(id) {
   }
 }
 
-export async function grabTrailers(id) {
+export async function gameQuery(query) {
   try {
     const res = await axios.get(
-      `${RAWG_URL}/games/${id}/movies?key=${RAWG_KEY}`
+      `${RAWG_URL}/games?key=${RAWG_KEY}&search=${query}`
     )
     return res.data.results
   } catch (error) {

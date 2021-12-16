@@ -1,9 +1,22 @@
-const { GamePost, User } = require('../models')
+const { Op } = require('sequelize')
+const { GamePost, Comment, User } = require('../models')
 
 const GetGames = async (req, res) => {
   try {
     const games = await GamePost.findAll({
-      include: [{ model: User, as: 'commenters' }]
+      include: [
+        {
+          model: Comment,
+          as: 'post_comments',
+          include: [
+            {
+              model: User,
+              as: 'comment_by',
+              attributes: { exclude: ['password_digest', 'email'] }
+            }
+          ]
+        }
+      ]
     })
     return res.send(games)
   } catch (error) {
@@ -13,9 +26,7 @@ const GetGames = async (req, res) => {
 
 const DeleteAllGames = async (req, res) => {
   try {
-    const games = await GamePost.findAll({
-      include: [{ model: User, as: 'commenters' }]
-    })
+    const games = await GamePost.findAll({})
     games.forEach((game) => {
       GamePost.destroy({ where: { id: game.id } })
     })
@@ -28,7 +39,24 @@ const DeleteAllGames = async (req, res) => {
 const GamesByName = async (req, res) => {
   try {
     const { name } = req.params
-    const games = await GamePost.findAll({ where: { title: `${name}` } })
+    const games = await GamePost.findAll({
+      where: {
+        title: `${name}`
+      },
+      include: [
+        {
+          model: Comment,
+          as: 'post_comments',
+          include: [
+            {
+              model: User,
+              as: 'comment_by',
+              attributes: { exclude: ['password_digest', 'email'] }
+            }
+          ]
+        }
+      ]
+    })
     return res.send(games)
   } catch (error) {
     throw error
@@ -38,7 +66,48 @@ const GamesByName = async (req, res) => {
 const GameDetails = async (req, res) => {
   try {
     const games = await GamePost.findByPk(req.params.post_id, {
-      include: [{ model: User, as: 'commenters' }]
+      include: [
+        {
+          model: Comment,
+          as: 'post_comments',
+          include: [
+            {
+              model: User,
+              as: 'comment_by',
+              attributes: { exclude: ['password_digest', 'email'] }
+            }
+          ]
+        }
+      ]
+    })
+    return res.send(games)
+  } catch (error) {
+    throw error
+  }
+}
+
+const GameQuery = async (req, res) => {
+  try {
+    const { query } = req.params
+    const games = await GamePost.findAll({
+      where: {
+        title: {
+          [Op.iLike]: `%${query}%`
+        }
+      },
+      include: [
+        {
+          model: Comment,
+          as: 'post_comments',
+          include: [
+            {
+              model: User,
+              as: 'comment_by',
+              attributes: { exclude: ['password_digest', 'email'] }
+            }
+          ]
+        }
+      ]
     })
     return res.send(games)
   } catch (error) {
@@ -69,5 +138,6 @@ module.exports = {
   GameDetails,
   CreateGame,
   GamesByName,
-  DeleteAllGames
+  DeleteAllGames,
+  GameQuery
 }

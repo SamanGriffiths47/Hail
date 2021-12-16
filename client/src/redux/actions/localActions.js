@@ -1,14 +1,17 @@
 import { CheckSession } from '../../services/auth'
 import {
   grabGamePosts,
-  grabCommentByPostId
+  grabCommentByPostId,
+  gameSearch
 } from '../../services/localServices'
 import {
   GET_POSTS,
   SET_USER_STATE,
   TOGGLE_AUTH,
-  GET_COMMENTS,
-  CHANGE_FORM
+  CHANGE_FORM,
+  UPDATE_COMMENTS,
+  UPDATE_QUERY,
+  UPDATE_SEARCH
 } from '../types'
 
 export function authToggle(boolean) {
@@ -33,6 +36,15 @@ export function setUser() {
     }
   }
 }
+export function userLogout() {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: SET_USER_STATE, payload: null })
+    } catch (error) {
+      throw error
+    }
+  }
+}
 
 export function getPosts() {
   return async (dispatch) => {
@@ -44,12 +56,55 @@ export function getPosts() {
     }
   }
 }
-
-export function getComments(postid) {
+export function emptyPosts() {
   return async (dispatch) => {
     try {
-      const comment = await grabCommentByPostId(postid)
-      dispatch({ type: GET_COMMENTS, payload: comment })
+      const posts = {}
+      dispatch({ type: GET_POSTS, payload: posts })
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
+export function queryPosts(query) {
+  return async (dispatch) => {
+    try {
+      const posts = await gameSearch(query)
+      dispatch({ type: GET_POSTS, payload: posts })
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
+export function updateQuery(query) {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_QUERY, payload: query })
+    } catch (error) {
+      throw error
+    }
+  }
+}
+export function updateSearch(query) {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_SEARCH, payload: query })
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
+export function getComments(postid, index) {
+  return async (dispatch) => {
+    try {
+      const comments = await grabCommentByPostId(postid)
+      dispatch({
+        type: UPDATE_COMMENTS,
+        payload: { comments: comments, index: index }
+      })
     } catch (error) {
       throw error
     }

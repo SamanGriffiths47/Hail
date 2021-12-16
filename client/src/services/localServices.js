@@ -18,6 +18,15 @@ export async function gamePostsByName(name) {
   }
 }
 
+export async function gameSearch(query) {
+  try {
+    const res = await Client.get(`/gameposts/search/${query}`)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export async function grabCommentByPostId(postid) {
   try {
     const res = await Client.get(`/comments/view/${postid}`)
@@ -29,9 +38,7 @@ export async function grabCommentByPostId(postid) {
 
 export async function postComment(body) {
   try {
-    const res = await Client.post(`/comments/create`, body, {
-      headers: { 'Content-Type': 'application/json' }
-    })
+    const res = await Client.post(`/comments/create`, body)
     return res.data
   } catch (error) {
     throw error
@@ -51,6 +58,15 @@ export async function delComment(id) {
   try {
     const res = await Client.delete(`/comments/del/${id}`)
     return res
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function getUser(id) {
+  try {
+    const res = await Client.get(`/users/${id}`)
+    return res.data
   } catch (error) {
     throw error
   }

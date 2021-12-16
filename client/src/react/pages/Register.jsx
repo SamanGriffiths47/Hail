@@ -39,7 +39,7 @@ function Register(props) {
   }
 
   return (
-    <div className="formControl">
+    <div className="formControl flex">
       <div className="formContain">
         <form onSubmit={handleSubmit}>
           <div className="inputWrapper">
@@ -123,6 +123,7 @@ function Register(props) {
                   formValues.confirmPassword !== formValues.password)
               }
               type="submit"
+              className='authBtn'
             >
               Register
             </button>

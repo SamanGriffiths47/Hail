@@ -1,17 +1,15 @@
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
-
-const mapStateToProps = ({ localState }) => {
-  return {
-    localState
-  }
-}
 
 function PostCard(props) {
   const { gamePost } = props
   let showPost = (gamePost) => {
     props.history.push(`/gamepost/${gamePost.id}`)
   }
+
+  let gameTitle = gamePost.title.split(' ')
+  gameTitle.forEach((word) => {
+    word = word.charAt(0).toUpperCase() + word.slice(1)
+  })
+  gameTitle = gameTitle.join(' ')
 
   return (
     <div className="postcard" onClick={() => showPost(gamePost)}>
@@ -27,4 +25,4 @@ function PostCard(props) {
     </div>
   )
 }
-export default connect(mapStateToProps)(withRouter(PostCard))
+export default PostCard

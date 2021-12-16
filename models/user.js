@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       })
       User.belongsToMany(models.GamePost, {
         foreignKey: 'user_Id',
-        as: 'commented_posts',
+        as: 'commented',
         through: models.Comment
       })
     }

@@ -3,7 +3,10 @@ import {
   TOGGLE_AUTH,
   GET_POSTS,
   GET_COMMENTS,
-  CHANGE_FORM
+  CHANGE_FORM,
+  UPDATE_COMMENTS,
+  UPDATE_QUERY,
+  UPDATE_SEARCH
 } from '../types'
 
 const iState = {
@@ -11,6 +14,8 @@ const iState = {
   user: null,
   gamePosts: [],
   comments: [],
+  search: '',
+  query: '',
   form: {
     city_state: '',
     country: '',
@@ -33,6 +38,14 @@ export default function localReducer(state = iState, action) {
       return { ...state, comments: action.payload }
     case CHANGE_FORM:
       return { ...state, form: action.payload }
+    case UPDATE_COMMENTS:
+      state.gamePosts[action.payload.index].post_comments =
+        action.payload.comments
+      return { ...state }
+    case UPDATE_SEARCH:
+      return { ...state, search: action.payload }
+    case UPDATE_QUERY:
+      return { ...state, query: action.payload }
     default:
       return { ...state }
   }
