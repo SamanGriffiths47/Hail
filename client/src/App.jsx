@@ -39,9 +39,7 @@ function App(props) {
         await props.userSet()
         await props.toggleAuth(true)
         await requestGames()
-        await setTimeout(async() => {
-          await props.fetchPosts()
-        }, 1000)
+        await props.fetchPosts()
       } else {
         if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
           history.push('/')
@@ -60,7 +58,7 @@ function App(props) {
           <Route exact path="/" render={(props) => <Home {...props} />} />
           <Route path="/signin" render={(props) => <Signin {...props} />} />
           <Route path="/register" render={(props) => <Register {...props} />} />
-          <Route path="/search" render={(props) => <SearchFeed {...props} />} />
+          <Route path="/search/:query" render={(props) => <SearchFeed {...props} />} />
           <Route path="/userpage" render={(props) => <UserPage {...props} />} />
           {games.length && <Route
             path="/gamepost/:post_Id"

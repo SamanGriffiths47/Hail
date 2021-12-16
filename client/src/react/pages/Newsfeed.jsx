@@ -21,9 +21,7 @@ function Newsfeed(props) {
   useEffect(()=>{
     async function allGames(){
       await requestGames()
-      await setTimeout(async() => {
-        await props.fetchPosts()
-      }, 1000)
+      await props.fetchPosts()
     }
     allGames()
   },[])

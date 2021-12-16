@@ -24,12 +24,10 @@ const Search = (props) => {
   async function onSubmit(e){
     e.preventDefault()
     await searchGames(props.search)
-    await setTimeout(async() => {
-      await props.queryDB(props.search)
-    }, 1000)
+    await props.queryDB(props.search)
     await props.queryUpdate(props.search)
     await props.searchUpdate('')
-    props.history.push('/search')
+    props.history.push(`/search/${props.query}`)
   }
 
   return (

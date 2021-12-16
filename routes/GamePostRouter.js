@@ -32,11 +32,7 @@ Router.get(
   middleware.verifyToken,
   controller.GameQuery
 )
-Router.post(
-  '/create',
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.CreateGame
-)
+
+Router.post('/create', controller.CreateGame)
 
 module.exports = Router
