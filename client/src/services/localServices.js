@@ -19,7 +19,7 @@ export async function grabGamePosts() {
 
 export function gamePostsByName(name) {
   try {
-    return Client.post(`/gameposts/name`, name)
+    return Client.post(`/gameposts/name`, { name: name })
   } catch (error) {
     return { data: ['error'] }
   }

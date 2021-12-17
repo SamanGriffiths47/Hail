@@ -22,7 +22,7 @@ function gameFilter(rawgRes, resolve, gameList) {
     if (rawgRes.data.results.length > 0) {
       let count = 0
       const endLoop = () => {
-        count++
+        count += 1
         count === rawgRes.data.results.length && resolve(true)
       }
 

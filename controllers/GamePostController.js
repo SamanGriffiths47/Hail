@@ -46,7 +46,7 @@ const GamesByName = async (req, res) => {
     const { name } = req.body
     const games = await GamePost.findAll({
       where: {
-        title: `${name}`
+        title: name
       },
       include: [
         {
