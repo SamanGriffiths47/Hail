@@ -34,18 +34,14 @@ const mapDispatchToProps = (dispatch) => {
 function App(props) {
   const games = props.gamePosts
   const history = useHistory()
-  const token = localStorage.getItem('token')
 
   function checkToken () {
-    if (token) {
+    if (localStorage.getItem('token')) {
       props.authChain(true).then(tokenIs => {
         if(tokenIs){
-          // if(/^\/gamepost\/.+$/m.test(history.location.pathname)){
-          //   const gameList = []
-          //   props.gamePosts.forEach(game => gameList.push(game.title))
-          //   console.log(gameList)
-          //   props.newsfeedChain(gameList)
-          // }
+          if (['/signin'].includes(history.location.pathname)) {
+            history.push('/')
+          }
         }else{
           if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
             history.push('/')
@@ -60,7 +56,7 @@ function App(props) {
   }
   useEffect(() => {
     checkToken()
-  }, [token])
+  }, [localStorage.getItem('token')])
 
   return (
     <div className="App">

@@ -23,11 +23,18 @@ function Signin(props) {
 
   async function formSubmit() {
     const { city_state, country, confirmPassword, ...formValues } = userForm
-    await SignInUser(formValues)
-    if (localStorage.getItem('token')) {
-      props.changeForm(clearForm())
-      props.checkToken()
-    }
+    await SignInUser(formValues).then(res => {
+      if (res) {
+        new Promise (resolve =>{
+          localStorage.setItem('token', res.data.token)
+          props.changeForm(clearForm())
+          resolve(true)
+        }).finally(_ => {
+          console.log(localStorage)
+          props.checkToken()
+        })
+      }
+    })
   }
 
   async function handleSubmit(e) {
