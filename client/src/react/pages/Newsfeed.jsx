@@ -23,7 +23,7 @@ function Newsfeed(props) {
   useEffect(()=>{
     if(props.authenticated){
       const gameList = []
-      props.gamePosts.forEach(game => gameList.push(game.title))
+      gamePosts.forEach(game => gameList.push(game.title))
       props.newsfeedChain(gameList).then(posts => setGamePosts(posts))
     }
   },[props.authenticated])
