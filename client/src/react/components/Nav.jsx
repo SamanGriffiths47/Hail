@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Search from '../components/Search'
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = (localState) => {
   return {
     localState
   }

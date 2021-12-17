@@ -4,20 +4,20 @@ const middleware = require('../middleware')
 
 Router.get(
   '/all',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.GetGames
 )
 Router.delete(
   '/all',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.DeleteAllGames
 )
 Router.get(
-  '/details',
-  middleware.stripToken,
-  middleware.verifyToken,
+  '/byid/:post_id',
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.GameDetails
 )
 Router.get(

@@ -1,31 +1,43 @@
 import { RAWG_KEY, RAWG_URL } from './api'
 import axios from 'axios'
+import { createPost, gamePostsByName } from './localServices'
 
-export async function grabGames() {
+export function grabGames() {
   try {
-    const res = await axios.get(`${RAWG_URL}/games?key=${RAWG_KEY}`)
-    return res.data.results
+    return axios.get(`${RAWG_URL}/games?key=${RAWG_KEY}`)
   } catch (error) {
-    throw error
+    return false
   }
 }
+// export async function grabGames() {
+//   try {
+//     const res = await axios.get(`${RAWG_URL}/games?key=${RAWG_KEY}`)
+//     return res.data.results
+//   } catch (error) {
+//     throw error
+//   }
+// }
 
-export async function grabDescription(id) {
+export function grabDescription(id) {
   try {
-    const res = await axios.get(`${RAWG_URL}/games/${id}?key=${RAWG_KEY}`)
-    return res.data
+    return axios.get(`${RAWG_URL}/games/${id}?key=${RAWG_KEY}`)
   } catch (error) {
-    throw error
+    return { data: '' }
   }
 }
+// export async function grabDescription(id) {
+//   try {
+//     const res = await axios.get(`${RAWG_URL}/games/${id}?key=${RAWG_KEY}`)
+//     return res.data
+//   } catch (error) {
+//     throw error
+//   }
+// }
 
 export async function gameQuery(query) {
   try {
-    const res = await axios.get(
-      `${RAWG_URL}/games?key=${RAWG_KEY}&search=${query}`
-    )
-    return res.data.results
+    return axios.get(`${RAWG_URL}/games?key=${RAWG_KEY}&search=${query}`)
   } catch (error) {
-    throw error
+    return false
   }
 }

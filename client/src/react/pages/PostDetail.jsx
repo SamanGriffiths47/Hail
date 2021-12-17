@@ -1,32 +1,44 @@
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getPosts } from '../../redux/actions/localActions'
+import { byIdChain, getPosts } from '../../redux/actions/localActions'
 import Comments from '../components/Comments'
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = (state) => {
   return {
-    localState
+    ...state
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPosts: () => dispatch(getPosts())
+    byIdChain: (post_id) => dispatch(byIdChain(post_id))
   }
 }
 
 function PostDetail(props) {
-  // const [Post, setPost] = useState(null)
-  const { gamePosts } = props.localState
+  const { gamePosts } = props
   const { post_Id } = props.match.params
-  const Post = gamePosts.find((post) => post.id === parseInt(post_Id))
+  const [Post, setPost] = useState(null)
 
+  useEffect(()=>{
+    if(!Post){
+      const found = gamePosts.find((post) => post.id === parseInt(post_Id))
+      found ? setPost(found) : props.byIdChain(post_Id).then(post => setPost(gamePosts))
+    }
+  },[gamePosts])
+  
   return (
-    <div className="game_detail flex">
-      <h1 className="title flex">{Post.title}</h1>
-      <div className="imgCont flex">
-        <img src={Post.image} alt="game_image" className="game_img flex"/>
-      </div>
-      <h5 className="desc">{Post.description}</h5>
-      <Comments Post={Post} {...props} />
+    <div>
+      {Post && (Post !== "Post Not Found" ?
+        <div className="game_detail flex">
+          <h1 className="title flex">{Post.title}</h1>
+          <div className="imgCont flex">
+            <img src={Post.image} alt="game_image" className="game_img flex"/>
+          </div>
+          <h5 className="desc">{Post.description}</h5>
+          <Comments Post={Post} {...props} />
+        </div> :
+        <h1 className='searchMsg'>{Post}</h1>
+        )}
     </div>
   )
 }

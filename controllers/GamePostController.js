@@ -80,9 +80,9 @@ const GameDetails = async (req, res) => {
         }
       ]
     })
-    return res.send(games)
+    return games ? res.send(games) : res.send('Post Not Found')
   } catch (error) {
-    throw error
+    return res.send('Post Not Found')
   }
 }
 

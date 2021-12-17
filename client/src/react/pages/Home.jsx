@@ -3,22 +3,15 @@ import logo from '../../a-img/hail_logo.png'
 import { getPosts } from '../../redux/actions/localActions'
 import requestGames from '../../redux/actions/rawgActions'
 
-const mapStateToProps = ({ localState, rawgState }) => {
+const mapStateToProps = (state) => {
   return {
-    localState,
-    rawgState
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchPosts: () => dispatch(getPosts()),
-    storeGames: () => dispatch(requestGames())
+    ...state,
   }
 }
 
 function Home(props) {
   function handleClick() {
-    props.localState.authenticated && props.localState.user
+    props.authenticated && props.user
       ? props.history.push('/newsfeed')
       : props.history.push('/register')
   }
@@ -33,4 +26,4 @@ function Home(props) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps)(Home)

@@ -7,20 +7,24 @@ import Signin from './react/pages/Signin'
 import Newsfeed from './react/pages/Newsfeed'
 import Register from './react/pages/Register'
 import Home from './react/pages/Home'
-import { authToggle, getPosts, setUser } from './redux/actions/localActions'
+import { authChain, authToggle, getPosts, newsfeedChain, setUser } from './redux/actions/localActions'
 import PostDetail from './react/pages/PostDetail'
 import requestGames from './redux/actions/rawgActions'
 import SearchFeed from './react/pages/SearchFeed'
 import UserPage from './react/pages/UserPage'
+import { CheckSession } from './services/auth'
+import { grabGamePosts } from './services/localServices'
+import { grabGames } from './services/rawgServices'
 
-const mapStateToProps = ({ rawgState, localState }) => {
+const mapStateToProps = (state) => {
   return {
-    rawgState,
-    localState
+    ...state
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
+    authChain: (boolean) => dispatch(authChain(boolean)),
+    newsfeedChain: () => dispatch(newsfeedChain()),
     userSet: () => dispatch(setUser()),
     toggleAuth: (boolean) => dispatch(authToggle(boolean)),
     fetchPosts: () => dispatch(getPosts())
@@ -28,18 +32,28 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 function App(props) {
-  const games = props.localState.gamePosts
+  const games = props.gamePosts
   const history = useHistory()
   const token = localStorage.getItem('token')
 
   
   useEffect(() => {
-    async function checkToken () {
+    function checkToken () {
       if (token) {
-        await props.userSet()
-        await props.toggleAuth(true)
-        await requestGames()
-        await props.fetchPosts()
+        props.authChain(true).then(tokenIs => {
+          if(tokenIs){
+            // if(/^\/gamepost\/.+$/m.test(history.location.pathname)){
+            //   const gameList = []
+            //   props.gamePosts.forEach(game => gameList.push(game.title))
+            //   console.log(gameList)
+            //   props.newsfeedChain(gameList)
+            // }
+          }else{
+            if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
+              history.push('/')
+            }
+          }
+        })
       } else {
         if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
           history.push('/')
@@ -60,10 +74,7 @@ function App(props) {
           <Route path="/register" render={(props) => <Register {...props} />} />
           <Route path="/search/:query" render={(props) => <SearchFeed {...props} />} />
           <Route path="/userpage" render={(props) => <UserPage {...props} />} />
-          {games.length && <Route
-            path="/gamepost/:post_Id"
-            render={(props) => <PostDetail {...props} />}
-          />}
+          <Route path="/gamepost/:post_Id" render={(props) => <PostDetail {...props} />} />
           <Route path="/newsfeed" render={(props) => <Newsfeed {...props} />} />
         </Switch>
       </main>

@@ -6,7 +6,8 @@ import {
   CHANGE_FORM,
   UPDATE_COMMENTS,
   UPDATE_QUERY,
-  UPDATE_SEARCH
+  UPDATE_SEARCH,
+  SEARCH_RETURN
 } from '../types'
 
 const iState = {
@@ -14,6 +15,7 @@ const iState = {
   user: null,
   gamePosts: [],
   comments: [],
+  searchReturn: [],
   search: '',
   query: '',
   form: {
@@ -42,6 +44,8 @@ export default function localReducer(state = iState, action) {
       state.gamePosts[action.payload.index].post_comments =
         action.payload.comments
       return { ...state }
+    case SEARCH_RETURN:
+      return { ...state, searchReturn: action.payload }
     case UPDATE_SEARCH:
       return { ...state, search: action.payload }
     case UPDATE_QUERY:

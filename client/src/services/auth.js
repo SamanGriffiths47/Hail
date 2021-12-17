@@ -1,11 +1,11 @@
+import { setUser } from '../redux/actions/localActions'
 import Client from './api'
 
 export const SignInUser = async (data) => {
   try {
-    const res = await Client.post('/auth/login', data)
     // Set the current signed in users token to localstorage
+    const res = await Client.post('/auth/login', data)
     localStorage.setItem('token', res.data.token)
-    return res.data.user
   } catch (error) {
     throw error
   }
@@ -20,11 +20,16 @@ export const RegisterUser = async (data) => {
   }
 }
 
-export const CheckSession = async () => {
-  try {
-    const res = await Client.get('/auth/session')
-    return res.data
-  } catch (error) {
-    throw error
-  }
+export const CheckSession = () => {
+  return Client.get('/auth/session').catch((error) => {
+    return { data: false }
+  })
 }
+// export const CheckSession = async () => {
+//   try {
+//     const res = await Client.get('/auth/session')
+//     return res.data
+//   } catch (error) {
+//     return false
+//   }
+// }

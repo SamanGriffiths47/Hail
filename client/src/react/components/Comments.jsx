@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getComments } from '../../redux/actions/localActions'
 import CommentCard from './CommentCard'
-import { postComment } from '../../services/localServices'
+import { delComment, postComment } from '../../services/localServices'
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = (state) => {
   return {
-    ...localState
+    ...state
   }
 }
 
@@ -15,25 +15,37 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 function Comments(props) {
-  const Post = props.Post
-  const comments = Post.post_comments
   const postIndex = props.gamePosts.findIndex((post) => post.id === props.Post.id)
-  const [commentBody, SetCommentBody] = useState({
+  const Post = props.gamePosts[postIndex]
+  const [comments, setComments] = useState(Post.post_comments)
+  const [commentBody, setCommentBody] = useState({
     content: '',
-    user_Id: props.localState.user.id,
+    user_Id: props.user.id,
     post_Id: Post.id
   })
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    await postComment(commentBody)
-    await props.fetchComments(Post.id, postIndex)
-    SetCommentBody({ ...commentBody, content: '' })
+    postComment(commentBody).then(_ => {
+      props.fetchComments(Post.id, postIndex).then(_ =>{
+        setCommentBody({ ...commentBody, content: '' })
+        setComments(_)
+      })
+    })
+  }
+
+  const deleteComment =(i) => {
+    delComment(comments[i].id).then(_ => {
+      props.fetchComments(comments[i].post_Id, postIndex).then(_ => {
+        setComments(_)
+      })
+    })
   }
 
   const handleChange = (e) => {
-    SetCommentBody({ ...commentBody, content: e.target.value })
+    setCommentBody({ ...commentBody, content: e.target.value })
   }
+
   return (
     <div className='commentSec'>
       <h2>Comment section</h2>
@@ -48,7 +60,7 @@ function Comments(props) {
       <div className="card_holder">
         {comments.length > 0 &&
           comments.map((comment,i) => (
-            <CommentCard key={i} comment={comment} {...props} postIndex={postIndex} />
+            <CommentCard key={i} index={i} deleteComment={deleteComment} comment={comment} {...props} postIndex={postIndex} />
           ))}
       </div>
     </div>

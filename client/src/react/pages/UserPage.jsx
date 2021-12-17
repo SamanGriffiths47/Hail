@@ -4,9 +4,9 @@ import { authToggle, emptyPosts, userLogout } from "../../redux/actions/localAct
 import { getUser } from "../../services/localServices"
 import PostCard from "../components/Postcard"
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = (state) => {
   return {
-    localState
+    ...state
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -22,24 +22,24 @@ function UserPage (props){
   const [user, setUser] = useState(null)
   const [date, setDate] = useState(null)
 
-  async function logoutUser(){
+  function logoutUser(){
     localStorage.removeItem('token')
-    await props.clearUser()
-    await props.clearPosts()
-    await props.toggleAuth(false)
+    props.clearUser()
+    props.clearPosts()
+    props.toggleAuth(false)
   }
 
   useEffect(()=>{
     async function userGrab () {
-      if(props.localState.user){
-      setUser(await getUser(props.localState.user.id))
+      if(props.user){
+        setUser(await getUser(props.user.id))
       }
     }
     userGrab()
-  },[props.localState.user])
+  },[props.user])
   
   useEffect(()=>{
-    async function dateFormat () {
+    function dateFormat () {
       if(user){
         let stamp = ''
         let date = new Date(user.createdAt)

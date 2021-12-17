@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { SignInUser } from '../../services/auth'
 import { changeForm } from '../../redux/actions/localActions'
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = (state) => {
   return {
-    localState
+    ...state
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 function Signin(props) {
-  const userForm = props.localState.form
+  const userForm = props.form
 
   function handleChange(e) {
     props.changeForm({ ...userForm, [e.target.name]: e.target.value })

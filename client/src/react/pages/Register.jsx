@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { changeForm } from '../../redux/actions/localActions'
 import { RegisterUser } from '../../services/auth'
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = (state) => {
   return {
-    localState
+    ...state
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 function Register(props) {
-  const formValues = props.localState.form
+  const formValues = props.form
 
   function handleChange(e) {
     props.changeForm({ ...formValues, [e.target.name]: e.target.value })

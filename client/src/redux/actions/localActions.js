@@ -1,8 +1,11 @@
+import Client from '../../services/api'
 import { CheckSession } from '../../services/auth'
 import {
   grabGamePosts,
   grabCommentByPostId,
-  gameSearch
+  gameSearch,
+  postById,
+  postComment
 } from '../../services/localServices'
 import {
   GET_POSTS,
@@ -13,6 +16,7 @@ import {
   UPDATE_QUERY,
   UPDATE_SEARCH
 } from '../types'
+import requestGames, { searchGames } from './rawgActions'
 
 export function authToggle(boolean) {
   return (dispatch) => {
@@ -28,39 +32,29 @@ export function changeForm(formValues) {
 
 export function setUser() {
   return async (dispatch) => {
-    try {
-      const session = await CheckSession()
-      dispatch({ type: SET_USER_STATE, payload: session })
-    } catch (error) {
-      throw error
-    }
+    const session = await Client.get('/auth/session')
+    dispatch({ type: SET_USER_STATE, payload: session })
   }
 }
+
 export function userLogout() {
-  return async (dispatch) => {
-    try {
-      dispatch({ type: SET_USER_STATE, payload: null })
-    } catch (error) {
-      throw error
-    }
+  return (dispatch) => {
+    dispatch({ type: SET_USER_STATE, payload: null })
   }
 }
 
 export function getPosts() {
   return async (dispatch) => {
-    try {
-      const posts = await grabGamePosts()
-      dispatch({ type: GET_POSTS, payload: posts })
-    } catch (error) {
-      throw error
-    }
+    const posts = await grabGamePosts()
+    dispatch({ type: GET_POSTS, payload: posts })
   }
 }
+
 export function emptyPosts() {
   return async (dispatch) => {
     try {
       const posts = {}
-      dispatch({ type: GET_POSTS, payload: posts })
+      await dispatch({ type: GET_POSTS, payload: posts })
     } catch (error) {
       throw error
     }
@@ -71,7 +65,7 @@ export function queryPosts(query) {
   return async (dispatch) => {
     try {
       const posts = await gameSearch(query)
-      dispatch({ type: GET_POSTS, payload: posts })
+      await dispatch({ type: GET_POSTS, payload: posts })
     } catch (error) {
       throw error
     }
@@ -81,7 +75,7 @@ export function queryPosts(query) {
 export function updateQuery(query) {
   return async (dispatch) => {
     try {
-      dispatch({ type: UPDATE_QUERY, payload: query })
+      await dispatch({ type: UPDATE_QUERY, payload: query })
     } catch (error) {
       throw error
     }
@@ -90,7 +84,7 @@ export function updateQuery(query) {
 export function updateSearch(query) {
   return async (dispatch) => {
     try {
-      dispatch({ type: UPDATE_SEARCH, payload: query })
+      await dispatch({ type: UPDATE_SEARCH, payload: query })
     } catch (error) {
       throw error
     }
@@ -99,14 +93,106 @@ export function updateSearch(query) {
 
 export function getComments(postid, index) {
   return async (dispatch) => {
-    try {
-      const comments = await grabCommentByPostId(postid)
-      dispatch({
-        type: UPDATE_COMMENTS,
-        payload: { comments: comments, index: index }
+    return new Promise((resolve) => {
+      grabCommentByPostId(postid).then((comments) => {
+        dispatch({
+          type: UPDATE_COMMENTS,
+          payload: { comments: comments.data, index: index }
+        })
+        resolve(comments.data)
       })
-    } catch (error) {
-      throw error
-    }
+    })
+  }
+}
+// Thunk Chain Actions
+const checkToken = (dispatch) => {
+  return Client.get('/auth/session').then((res) => {
+    dispatch({
+      type: SET_USER_STATE,
+      payload: res.data
+    })
+  })
+}
+const toggleAuth = (dispatch, boolean) => {
+  return (dispatch) => {
+    dispatch({ type: TOGGLE_AUTH, payload: boolean })
+  }
+}
+
+// Thunk Chains
+export function authChain(boolean) {
+  return async (dispatch) => {
+    return new Promise(async (resolve) => {
+      await CheckSession().then((res) => {
+        if (res.data) {
+          dispatch({
+            type: SET_USER_STATE,
+            payload: res.data
+          })
+          dispatch({
+            type: TOGGLE_AUTH,
+            payload: boolean
+          })
+          resolve(true)
+        } else {
+          resolve(false)
+        }
+      })
+    })
+  }
+}
+
+export function newsfeedChain(gameList) {
+  return async (dispatch) => {
+    return new Promise(async (resolve) => {
+      await requestGames(gameList).then(async (_) => {
+        if (_) {
+          grabGamePosts().then((posts) => {
+            dispatch({ type: GET_POSTS, payload: posts.data })
+            resolve(posts.data)
+          })
+        } else {
+          resolve([])
+        }
+      })
+    })
+  }
+}
+
+export function searchFeedChain(query, gameList) {
+  return async (dispatch) => {
+    return new Promise(async (resolve) => {
+      await searchGames(query, gameList).then((_) => {
+        if (_) {
+          gameSearch(query).then((posts) => {
+            dispatch({ type: GET_POSTS, payload: posts.data })
+            resolve(posts.data)
+          })
+        } else {
+          resolve([])
+        }
+      })
+    })
+  }
+}
+
+export function searchChain(query) {
+  return async (dispatch) => {
+    return new Promise((resolve) => {
+      dispatch({ type: UPDATE_QUERY, payload: query })
+      dispatch({ type: UPDATE_SEARCH, payload: '' })
+      resolve(query)
+    })
+  }
+}
+
+export function byIdChain(post_Id) {
+  return async (dispatch) => {
+    return new Promise((resolve) => {
+      postById(post_Id).then((post) => {
+        dispatch({ type: GET_POSTS, payload: [post.data] })
+        resolve(post.data)
+      })
+    })
   }
 }

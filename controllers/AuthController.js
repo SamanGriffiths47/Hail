@@ -70,7 +70,7 @@ const CheckSession = async (req, res) => {
     const { payload } = res.locals
     return res.send(payload)
   } catch (error) {
-    throw error
+    return res.send(false)
   }
 }
 module.exports = {

@@ -11,6 +11,7 @@ export const CREATE_POST = 'CREATE_POST'
 export const CHANGE_FORM = 'CHANGE_FORM'
 export const UPDATE_SEARCH = 'UPDATE_SEARCH'
 export const UPDATE_QUERY = 'UPDATE_QUERY'
+export const SEARCH_RETURN = 'SEARCH_RETURN'
 
 //Auth
 export const TOGGLE_AUTH = 'TOGGLE_AUTH'

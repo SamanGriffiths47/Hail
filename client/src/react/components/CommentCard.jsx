@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import { getComments } from '../../redux/actions/localActions'
 import { delComment } from '../../services/localServices'
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = (state) => {
   return {
-    ...localState
+    ...state
   }
 }
 
@@ -15,10 +15,6 @@ const mapDispatchToProps = (dispatch) => ({
 function CommentCard(props) {
   const comment = props.comment
 
-  async function deletecomment() {
-    await delComment(comment.id)
-    await props.fetchComments(comment.post_Id, props.postIndex)
-  }
   let stamp = ''
   let date = new Date(comment.createdAt)
   date = `${date}`.split(' ')
@@ -36,7 +32,7 @@ function CommentCard(props) {
         className='delBtn'
         id={comment.id}
         onClick={() => {
-          deletecomment()
+          props.deleteComment(props.index)
         }}
       >
         Delete Comment

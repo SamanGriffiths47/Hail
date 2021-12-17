@@ -1,30 +1,32 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getPosts } from '../../redux/actions/localActions'
+import { getPosts, newsfeedChain } from '../../redux/actions/localActions'
 import requestGames from '../../redux/actions/rawgActions'
+import { grabGames } from '../../services/rawgServices'
 import PostCard from '../components/Postcard'
 
-const mapStateToProps = ({ localState }) => {
+const mapStateToProps = (state) => {
   return {
-    ...localState
+    ...state
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPosts: () => dispatch(getPosts())
+    fetchPosts: () => dispatch(getPosts()),
+    newsfeedChain: (gameList) => dispatch(newsfeedChain(gameList))
   }
 }
 
 function Newsfeed(props) {
-  const gamePosts = props.gamePosts
-  
+  const [gamePosts, setGamePosts] = useState([])
+
   useEffect(()=>{
-    async function allGames(){
-      await requestGames()
-      await props.fetchPosts()
+    if(props.authenticated){
+      const gameList = []
+      props.gamePosts.forEach(game => gameList.push(game.title))
+      props.newsfeedChain(gameList).then(posts => setGamePosts(posts))
     }
-    allGames()
-  },[])
+  },[props.authenticated])
 
   return (
     <div className="postlist flexRow">
