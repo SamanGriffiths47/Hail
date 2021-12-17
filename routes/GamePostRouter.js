@@ -20,8 +20,8 @@ Router.get(
   // middleware.verifyToken,
   controller.GameDetails
 )
-Router.get(
-  '/:name',
+Router.post(
+  '/name',
   middleware.stripToken,
   middleware.verifyToken,
   controller.GamesByName
