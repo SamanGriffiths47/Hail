@@ -26,7 +26,7 @@ function Signin(props) {
     await SignInUser(formValues)
     if (localStorage.getItem('token')) {
       props.changeForm(clearForm())
-      props.history.push('/')
+      props.checkToken()
     }
   }
 

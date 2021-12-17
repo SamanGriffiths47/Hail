@@ -36,30 +36,29 @@ function App(props) {
   const history = useHistory()
   const token = localStorage.getItem('token')
 
-  
-  useEffect(() => {
-    function checkToken () {
-      if (token) {
-        props.authChain(true).then(tokenIs => {
-          if(tokenIs){
-            // if(/^\/gamepost\/.+$/m.test(history.location.pathname)){
-            //   const gameList = []
-            //   props.gamePosts.forEach(game => gameList.push(game.title))
-            //   console.log(gameList)
-            //   props.newsfeedChain(gameList)
-            // }
-          }else{
-            if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
-              history.push('/')
-            }
+  function checkToken () {
+    if (token) {
+      props.authChain(true).then(tokenIs => {
+        if(tokenIs){
+          // if(/^\/gamepost\/.+$/m.test(history.location.pathname)){
+          //   const gameList = []
+          //   props.gamePosts.forEach(game => gameList.push(game.title))
+          //   console.log(gameList)
+          //   props.newsfeedChain(gameList)
+          // }
+        }else{
+          if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
+            history.push('/')
           }
-        })
-      } else {
-        if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
-          history.push('/')
         }
+      })
+    } else {
+      if (!['/signin', '/register', '/'].includes(history.location.pathname)) {
+        history.push('/')
       }
     }
+  }
+  useEffect(() => {
     checkToken()
   }, [token])
 
@@ -70,7 +69,7 @@ function App(props) {
       <main>
         <Switch>
           <Route exact path="/" render={(props) => <Home {...props} />} />
-          <Route path="/signin" render={(props) => <Signin {...props} />} />
+          <Route path="/signin" render={(props) => <Signin checkToken={checkToken} {...props} />} />
           <Route path="/register" render={(props) => <Register {...props} />} />
           <Route path="/search/:query" render={(props) => <SearchFeed {...props} />} />
           <Route path="/userpage" render={(props) => <UserPage {...props} />} />
