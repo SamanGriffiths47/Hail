@@ -38,11 +38,6 @@ const DeleteAllGames = async (req, res) => {
 
 const GamesByName = async (req, res) => {
   try {
-    console.log('')
-    console.log('')
-    console.log(req.body)
-    console.log('')
-    console.log('')
     const { name } = req.body
     const games = await GamePost.findAll({
       where: {
