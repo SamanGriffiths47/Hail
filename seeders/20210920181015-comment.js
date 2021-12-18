@@ -20,14 +20,6 @@ module.exports = {
       }
     })
 
-    // const comments = [...Array(20)].map((_) => ({
-    //   content: faker.random.word(),
-    //   user_Id: user[Math.floor(Math.random() * users.length)].id,
-    //   post_Id: user[Math.floor(Math.random() * posts.length)].id,
-    //   createdAt: new Date(),
-    //   updatedAt: new Date()
-    // }))
-
     await queryInterface.bulkInsert('comments', comments)
   },
 
