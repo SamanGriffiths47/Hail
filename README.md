@@ -1,7 +1,7 @@
 # Hail: Gaming Blog
 
 ### By: Sam'an Khaliq, Robert Thome, & Zitai Haung
-Sam'an: [GitHub](https://github.com/SamanGriffiths47) | [LinkedIn](https://www.linkedin.com/in/saman-khaliq/) | [Portfolio](https://www.samankhaliq.com/)
+Sam'an: [GitHub](https://github.com/SamanKhaliq47) | [LinkedIn](https://www.linkedin.com/in/saman-khaliq/) | [Portfolio](https://www.samankhaliq.com/)
 
 Robert Thome: [GitHub](https://github.com/robertthome) | [LinkedIn](https://www.linkedin.com/in/robertthome/)
 
