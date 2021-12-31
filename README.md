@@ -1,18 +1,19 @@
-# Hail: A Video Game Blog
+# Hail: Gaming Blog
 
-## Date: 09/17/2021
+### By: Sam'an Khaliq, Robert Thome, & Zitai Haung
+Sam'an: [GitHub](https://github.com/SamanGriffiths47) | [LinkedIn](https://www.linkedin.com/in/saman-khaliq/) | [Portfolio](https://www.samankhaliq.com/)
 
-### By: Zitai Haung | Sam'man Griffiths
+Robert Thome: [GitHub](https://github.com/robertthome) | [LinkedIn](https://www.linkedin.com/in/robertthome/)
 
-[GitHub](https://github.com/SamanGriffiths47/Hail) |
-[Trello]() |
-[DeployedSite]()
+Zitai Haung: [GitHub](https://github.com/Zitai01) | [LinkedIn](https://www.linkedin.com/in/zitai-huang/)
+
+[DeployedSite](https://hail-gaming.herokuapp.com/)
 
 ***
 
 ### ***Discription***
 
-#### Find and talk about the games you love all in one place. Explore new games and read reviews from other players. If you see something you would love to play, go ahead and add it to your wishlist so you may purchase it later.
+#### Hail is a kind of gaming social media site, wherein video game lovers of all kinds can congregate to appreciate (or deprecate :stuck_out_tongue_winking_eye:) their favorite games 
 
 
 ### ***Technologies used***
@@ -21,7 +22,7 @@
 
 ### ***Getting Started***
 
-Register and sign in to the gameing blog where you will have access to thousands of games and join in on the discussion. Please follow community guidlines and respect your fellow gamers in the comment sections.
+Register and sign in to the gameing blog where you will have access to a collection of games and join in on the discussion. Please follow community guidlines and respect your fellow gamers in the comment sections.
 
 ***
 
@@ -33,16 +34,21 @@ Register and sign in to the gameing blog where you will have access to thousands
 
 ![Hierarchy](mdImgs/Hail_CHD%20(1).png)
 
-## Screenshots of Website
+## Screenshots of the Website
 
-![Landing]()
-![CommentSection]()
-![WishList]()
+#### Landing Page
+![Landing Page](./mdImgs/LandingPage.png)
+
+#### Newsfeed
+![Newsfeed](./mdImgs/Newsfeed.png)
+
+#### Comment Section
+![Comment Section](./mdImgs/CommentSection.png)
 
 ### ***Future Updates***
 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
+- [x] Finish Styling
+- [x] User Page
+- [x] Working Search
+- [ ] Wishlist
+- [ ] Light Mode

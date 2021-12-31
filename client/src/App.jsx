@@ -9,12 +9,8 @@ import Register from './react/pages/Register'
 import Home from './react/pages/Home'
 import { authChain, authToggle, getPosts, newsfeedChain, setUser } from './redux/actions/localActions'
 import PostDetail from './react/pages/PostDetail'
-import requestGames from './redux/actions/rawgActions'
 import SearchFeed from './react/pages/SearchFeed'
 import UserPage from './react/pages/UserPage'
-import { CheckSession } from './services/auth'
-import { grabGamePosts } from './services/localServices'
-import { grabGames } from './services/rawgServices'
 
 const mapStateToProps = (state) => {
   return {
