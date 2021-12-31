@@ -13,7 +13,7 @@ Zitai Haung: [GitHub](https://github.com/Zitai01) | [LinkedIn](https://www.linke
 
 ### ***Discription***
 
-#### Hail is a kind of gaming social media site, wherein video game lovers of all kinds can congregate to appreciate (or deprecate :stuck_out_tongue_winking_eye:) their favorite games 
+#### Hail is a kind of gaming social media site wherein video game lovers of all kinds can congregate to appreciate (or deprecate :stuck_out_tongue_winking_eye:) their favorite games. We all had a blast working on this website as a team! I'm proud of the progress we made on it in the 5 days we were given to complete it during the General Assembly Bootcamp. I'm glad I circled back to it once our instructional period was over to deploy the finishing touches because this project deserves its shine!
 
 
 ### ***Technologies used***
