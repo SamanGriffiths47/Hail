@@ -32,6 +32,8 @@ function UserPage (props){
   useEffect(()=>{
     async function userGrab () {
       if(props.user){
+        console.log(props.user)
+        console.log(await getUser(props.user.id))
         setUser(await getUser(props.user.id))
       }
     }
@@ -54,22 +56,22 @@ function UserPage (props){
     }
     dateFormat()
   },[user])
-
+  console.log(user)
 
 return(
-  <div>
+  <div id='userProfile'>
     {user &&
       <div className="userInfo">
-      <h1>{user.username}</h1>
-      <h3>{user.city_state}, {user.country}</h3>
-      <h3>Email: {user.email}</h3>
-      <h3>Joined At: {date}</h3>
-      <button id='logOut' type='button' onClick={(e)=>logoutUser(e)}>Log Out</button>
-      <h2>Posts You've Commented On</h2>
-      <div className="postlist flexRow">
-      {user.commented.map(gamePost => (
-        <PostCard key={gamePost.id} gamePost={gamePost} {...props}/>
-      ))}
+        <h1>{user.username}</h1>
+        <h3>{user.city_state}, {user.country}</h3>
+        <h3>Email: {user.email}</h3>
+        <h3>Joined At: {date}</h3>
+        <button id='logOut' type='button' onClick={(e)=>logoutUser(e)}>Log Out</button>
+        <h2>Posts You've Commented On</h2>
+        <div className="postlist flexRow">
+          {user.commented.map(gamePost => (
+            <PostCard key={gamePost.id} gamePost={gamePost} {...props}/>
+          ))}
         </div>
       </div>
     }
