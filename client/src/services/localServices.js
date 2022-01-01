@@ -1,5 +1,4 @@
 import Client from './api'
-import { grabDescription } from './rawgServices'
 
 export async function grabGamePosts() {
   try {
@@ -8,14 +7,6 @@ export async function grabGamePosts() {
     return { data: [] }
   }
 }
-// export async function grabGamePosts() {
-//   try {
-//     const res = await Client.get('/gameposts/all')
-//     return res.data
-//   } catch (error) {
-//     throw error
-//   }
-// }
 
 export function gamePostsByName(name) {
   try {
@@ -24,14 +15,6 @@ export function gamePostsByName(name) {
     return { data: ['error'] }
   }
 }
-// export async function gamePostsByName(name) {
-//   try {
-//     const res = await Client.get(`/gameposts/${name}`)
-//     return res.data
-//   } catch (error) {
-//     throw error
-//   }
-// }
 
 export async function gameSearch(query) {
   try {
@@ -40,14 +23,6 @@ export async function gameSearch(query) {
     return false
   }
 }
-// export async function gameSearch(query) {
-//   try {
-//     const res = await Client.get(`/gameposts/search/${query}`)
-//     return res.data
-//   } catch (error) {
-//     throw error
-//   }
-// }
 
 export async function grabCommentByPostId(postid) {
   return Client.get(`/comments/view/${postid}`)
@@ -72,14 +47,6 @@ export function createPost(body) {
     return false
   }
 }
-// export async function createPost(body) {
-//   try {
-//     const res = await Client.post('/gameposts/create', body)
-//     return res.data
-//   } catch (error) {
-//     throw error
-//   }
-// }
 
 export async function delComment(id) {
   try {
@@ -88,14 +55,6 @@ export async function delComment(id) {
     return false
   }
 }
-// export async function delComment(id) {
-//   try {
-//     const res = await Client.delete(`/comments/del/${id}`)
-//     return res
-//   } catch (error) {
-//     throw error
-//   }
-// }
 
 export async function getUser(id) {
   try {

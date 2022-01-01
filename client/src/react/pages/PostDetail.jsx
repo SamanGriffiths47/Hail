@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { byIdChain, getPosts } from '../../redux/actions/localActions'
+import { byIdChain } from '../../redux/actions/localActions'
 import Comments from '../components/Comments'
 
 const mapStateToProps = (state) => {

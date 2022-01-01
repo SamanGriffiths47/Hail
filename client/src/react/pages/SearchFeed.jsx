@@ -18,22 +18,25 @@ const mapDispatchToProps = (dispatch) => {
 function SearchFeed(props) { 
   const [gamePosts, setGamePosts] = useState([])
   const [loading, setLoading] = useState(true)
+  const { query } = props.match.params
 
   useEffect(()=>{
     const gameList = []
     props.gamePosts.forEach(game => gameList.push(game.title))
-    props.searchFeedChain(props.query, gameList).then(posts => {
+    props.searchFeedChain(query, gameList).then(posts => {
       setGamePosts(posts)
       setLoading(false)
     })
-  },[props.query])
+  },[query])
+
+  const msg = gamePosts === null ? 'Your Search Must Be Alphanumeric' : `No Games Matching "${query}" Found`
 
   return (
-    <div className="postlist flexRow search">
-      {!loading && gamePosts.length ? gamePosts.map((gamePost) => (
+    <div className={"postlist flexRow" + (gamePosts && gamePosts.length ? '' : ' search')}>
+      {!loading && gamePosts && gamePosts.length ? gamePosts.map((gamePost) => (
         <PostCard key={gamePost.id} gamePost={gamePost} {...props}/>
       )) :
-      !loading && <h1 className='searchMsg'>No Games Matching "{props.query}" Found</h1>}
+      !loading && <h1 className='searchMsg'>{msg}</h1>}
     </div>
   )
 }

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getPosts, newsfeedChain } from '../../redux/actions/localActions'
-import requestGames from '../../redux/actions/rawgActions'
-import { grabGames } from '../../services/rawgServices'
 import PostCard from '../components/Postcard'
 
 const mapStateToProps = (state) => {

@@ -28,7 +28,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 function App(props) {
-  const games = props.gamePosts
   const history = useHistory()
 
   function checkToken () {

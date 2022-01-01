@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { getComments } from '../../redux/actions/localActions'
-import { delComment } from '../../services/localServices'
 
 const mapStateToProps = (state) => {
   return {

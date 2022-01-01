@@ -1,4 +1,3 @@
-import { setUser } from '../redux/actions/localActions'
 import Client from './api'
 
 export const SignInUser = async (data) => {
@@ -24,11 +23,3 @@ export const CheckSession = () => {
     return { data: false }
   })
 }
-// export const CheckSession = async () => {
-//   try {
-//     const res = await Client.get('/auth/session')
-//     return res.data
-//   } catch (error) {
-//     return false
-//   }
-// }

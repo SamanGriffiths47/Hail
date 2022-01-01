@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { queryPosts, searchChain, updateQuery, updateSearch } from '../../redux/actions/localActions'
-import { searchGames } from '../../redux/actions/rawgActions'
 
 const mapStateToProps = (state) => {
   return {
@@ -25,10 +24,6 @@ const Search = (props) => {
   
   async function onSubmit(e){
     e.preventDefault()
-    // await searchGames(props.search)
-    // await props.queryDB(props.search)
-    // await props.queryUpdate(props.search)
-    // await props.searchUpdate('')
     props.searchChain(props.search).then(query => {
       props.history.push(`/search/${query}`)
     })

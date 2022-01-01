@@ -4,8 +4,7 @@ import {
   grabGamePosts,
   grabCommentByPostId,
   gameSearch,
-  postById,
-  postComment
+  postById
 } from '../../services/localServices'
 import {
   GET_POSTS,
@@ -104,20 +103,6 @@ export function getComments(postid, index) {
     })
   }
 }
-// Thunk Chain Actions
-const checkToken = (dispatch) => {
-  return Client.get('/auth/session').then((res) => {
-    dispatch({
-      type: SET_USER_STATE,
-      payload: res.data
-    })
-  })
-}
-const toggleAuth = (dispatch, boolean) => {
-  return (dispatch) => {
-    dispatch({ type: TOGGLE_AUTH, payload: boolean })
-  }
-}
 
 // Thunk Chains
 export function authChain(boolean) {
@@ -162,16 +147,22 @@ export function newsfeedChain(gameList) {
 export function searchFeedChain(query, gameList) {
   return async (dispatch) => {
     return new Promise(async (resolve) => {
-      await searchGames(query, gameList).then((_) => {
-        if (_) {
-          gameSearch(query).then((posts) => {
-            dispatch({ type: GET_POSTS, payload: posts.data })
-            resolve(posts.data)
-          })
-        } else {
-          resolve([])
-        }
-      })
+      if (/^(?!.*_.*)[\w]+$/.test(query)) {
+        await searchGames(query, gameList).then((_) => {
+          if (_) {
+            gameSearch(query)
+              .then((posts) => {
+                dispatch({ type: GET_POSTS, payload: posts.data })
+                resolve(posts.data)
+              })
+              .catch((_) => resolve([]))
+          } else {
+            resolve([])
+          }
+        })
+      } else {
+        resolve(null)
+      }
     })
   }
 }
@@ -179,7 +170,6 @@ export function searchFeedChain(query, gameList) {
 export function searchChain(query) {
   return async (dispatch) => {
     return new Promise((resolve) => {
-      dispatch({ type: UPDATE_QUERY, payload: query })
       dispatch({ type: UPDATE_SEARCH, payload: '' })
       resolve(query)
     })

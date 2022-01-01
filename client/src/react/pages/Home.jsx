@@ -1,7 +1,5 @@
 import { connect } from 'react-redux'
 import logo from '../../a-img/hail_logo.png'
-import { getPosts } from '../../redux/actions/localActions'
-import requestGames from '../../redux/actions/rawgActions'
 
 const mapStateToProps = (state) => {
   return {
