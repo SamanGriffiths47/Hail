@@ -24,7 +24,7 @@ body {
   color: rgb(255, 255, 255);
   font-size: var(--font);
   display: grid;
-  grid-template: 10vw auto / 1fr;
+  grid-template: 6vw calc(100vh - 6vw) / 1fr;
 }
 
 .App-header {
@@ -42,7 +42,7 @@ body {
 }
 
 nav {
-  height: 10vw;
+  height: 6vw;
   background: linear-gradient(rgba(113, 0, 0, 0.418), rgba(113, 0, 0, 0.075));
 }
 
@@ -62,7 +62,7 @@ h3 {
 }
 
 main {
-  height: calc(100vh - 10vw);
+  height: 100%;
   width: 100vw;
   overflow-y: scroll;
 }
@@ -90,7 +90,8 @@ main {
 }
 .searchForm > button {
   height: 3vw;
-  width: 6vw;
+  width: 8vw;
+  line-height: 100%;
 }
 .search {
   display: flex;
@@ -327,10 +328,9 @@ span {
 
 .homeContainer {
   width: 100vw;
-  height: 90vh;
+  height: 100%;
   background-image: url(https://cdn.wallpapersafari.com/25/63/VxMO4Q.jpg);
   background-size: 100% 100%;
-  background-attachment: fixed;
   background-repeat: no-repeat;
   background-color: rgba(255, 255, 255, 0.4);
   flex-direction: column;
@@ -349,5 +349,13 @@ button {
 @media (max-width: 700px) {
   :root {
     --font: 4vw;
+  }
+}
+@media (orientation: portrait) {
+  .App {
+    grid-template: 10vw calc(100vh - 10vw) / 1fr;
+  }
+  nav {
+    height: 10vw;
   }
 }
