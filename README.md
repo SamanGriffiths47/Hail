@@ -1,13 +1,13 @@
 # Hail: Gaming Blog
 
 ### By: Sam'an Khaliq, Robert Thome, & Zitai Haung
-Sam'an: [GitHub](https://github.com/SamanKhaliq47) | [LinkedIn](https://www.linkedin.com/in/saman-khaliq/) | [Portfolio](https://www.samankhaliq.com/)
+Sam'an: [GitHub](https://github.com/samanhg47) | [LinkedIn](https://www.linkedin.com/in/saman-khaliq/) | [Portfolio](https://www.samanhg.com/)
 
 Robert Thome: [GitHub](https://github.com/robertthome) | [LinkedIn](https://www.linkedin.com/in/robertthome/)
 
 Zitai Haung: [GitHub](https://github.com/Zitai01) | [LinkedIn](https://www.linkedin.com/in/zitai-huang/)
 
-[DeployedSite](https://hail-gaming.herokuapp.com/)
+[Deployed Site](https://hail-gaming.herokuapp.com/)
 
 ***
 
